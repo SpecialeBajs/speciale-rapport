@@ -42,3 +42,15 @@
 \usepackage{titling} % Customizing the title section
 
 \usepackage{hyperref} % For hyperlinks in the PDF
+
+% Bibliography
+% http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add the \citep{key} command which display a
+% reference as [author, year]
+\usepackage[backend=bibtex,
+    bibencoding=utf8
+]{biblatex}
+\addbibresource{bib/mybib}
+\usepackage{csquotes}
+\usepackage[nottoc]{tocbibind}
