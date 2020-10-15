@@ -11,5 +11,5 @@ A simple example could be $f(H^i, A) = \sigma(AH^iW^i) = H^{i+1}$ where $W^i$ is
 The intuition behind this propagation function is that the future representation of each node is calculated based on its neighbors nodes.
 Each time $i$ is increased, the nodes will reach one further edge away from the original node in the graph. %Fuck this sentence
 An issue with this propagation function could be that the value of each node now is a sum of each of its neighbors, and therefore loses its own value.
-This could be solved by replacing $A$ with $\hat{A} = A + I$ where $I$ is the degree matrix.
+This could be solved by replacing $A$ with $\hat{A} = A + I$ where $I$ is the identity matrix.
 Doing this the node considers itself a neighbor.
