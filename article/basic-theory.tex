@@ -3,8 +3,7 @@
 \subsection{Graph Convolutional Network}
 Graph Convolutional Network (GCN) is a neural network architecture that operates on graphs.
 Given a graph $G = (V,E)$ a GCN takes the input of a adjacency
-matrix $A$ with size of $N x N$ that represents graph $G$ and a feature matrix $N x F^0$, where $N$ is the total amount of nodes and $F^0$ is the total amount of input features for each node.\\
-\indent
+matrix $A$ with size of $N x N$ that represents graph $G$ and a feature matrix $N x F^0$, where $N$ is the total amount of nodes and $F^0$ is the total amount of input features for each node.
 A hidden layer in a GCN can be defined as $H^i = f(H^{i-1}, A)$ where $i$ indicates the layer and $H^0$ is the previously mentioned $N x F^0$ feature matrix and $f$ is a propagation function \cite{Deep-Learning-on-Graphs-with-GCN}.
 There are many different types of propagation functions.
 A simple example could be $f(H^i, A) = \sigma(AH^iW^i) = H^{i+1}$ where $W^i$ is the weight matrix at layer $i$ and $\sigma$ is a non-linear activation function \cite{Deep-Learning-on-Graphs-with-GCN}.
