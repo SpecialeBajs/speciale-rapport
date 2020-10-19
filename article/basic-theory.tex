@@ -4,19 +4,19 @@ This is usually done through recommender systems.
 There are broadly speaking two approaches to recommender systems which are content-based filtering and collaborative filtering.
 Content-based filtering is done by recommending items that are similar to items that the user had like before.
 This approach uses features that have to be hand engineered by categorizing the items.
-Collaborative filtering on the other hand uses both similarity between users and items to provide recommendations. 
+Collaborative filtering on the other hand uses both relationship between users and the inter dependencies among items to provide recommendations \cite{Matrix-factorization-techniques}. 
 This means that collaborative filtering recommends an item to a user based on a similar user.
-The advantage with collaborative filtering is that the features are learned automatically and it does not rely on hand engineered features which makes it more scalable for larger domains with many users and items.
-These features are called laten features.
 
-In general collaborative filtering is more accurate than content-based filtering.
-But collaborative filtering suffers from the cold start problem which means that it does not deal well with new users that have no rated items.
+The advantage with collaborative filtering is that the features are learned automatically and it does not rely on hand engineered features which makes it more scalable for larger domains with many users and items.
+These features are called latent features.
+In general collaborative filtering is more accurate than content-based filtering \cite{Matrix-factorization-techniques}.
+But collaborative filtering suffers from the cold start problem which means that it does not deal well with new users that have not rated any items yet.
 
 \subsection{Matrix factorization}
 The data concerning users and items can be represented as a matrix where each row represents a user and each column an item.
 The entries in the matrix will then be the explicit feedback given for that item by the user if there is any.
 This will be quite a sparse matrix in most cases.
-Matrix factorization can then be used to infer user preference for the items not rated by the user by using implicit feedback.
+Matrix factorization can then be used to infer user preference for the items not rated by the user by using implicit feedback which can be purchase history, browsing history, mouse movement or any behavioral patterns that the user has.
 We can estimate if a user is going to like an item by analyzing the behavior of the users \cite{Matrix-factorization-techniques}.
 We start out with a matrix $A = N x M$ where N is the number of users and M is the number of items.
 The implicit feedback is used to learn the latent features of the items and the users liking of those latent features.
