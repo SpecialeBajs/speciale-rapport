@@ -1,0 +1,16 @@
+\subsection{Nerual Networks}
+Nerual networks are a multi layered collection of nodes which have an input layer, hidden layer and an output layer \cite{AI-book}.
+The input of each node is the output of all nodes in the previous layer.
+Each of these connections in the network has an individual weight associated to it.
+To get the value of a node not in the input layer, the output of all the nodes in the previous layer are added togehther with each individual weight along the connection that it travels.
+All these weighted values are then fed to an aggregation function which result is given to an activation function.
+The activation function is usually the Sigmoid, Sign or Relu function.
+\\
+Neural networks can have any number of nodes in the input layer, hidden layers and outputlayer and they do not need to be the same amount.
+Furthermore it can have any number of hidden layers.
+\\
+Neural networks have had considerable succes in low-level reasoning where lots of training data is available.
+They learn by giving the input layer values and then have the network compute an output value.
+The ouput value is then compared to the real value of the inputs and based on the margin of error we go backwards through the network adjusting each weight.
+This is called back propagation.
+After doing this enough times or when the margin of error is lower than a predefined value the network is considered trained and can be tested on new data or be applied to a real world sceneario.
