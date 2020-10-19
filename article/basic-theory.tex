@@ -5,29 +5,29 @@ There are broadly speaking two approaches to recommender systems which are conte
 Content-based filtering is done by recommending items that are similar to items that the user had like before.
 This approach uses features that have to be hand engineered by categorizing the items.
 Collaborative filtering on the other hand uses both similarity between users and items to provide recommendations. 
-This means that collaborative filtering recommends and item to a user based on a similar user.
+This means that collaborative filtering recommends an item to a user based on a similar user.
 The advantage with collaborative filtering is that the features are learned automatically and it does not rely on hand engineered features which makes it more scalable for larger domains with many users and items.
 These features are called laten features.
 
 In general collaborative filtering is more accurate than content-based filtering.
-But collaborative filtering suffers from the cold start problem which means that it does not deal well with new users that has not like anything yet.
+But collaborative filtering suffers from the cold start problem which means that it does not deal well with new users that have no rated items.
 
 \subsection{Matrix factorization}
-The data concerning users and items can be represented as matrix where each row represents a user and each column an item.
-The entries in the matrix will then be the explicit feedback given for that item by the user of there is any.
+The data concerning users and items can be represented as a matrix where each row represents a user and each column an item.
+The entries in the matrix will then be the explicit feedback given for that item by the user if there is any.
 This will be quite a sparse matrix in most cases.
 Matrix factorization can then be used to infer user preference for the items not rated by the user by using implicit feedback.
 We can estimate if a user is going to like an item by analyzing the behavior of the users \cite{Matrix-factorization-techniques}.
 We start out with a matrix $A = N x M$ where N is the number of users and M is the number of items.
 The implicit feedback is used to learn the latent features of the items and the users liking of those latent features.
-This is done by mapping users and items to a joint  latent factor space of dimensionality $f$.
+This is done by mapping users and items to a joint latent factor space of dimensionality $f$.
 The items will then be associated with a vector $q_i \: \epsilon \: \mathbb{R}_f$ and the user will be associated with a vector $p_u \: \epsilon \: \mathbb{R}_f$. 
 The matrix $q_i$ has the dimensions $k x m$ where k is the number of latent features and m is the number of items.
 Matrix $q_u$ has the dimensions $n x k$ where n is the number of users and k is the number of latent features.
-For each item i their corresponding entry in $q_i$ will meassure the extent in which the item posseses the feature and for each user u their corresponding entry in $q_u$ will meassure their liking to each feature.
+For each item i their corresponding entry in $q_i$ will measure the extent in which the item possesses the feature and for each user u their corresponding entry in $q_u$ will measure their liking to each feature.
 By then calculating the dot product $q_i^T p_u$ the resulting matrix will capture an estimate of what each user would rate each item. 
-The main challenge of using the matrix factorization model is finding a good algortihm for computing the mapping of each item to the factor vectors $q_i$ and $q_u$.
-After the factor vectors are computed the task of estimating the rating a user will give an item is easy through the following equation $r_ui \: = \: q_i^T p_u$ where $r_ui$ is the resulting ratings matrix.
+The main challenge of using the matrix factorization model is finding a good algorithm for computing the mapping of each item to the factor vectors $q_i$ and $q_u$.
+After the factor vectors are computed the task of estimating the rating a user will give an item is easy through the following equation $r_{ui} \: = \: q_i^T p_u$ where $r_{ui}$ is the resulting ratings matrix.
 
 \subsection{Graph Convolutional Network}
 Graph Convolutional Network (GCN) is a neural network architecture that operates on graphs.
