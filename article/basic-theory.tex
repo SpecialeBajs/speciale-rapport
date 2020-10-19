@@ -12,3 +12,14 @@ The advantage with collaborative filtering is that the embedding's are learned a
 
 
 \subsection{Graph Convolutional Network}
+Graph Convolutional Network (GCN) is a neural network architecture that operates on graphs.
+Given a graph $G = (V,E)$ a GCN takes the input of a adjacency
+matrix $A$ with size of $N x N$ that represents graph $G$ and a feature matrix $N x F^0$, where $N$ is the total amount of nodes and $F^0$ is the total amount of input features for each node.
+A hidden layer in a GCN can be defined as $H^i = f(H^{i-1}, A)$ where $i$ indicates the layer and $H^0$ is the previously mentioned $N x F^0$ feature matrix and $f$ is a propagation function \cite{Deep-Learning-on-Graphs-with-GCN}.
+There are many different types of propagation functions.
+A simple example could be $f(H^i, A) = \sigma(AH^iW^i) = H^{i+1}$ where $W^i$ is the weight matrix at layer $i$ and $\sigma$ is a non-linear activation function \cite{Deep-Learning-on-Graphs-with-GCN}.
+The intuition behind this propagation function is that the future representation of each node is calculated based on its neighbors nodes.
+Because of this, each time $i$ is increased, a node's new value is therefore affected not only by its neighbors but its neighbors' neighbors and so on.
+An issue with this propagation function could be that the value of each node now is a sum of each of its neighbors, and therefore loses its own value.
+This could be solved by replacing $A$ with $\hat{A} = A + I$ where $I$ is the identity matrix.
+Doing this the node considers itself a neighbor.
