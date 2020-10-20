@@ -17,6 +17,6 @@ Also within the second component the message aggregation is implemented as:
     e_{u}^{(l)} = \mbox{LeakyReLU}(m^{(l)}_{u \leftarrow u} + \sum^{}_{i \in \mathcal{N}} m^{(l)}_{u \leftarrow i}),
 \end{equation}
 where $e_{u}^{(l)}$ are the embeddings of user $u$ at layer $l$.
-LeakyReLU is the activation function chosen in NGCF to allow encoding positive and small negative signals.
+LeakyReLU is the activation function chosen in NGCF to allow encoding positive and small negative signals. % WHAT DOES THIS EVEN MEAN???
 LightGCN shows that NGCF will perform better if the feature transformation is removed, and that the activation function has small effect when the feature transformation is included, but if feature transformation is disabled the activation function will have a negative impact on performance.
 Light GCN also shows that NGCF will significantly improve if both the activation function and feature transformation are removed \cite{lightgcn}.
