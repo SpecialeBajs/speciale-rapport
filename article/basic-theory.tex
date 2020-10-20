@@ -2,14 +2,14 @@
 When dealing with systems with a lot of users and a lot of content it can be beneficial to try and help users find content that they would like.
 This is usually done through recommender systems.
 There are broadly speaking two approaches to recommender systems which are content-based filtering and collaborative filtering.
-Content-based filtering is done by recommending items that are similar to items that the user had like before.
+Content-based filtering is done by recommending items that are similar to items that the user has liked before.
 This approach uses features that have to be hand engineered by categorizing the items.
 Collaborative filtering on the other hand uses both relationship between users and the inter dependencies among items to provide recommendations \cite{Matrix-factorization-techniques}. 
 This means that collaborative filtering recommends an item to a user based on a similar user.
 
 The advantage with collaborative filtering is that the features are learned automatically and it does not rely on hand engineered features which makes it more scalable for larger domains with many users and items.
 These features are called latent features.
-In general collaborative filtering is more accurate than content-based filtering \cite{Matrix-factorization-techniques}.
+In general, collaborative filtering is more accurate than content-based filtering \cite{Matrix-factorization-techniques}.
 But collaborative filtering suffers from the cold start problem which means that it does not deal well with new users that have not rated any items yet.
 
 \subsection{Matrix factorization}
@@ -24,7 +24,7 @@ This is done by mapping users and items to a joint latent factor space of dimens
 The items will then be associated with a vector $q_i \: \epsilon \: \mathbb{R}_f$ and the user will be associated with a vector $p_u \: \epsilon \: \mathbb{R}_f$. 
 The matrix $q_i$ has the dimensions $k x m$ where k is the number of latent features and m is the number of items.
 Matrix $q_u$ has the dimensions $n x k$ where n is the number of users and k is the number of latent features.
-For each item i their corresponding entry in $q_i$ will measure the extent in which the item possesses the feature and for each user u their corresponding entry in $q_u$ will measure their liking to each feature.
+For each item i the corresponding entry in $q_i$ will measure the extent in which the item possesses the feature and for each user u the corresponding entry in $q_u$ will measure their liking to each feature.
 By then calculating the dot product $q_i^T p_u$ the resulting matrix will capture an estimate of what each user would rate each item. 
 The main challenge of using the matrix factorization model is finding a good algorithm for computing the mapping of each item to the factor vectors $q_i$ and $q_u$.
 After the factor vectors are computed the task of estimating the rating a user will give an item is easy through the following equation $r_{ui} \: = \: q_i^T p_u$ where $r_{ui}$ is the resulting ratings matrix.
