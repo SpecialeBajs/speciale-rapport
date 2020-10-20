@@ -29,6 +29,8 @@ By then calculating the dot product $q_i^T p_u$ the resulting matrix will captur
 The main challenge of using the matrix factorization model is finding a good algorithm for computing the mapping of each item to the factor vectors $q_i$ and $q_u$.
 After the factor vectors are computed the task of estimating the rating a user will give an item is easy through the following equation $r_{ui} \: = \: q_i^T p_u$ where $r_{ui}$ is the resulting ratings matrix.
 
+\input{article/neural-network.tex}
+
 \subsection{Graph Convolutional Network}
 Graph Convolutional Network (GCN) is a neural network architecture that operates on graphs.
 Given a graph $G = (V,E)$ a GCN takes the input of a adjacency
