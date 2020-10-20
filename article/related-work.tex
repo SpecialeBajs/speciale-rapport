@@ -1,1 +1,22 @@
 \section{Related work}
+
+\subsection{Light GCN}
+In the paper \textit{LightGCN: Simplifying and Powering Graph Convolution Network for Recommendation} Xiangnan et al. investigate the effect of feature transformation and nonlinear activation within collaborative filtering using Neural Graph Collaborative Filtering (NGCF) \cite{lightgcn}.
+NGCF is a framework developed by Wang et al. \cite{NGCF_2019} that utilizes Graph Neural Network with three components in the framework: (1) an embedding layer that constructs initial user - and item embeddings; (2) embedding propagation layers that captures CF with the two operations of message construction and message aggregation; (3) a prediction layer that concatenates the embeddings at each layer for each user and for each item such that $e_{u}^{(*)} = e_{u}^{(0)}||...||e_{u}^{(l)}$ and $e_{i}^{(*)} = e_{i}^{(0)}||...||e_{i}^{(l)}$ where $u$ indicates the user, $i$ indicates the item, $e$ is the embedding and $l$ is the layer.
+Within the second component of message construction the message embedding is implemented as:
+\begin{equation}
+    m_{u \leftarrow i} = \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}(W_1e_i + W_2(e_i \bigodot e_u)),
+    \label{eq:message-construction}
+\end{equation}
+where $W_1$ and $W_2 \in R^{d' \times d}$ are weight matrices and $d'$ is the transformation size.
+$\frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}$ is the graph Laplacian norm, where $\mathcal{N}_u$ and $\mathcal{N}_i$ are the set of neighbors of user $u$ and item $i$.
+This is done with the purpose of calculating how much the item contributes to the users preference \cite{NGCF_2019}. % WTF is this shit????
+LightGCN criticize the use of the weight matrices $W_1$ and $W_2$ as not being useful for CF as each user-item interaction graph only has the ID as input and it has no semantic value \cite{lightgcn}.
+Also within the second component the message aggregation is implemented as:
+\begin{equation}
+    e_{u}^{(l)} = \mbox{LeakyReLU}(m^{(l)}_{u \leftarrow u} + \sum^{}_{i \in \mathcal{N}} m^{(l)}_{u \leftarrow i}),
+\end{equation}
+where $e_{u}^{(l)}$ are the embeddings of user $u$ at layer $l$.
+LeakyReLU is the activation function chosen in NGCF to allow encoding positive and small negative signals. % WHAT DOES THIS EVEN MEAN???
+LightGCN shows that NGCF will perform better if the feature transformation is removed, and that the activation function has small effect when the feature transformation is included, but if feature transformation is disabled the activation function will have a negative impact on performance.
+Light GCN also shows that NGCF will significantly improve if both the activation function and feature transformation are removed \cite{lightgcn}.
