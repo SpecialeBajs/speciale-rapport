@@ -26,10 +26,11 @@ Yu Zheng et al. develops an effective method called \textit{Price-aware User Pre
 There are two main challenges where the first is that the preferences of a user on item price are unknown, and can only be seen implicitly by previous purchases.
 The second challenge is that the price of an item largely depends on what category the item is within.
 They solve this by integrating the categories and items into the propagation process.
-PUP represents the data as an heterogeneous undirected graph $G = (V,E)$ where the nodes in $V$ consists of user nodes $u \in U$, item nodes $i \in I$, category nodes $c \in \textbf{c}$, and price nodes $p \in \textbf{p}$.
-The edges in $E$ consists of interaction edges $(u, i)$ with $R_{ui} = 1$ if there is an interaction between user $u$ and item $i$ and category edges $(i, \textbf{c}_i)$ and price edges $(i, \textbf{p}_i)$.
-Traditional Latent Factor Models such as Matrix Factorization is with this graph insufficient for Recommendation due to being more pairs than $(u,i)$, but also $(i,p)$ and $(i,c)$ \cite{Priceaware}.
-Hereby Yu Zheng et al. use Graph Neural Network to learn the embeddings so that each node has a separate embedding $e' \in \mathbb{R}^d$ where d is the dimensions of the embedding.
+PUP represents the data as a heterogeneous undirected graph $G = (V,E)$ where the nodes in $V$ consist of user nodes $u \in U$, item nodes $i \in I$, category nodes $c \in \textbf{c}$, and price nodes $p \in \textbf{p}$.
+The edges in $E$ consist of interaction edges $(u, i)$ with $R_{ui} = 1$ if there is an interaction between user $u$ and item $i$ and category edges $(i, \textbf{c}_i)$ and price edges $(i, \textbf{p}_i)$.
+Traditional Latent Factor Models such as Matrix Factorization only take a single type of edge $(u, i)$ into account. 
+This makes them insufficient when multiple types such as $(u, p)$ and $(i, c)$ are introduced \cite{Priceaware}.
+Hereby Yu Zheng et al. use a Graph Neural Network to learn the embeddings so that each node has a separate embedding $e' \in \mathbb{R}^d$ where d is the dimensions of the embeddings.
 In GCN the nodes propagate its nearest neighbors, which could be user-item, item-price or item-category.
 Embeddings from node j to node i are propagated as follows:
 \begin{equation}
@@ -45,13 +46,13 @@ The updating rule is:
      & e_f = \textrm{tanh}(o_f), f \in \{u, i, c, p\},
 \end{align*}
 where $e_u$, $e_i$, $e_c$, and $e_p$ are the embeddings for user $u$, item $i$, category $c$ and price $p$.
-The intuition about this updating rule is that the nodes gets aggregated together with its neighbors and in each layer it will go one step further.
-So for example a price nodes embedding will be aggregated together with all item nodes embedding connected with this specific price.
+The intuition about this updating rule is that the node gets aggregated together with its neighbors and in each layer it will go one step further.
+So for example a price nodes embedding will be aggregated together with all item node embeddings connected with this specific price.
 By doing this items with the same price levels are expected to be more similar than items not in the same price level.
 The intuition about the category is the same as with the price.
 The final purchase prediction $s$ between user $u$ and item $i$ is formulated as follows:
 \begin{equation}
     s = e^T_u e_i + e^T_u e_p + e^T_i e_p + \alpha (e^T_u e_c + e^T_u e_p + e^T_c e_p),
 \end{equation}
-where $\alpha$ is a hyper-parameter to balance the categories influence on the prediction.
-As the results of a Top-K Recommendation Performance test Yu Zheng et al. showcases that PUP outperforms other state-of-the-art methods such as NGCF with an average improvement of 3.59 \% to 5.97 \% \cite{Priceaware}.
+where $\alpha$ is a hyper-parameter used to balance the categories influence on the prediction.
+The results of a Top-K Recommendation Performance test showcase that PUP outperforms other state-of-the-art methods such as NGCF with an average improvement of 3.59 \% to 5.97 \% \cite{Priceaware}.
