@@ -26,7 +26,7 @@ Yu Zheng et al. develops an effective method called \textit{Price-aware User Pre
 There are two main challenges.
 The first is that the preferences of a user on item price are unknown, and can only be seen implicitly by previous purchases.
 The second challenge is that the price of an item largely depends on what category the item is within.
-The first problem they propose a model that creates a relationship between user-to-item and item-to-price using a Graph Convolutional Network, so that they can propagate the influence of price onto the users.
+For the first problem they propose a model that creates a relationship between user-to-item and item-to-price using a Graph Convolutional Network, so that they can propagate the influence of price onto the users.
 For the second problem they solve this by integrating the categories and items into the propagation process.
 PUP represents the data as a heterogeneous undirected graph $G = (V,E)$ where the nodes in $V$ consist of user nodes $u \in U$, item nodes $i \in I$, category nodes $c \in \textbf{c}$, and price nodes $p \in \textbf{p}$.
 The edges in $E$ consist of interaction edges $(u, i)$ with $R_{ui} = 1$ if there is an interaction between user $u$ and item $i$ and category edges $(i, \textbf{c}_i)$ and price edges $(i, \textbf{p}_i)$.
