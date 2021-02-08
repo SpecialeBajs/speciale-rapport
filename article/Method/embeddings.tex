@@ -1,21 +1,22 @@
 \subsection{Brief Review of NGCF, LightGCN and GCF}
-Neural Graph Collaborative Filtering (NGCF) was published in 2019, and was a state of the art method, that utilized graph convolutional networks for collaborative filtering \cite{NGCF_2019}.
-The original use for GCN was proposed on node classification where each node has rich attributes, but for collaborative filtering it only has a node ID \cite{lightgcn,kipf2017semisupervised,NGCF_2019}.
-This is something that LightGCN took advantage of and simplified NGCF by removing the activation function and the transformation matrix, which showed promising results.
+Neural Graph Collaborative Filtering (NGCF) was published in 2019, and was a state of the art method, that utilized graph convolutional networks (GCN) for collaborative filtering \cite{NGCF_2019}.
+The original use for GCN was proposed on node classification where each node has rich attributes, but for collaborative filtering the nodes only contains node IDs \cite{lightgcn,kipf2017semisupervised,NGCF_2019}.
+This is something that LightGCN took advantage of and simplified NGCF by removing the activation function and the transformation matrix, which showed promising results in their experiments.
 Later Meng Liu et. al then created a method called BiTGCF which utilized GCN and transfer learning between two domains \cite{BiTGCF}.
-BiTGCF adds some of the features from NGCF back to LightGCN, and in their experiment added GCF, which was a degenerate single domain method which utilized BiTGCF layer combination without using transfer learning.
-In their experiments Meng Liu et. al showed that both GCF and BiTGCF showed large improvements over both LightGCN and NGCF, but BiTGCF only showed smaller improvements over GCF, which can indicate that high connectivity has larger effect on recommendation than transfer learning.
+They also added GCF which is a degenerate version of BiTGCF that does not utilize transfer learning between two domains, but is a single domain method such as LightGCN and NGCF.
+BiTGCF and GCF removes different parts of NGCF, which was inspired by LightGCN, but chooses to keep different aspect of NGCF.
+In their experiments Meng Liu et. al showed that both GCF and BiTGCF showed large improvements over both LightGCN and NGCF, but BiTGCF only showed smaller improvements over GCF, which can indicate that high connectivity caused by GCN has larger effect on recommendation than transfer learning between other domains.
 In this paper we only concentrate on single domain methods, and therefore will only focus on GCF of these two methods.
 
 \subsubsection{Graph Convolutional Networks}
-In general GCN for collaborative filtering can be abstracted as \cite{BiTGCF}
+GCN for collaborative filtering can generally be abstracted as \cite{BiTGCF}
 \begin{equation}
     e_u^{(k+1)} = AGG(e_u^{(k)},e_i^{(k)} : i \in \mathcal{N}_u),
 \end{equation}
 where $AGG(\cdot)$ is an aggregation function, and $e_i^{(k)}$ and $e_u^{(k)}$ denotes the embeddings for user $u$ and item $i$ after $k$ propagation layers.
 $\mathcal{N}_u$ and $\mathcal{N}_i$ denotes the one hop neighbors from user $u$ and item $i$ respectively \cite{lightgcn,BiTGCF,NGCF_2019}.
 Following this section we will describe the embedding propagation for users and the final layer combination for NGCF, LightGCN and GCF.
-The embedding propagation for items can be obtained similarly as the embeddings with users by replacing $u$ to $i$ and vice versa.
+The embedding propagation for items can be obtained similarly as the embeddings with users by replacing $u$ with $i$ and vice versa.
 
 \subsubsection{Embedding Propagation in NGCF:}
 The embedding propagation for NGCF is defined as,
