@@ -1,0 +1,24 @@
+\subsection{Neural Graph Collaborative Filtering}
+Neural Graph Collaborative Filtering (NGCF) was published in 2019, and was a state of the art method, that utilized graph convolutional networks for collaborative filtering \cite{NGCF_2019}.
+The original use for GCN was proposed on node classification where each node has rich attributes, but for collaborative filtering it only has a node ID \cite{kipf2017semisupervised,lightgcn,NGCF_2019}.
+The embedding propagation for users is defined in \autoref{eq:ngcf-embedding-propagation}, and the embedding propagation for items can be defined similarly, where $u$ is replaced with $i$, and $i$ is replaced with $u$. \cite{NGCF_2019} % Skal sætningen efter "where" slettes eller omformuleres?
+\begin{equation}
+    \mathbf{e}_{u}^{(l)} = \mbox{LeakyReLU}(\mathbf{m}^{(l)}_{u \leftarrow u} + \sum^{}_{i \in \mathcal{N}_u} \mathbf{m}^{(l)}_{u \leftarrow i}),
+    \label{eq:ngcf-embedding-propagation}
+\end{equation}
+where $e_u^{(k)}$ and $e_i^{(k)}$ denotes the embeddings at the $k$ layer for users and items respectively.
+$\mathbf{m}^{(l)}_{u \leftarrow i}$ is the message construction from users u to item i, and $\mathbf{m}^{(l)}_{u \leftarrow u}$ is the self connection.
+LeakyReLU is the nonlinear activation function.
+These are respectively defined in \autoref{eq:message-construction-i-to-u} and \autoref{eq:self-connection} \cite{NGCF_2019}.
+\begin{equation}
+    \mathbf{m}^{(l)}_{u \leftarrow i} = \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}(\mathbf{W}^{(l)}_1\mathbf{e}^{(l-1)}_i + \mathbf{W}^{(l)}_2(\mathbf{e}^{(l-1)}_i \odot \mathbf{e}^{(l-1)}_u)),
+    \label{eq:message-construction-i-to-u}
+\end{equation}
+\begin{equation}
+    \mathbf{m}^{(l)}_{u \leftarrow u} = \mathbf{W}_1^{(l)}\mathbf{e}_u^{(l-1)}
+    \label{eq:self-connection}
+\end{equation}
+For \autoref{eq:message-construction-i-to-u} and \autoref{eq:self-connection} $W_1$ and $W_2$ are the trainable weight matrices used to perform feature transformation at each layer.
+$e_u^{(l-1)}$ and $e_i^{(l-1)}$ are the embeddings from the previous layer.
+$\frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}$ is the graph Laplacian norm used to normalize the embeddings, where $\mathcal{N}_u$ and $\mathcal{N}_i$ are the set of neighbours from user $u$ and item $i$.
+The final embedding is calculated by concatenating each embedding layer \cite{NGCF_2019}.
