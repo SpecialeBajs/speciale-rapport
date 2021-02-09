@@ -1,6 +1,6 @@
 \subsection{Brief Review of NGCF, LightGCN and GCF}
 Neural Graph Collaborative Filtering (NGCF) was published in 2019, and was a state of the art method, that utilized graph convolutional networks (GCN) for collaborative filtering \cite{NGCF_2019}.
-The original use for GCN was proposed on node classification where each node has rich attributes, but for collaborative filtering, the nodes only contain node IDs \cite{lightgcn,kipf2017semisupervised,NGCF_2019}.
+GCN was originally proposed for node classification where each node has rich attributes, but for collaborative filtering the nodes only contain node IDs \cite{lightgcn,kipf2017semisupervised,NGCF_2019}.
 This is something that LightGCN took advantage of and simplified NGCF by removing the nonlinear activation function and the feature transformation, which showed promising results in their experiments.
 Later Meng Liu et. al then created a method called BiTGCF which utilized GCN and transfer learning between two domains \cite{BiTGCF}.
 They also added GCF which is a degenerate version of BiTGCF that does not utilize transfer learning between two domains, but is a single domain method such as LightGCN and NGCF.
