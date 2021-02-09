@@ -1,12 +1,12 @@
 \subsection{Pre specialization paper}
-In preparation for our master thesis we spend a semester gaining knowledge in the field of recommendation systems.
+In preparation for our master thesis, we spend a semester gaining knowledge in the field of recommendation systems.
 We wrote a paper called \textit{Exploring Recommender Systems with Graph Convolutional Networks}.
-In this paper we studied recommendation systems using GCN's to achieve state of the art results.
-In particular we looked at the models NGCF, PUP and LightGCN.
-PUP and LightGCN is both inspired by NGCF, where LightGCN removes complexity operations from NGCF and PUP adds side information in form of prices and categories.
+In this paper, we studied recommendation systems using GCN's to achieve state of the art results.
+In particular, we looked at the models NGCF, PUP and LightGCN.
+PUP and LightGCN are both inspired by NGCF, where LightGCN removes complexity operations from NGCF and PUP adds side information in form of prices and categories.
 Both achieved better performance in NDCG compared to NGCF.
-Because of this we thought it would be interesting to extend LightGCN with price and categories to see if it would improve performance.
+We were however not able to achieve the results, where PUP performed better than NGCF in our own experiments.
+Because of this, we thought it would be interesting to extend LightGCN with price and categories to see if it would improve performance.
 \\
 Our initial extension of LightGCN where we changed the input by adding prices and categories to the user-item graph only made the model perform worse.
 It is our hypothesis that further changing how the embedding is performed can lead to performance increases.
-
