@@ -1,8 +1,8 @@
 \subsection{Brief Review of NGCF, LightGCN and GCF}
 Neural Graph Collaborative Filtering (NGCF) was published in 2019, and was a state of the art method, that utilized graph convolutional networks (GCN) for collaborative filtering \cite{NGCF_2019}.
-The original use for GCN was proposed on node classification where each node has rich attributes, but for collaborative filtering the nodes only contains node IDs \cite{lightgcn,kipf2017semisupervised,NGCF_2019}.
-This is something that LightGCN took advantage of and simplified NGCF by removing the non linear activation function and the feature transformation, which showed promising results in their experiments.
-Later Meng Liu et. al then created a method called BiTGCF which utilized GCN and transfer learning between two different datasets \cite{BiTGCF}.
+GCN was originally proposed for node classification where each node has rich attributes, but for collaborative filtering the nodes only contain node IDs \cite{lightgcn,kipf2017semisupervised,NGCF_2019}.
+This is something that LightGCN took advantage of and simplified NGCF by removing the nonlinear activation function and the feature transformation, which showed promising results in their experiments.
+Later Meng Liu et. al then created a method called BiTGCF which utilized GCN and transfer learning between two domains \cite{BiTGCF}.
 They also added GCF which is a degenerate version of BiTGCF that does not utilize transfer learning between two domains, but is a single domain method such as LightGCN and NGCF.
 BiTGCF and GCF removes the features transformation and nonlinear activation function of NGCF, which was inspired by LightGCN, but chooses to keep different aspect of NGCF.
 In their experiments Meng Liu et. al showed that both GCF and BiTGCF showed large improvements over both LightGCN and NGCF, but BiTGCF only showed smaller improvements over GCF, which can indicate that high connectivity caused by GCN has larger effect on recommendation than transfer learning between other domains.
@@ -19,12 +19,12 @@ $\mathcal{N}_u$ and $\mathcal{N}_i$ denotes the one hop neighbors from user $u$ 
 Following this section we will describe the embedding propagation for users and the final layer combination for NGCF, LightGCN and GCF.
 
 \subsubsection{Embedding Propagation in NGCF:}
-The embedding propagation for NGCF is defined as,
+The embedding propagation in NGCF is defined as,
 \begin{equation}
     \mathbf{e}_{u}^{(k+1)} = \mbox{LeakyReLU}(\mathbf{m}^{(k)}_{u \leftarrow u} + \sum^{}_{i \in \mathcal{N}_u} \mathbf{m}^{(k)}_{u \leftarrow i}),
     \label{eq:ngcf-embedding-propagation}
 \end{equation}
-where LeakyReLU is the nonlinear activation function and $\mathbf{m}^{(k)}_{u \leftarrow i}$ is the message construction from users u to item i, and $\mathbf{m}^{(k)}_{u \leftarrow u}$ is the self connection.
+where LeakyReLU is the nonlinear activation function, $\mathbf{m}^{(k)}_{u \leftarrow i}$ is the message construction from users u to item i, and $\mathbf{m}^{(k)}_{u \leftarrow u}$ is the self connection.
 These are respectively defined in \autoref{eq:message-construction-i-to-u} and \autoref{eq:self-connection} \cite{NGCF_2019}.
 \begin{equation}
     \mathbf{m}^{(k)}_{u \leftarrow i} = \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}(\mathbf{W}^{(k)}_1\mathbf{e}^{(k)}_i + \mathbf{W}^{(k)}_2(\mathbf{e}^{(k)}_i \odot \mathbf{e}^{(k)}_u)),
@@ -62,6 +62,6 @@ The embedding propagation in GCF is defined as \cite{BiTGCF},
     \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}\left( \mathbf{e}_i^{(k)} + \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)} \right)
 \end{equation}
 As can be seen GCF adds the self connections and the inner product between the users and items compared to LightGCN.
-The purpose of the inner product is that the more the user and item nodes has in common the greater the value will be passed to the center node \cite{BiTGCF}.
+The purpose of the inner product is that the more the user and item nodes have in common the greater the value will be passed to the center node \cite{BiTGCF}.
 Self connection is used to retain the information of the original node.
 Additionally GCF uses concatenation as layer combination, which was also used by NGCF in equation \autoref{eq:ngcf-concat-embed}.
