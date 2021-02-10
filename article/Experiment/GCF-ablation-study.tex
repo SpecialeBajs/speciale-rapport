@@ -26,7 +26,7 @@ The methods are as described here:\\
     \caption{Recall@50 on the Yelp2020 dataset.}
     \label{fig:GCF-recall-ablation-study}
 \end{figure}
-From \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-study} it can be seen that the methods that do not utilize concatenation as layer combination performs worse than the methods that utilize summation.
+From \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-study} it can be seen that the methods that do utilize concatenation as layer combination performs worse than the methods that utilize summation.
 For these experiments the dropout ratio is 0, so it could be because the concatenation methods hits overfitting.
 Additionally we can see that convolutions of items and user are beneficial, when using concatenation as layer combination, but decreases performance when using weighted summation as layer combination, while combining it with inner product.
 This is likely because weighted summation is more sensitive to changes in the embedding, and using both neighboring convolutions and inner product can create contradictions.
