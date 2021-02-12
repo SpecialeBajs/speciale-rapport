@@ -16,6 +16,16 @@ GCN for collaborative filtering can generally be abstracted as \cite{BiTGCF}
 where $AGG(\cdot)$ is an aggregation function, and $e_i^{(k)}$ and $e_u^{(k)}$ denotes the embeddings for user $u$ and item $i$ after $k$ propagation layers.
 The embedding propagation for items can be obtained similarly as the embeddings with users by replacing $u$ with $i$ and vice versa.
 $\mathcal{N}_u$ and $\mathcal{N}_i$ denotes the one hop neighbors from user $u$ and item $i$ respectively \cite{lightgcn,BiTGCF,NGCF_2019}.\\
+On \autoref{fig:gcn-figure} a generalized figure of LightGCN, GCF and NGCF can be seen.
+Graph convolutions are conduction on the initial embeddings, where an embedding function is used.
+When the convolutions have been created on each layer, it is input to the layer combination, which could either be concatenation or weighted summation.
+\begin{figure*}[h!]
+    \includegraphics[width=1.1\textwidth]{figures/generalized-gcn-figure.PNG}
+    \centering
+    \caption{Generalized structure of NGCF, LightGCN and GCF}
+    \label{fig:gcn-figure}
+\end{figure*}
+
 Following this section we will describe the embedding propagation for users and the final layer combination for NGCF, LightGCN and GCF.
 
 \subsubsection{Embedding Propagation in NGCF:}
