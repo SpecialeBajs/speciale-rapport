@@ -10,6 +10,7 @@ The methods are as described here:\\
     \item \textbf{GCF-only-IP}:  GCF where $e_i^{(k)}$ has been removed in \autoref{eq:GCF-embedding}, so that GCF's graph convolutions only considers the inner product of users and items.
     \item \textbf{GCF-only-IP-minus-sc}: Implemented as GCF-only-ip but without self connections.
     \item \textbf{GCF-minus-IP}: GCF where inner product has been removed. \textcolor{red}{Results missing}
+    \item \textbf{GCF-minus-IP-and-sc}: Same as GCF-minus-IP, but without self connections. \textcolor{red}{Results missing}
     \item \textbf{LightGCN-concat}: LightGCN with concatenation as layer combination.
     \item \textbf{LightGCN}: Original LightGCN as described in \autoref{subsubsec:LightGCN-embed-propagation}.
     \item \textbf{GCF-sum-only-IP}: Implemented as GCF-only-IP except that the layer combination method used is weighted summation.
@@ -31,7 +32,6 @@ From \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-
 For these experiments the dropout ratio is 0, so it could be because the concatenation methods hits overfitting.
 Additionally we can see that convolutions of items and user are beneficial, when using concatenation as layer combination, but decreases performance when using weighted summation as layer combination, while combining it with inner product.
 This is likely because weighted summation is more sensitive to changes in the embedding, and using both neighboring convolutions and inner product can create contradictions.
-<<<<<<< HEAD
 \begin{figure}[h!]
     \includegraphics[width=\linewidth]{figures/gcf-sum-ndcg.png}
     \caption{NDCG@50 for the compared methods that utilize summation as layer combination on the Yelp2020 dataset.}
@@ -56,5 +56,3 @@ Looking at \autoref{fig:GCF-sum-NDCG-ablation-study} and \autoref{fig:GCF-sum-re
 On \autoref{fig:GCF-NDCG-concat-ablation-study} and \autoref{fig:GCF-recall-concat-ablation-study} GCF without self connections performs a small amount better than GCF.
 Removing inner product or only keeping inner product makes them perform worse when using concatenation as layer combination.
 Interestingly \textit{gcf-only-ip-minus-sc} performs better than \textit{gcf-only-ip}, which can indicate that self connections are harmful for performance, if you only use inner product in the convolutions.
-=======
->>>>>>> 0d17e2391590323ac76859d9e45b0ae2dff36aaf
