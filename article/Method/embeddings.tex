@@ -18,14 +18,27 @@ The embedding propagation for items can be obtained similarly as the embeddings 
 $\mathcal{N}_u$ and $\mathcal{N}_i$ denotes the one hop neighbors from user $u$ and item $i$ respectively \cite{lightgcn,BiTGCF,NGCF_2019}.\\
 On \autoref{fig:gcn-figure} a generalized figure of LightGCN, GCF and NGCF can be seen.
 Graph convolutions are conduction on the initial embeddings, where an embedding function is used.
+\autoref{fig:gcn-convolutions} illustrates intuition about graph convolutions and shows how the signal from $e_{i_1}^{(0)}$ passes through $e_{u_3}^{(1)}$ and $e_{i_4}^{(2)}$ to $e_{u_1}^{(3)}$
 When the convolutions have been created on each layer, it is input to the layer combination, which could either be concatenation or weighted summation.
+An example can be seen on \autoref{fig:layer-combination}, where each array symbolize a layer.
 \begin{figure*}[h!]
     \includegraphics[width=1.1\textwidth]{figures/generalized-gcn-figure.PNG}
     \centering
     \caption{Generalized structure of NGCF, LightGCN and GCF}
     \label{fig:gcn-figure}
 \end{figure*}
-
+\begin{figure}[h!]
+    \includegraphics[width=0.5\textwidth]{figures/embedding-convolutions.png}
+    \centering
+    \caption{Illustration of three graph convolutions for $u_1$}
+    \label{fig:gcn-convolutions}
+\end{figure}
+\begin{figure}[h!]
+    \includegraphics[width=0.4\textwidth]{figures/layer-combination.png}
+    \centering
+    \caption{Example of weighted summation and concatenation as layer combinations.}
+    \label{fig:layer-combination}
+\end{figure}
 Following this section we will describe the embedding propagation for users and the final layer combination for NGCF, LightGCN and GCF.
 
 \subsubsection{Embedding Propagation in NGCF:}
