@@ -1,0 +1,30 @@
+\subsection{Changing with $\alpha_k$}
+
+\subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
+% Overvej om denne subsubsection er interessant nok at have med i sidste udgave af artiklen, eller om den skal i appendix.
+The most simple experiment to conduct is by changing $\alpha_k$ from $(1 / (K + 1))$ to $1$ and essentially removing the variable to see what impact it has on the results.
+This will result in the embeddings scaling more, than it otherwise would have with $\alpha_k$ as normalization.
+As can be seen on \autoref{fig:ndcg-yelp2020-alpha-k} and \autoref{fig:recall-yelp2020-alpha-k} removing $\alpha_k$ decreases performance of LightGCN on the yelp2020 dataset.
+In the initial epochs, LightGCN where $\alpha_k = 1$ it performs better, but quickly starts to decline in performance.
+On the amazon-book dataset it can be seen that LightGCN and LightGCN where $\alpha_k = 1$ performs similarly as on the yelp2020 dataset.
+These result indicates that $\alpha_k$ is an important part of the layer combination for weighted summation, and we will continue our experimentation on trying to optimize $\alpha_k$
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-ndcg.png}
+    \caption{NDCG@50 of LightGCN and LightGCN where $\alpha_k = 1$ on yelp2020}
+    \label{fig:ndcg-yelp2020-alpha-k}
+\end{figure}
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-recall.png}
+    \caption{Recall@50 of LightGCN and LightGCN where $\alpha_k = 1$ on yelp2020}
+    \label{fig:recall-yelp2020-alpha-k}
+\end{figure}
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/alpha-k-results/amazon-ndcg.png}
+    \caption{NDCG@50 of LightGCN and LightGCN where $\alpha_k = 1$ on amazon-book}
+    \label{fig:ndcg-amazon-alpha-k}
+\end{figure}
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/alpha-k-results/amazon-recall.png}
+    \caption{Recall@50 of LightGCN and LightGCN where $\alpha_k = 1$ on amazon-book}
+    \label{fig:recall-amazon-alpha-k}
+\end{figure}
