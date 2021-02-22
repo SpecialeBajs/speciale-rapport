@@ -1,6 +1,25 @@
 \subsection{Ablation study for GCF}
 Meng Liu et. al does not present an ablation study for BiTGCF and GCF, which LightGCN showed is important with their regards to NGCF \cite{lightgcn,BiTGCF}.
 In this section we conduct an ablation study on GCF to get an understanding on the effect of the different parts of the embedding propagation and layer combination.
+Examples of the equations can be seen on \autoref{eq:GCF-minus-sc}, \autoref{eq:GCF-only-IP} and \autoref{eq:GCF-minus-IP}.
+On \autoref{eq:GCF-minus-sc} the self-connection has been removed and is called \textit{GCF-minus-sc}. 
+On \autoref{eq:GCF-only-IP} only the inner product of the neighbor has been contained, and is called \textit{GCF-only-IP}
+\autoref{eq:GCF-minus-IP} has the inner product been removed and is called \textit{GCF-minus-IP}.
+There are also examples where GCF utilizes summation as layer combination as used in LightGCN which can be seen on \autoref{eq:lightgcn-sum}.
+These are named \textit{GCF-sum}.
+When LightGCN is tested with concatenation as layer combination it is called \textit{LightGCN-concat}
+\begin{equation}
+    \mathbf{e}_{u}^{(k+1)} = \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}\left( \mathbf{e}_i^{(k)} + \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)} \right)
+    \label{eq:GCF-minus-sc}
+\end{equation}
+\begin{equation}
+    \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)} 
+    \label{eq:GCF-only-IP}
+\end{equation}
+\begin{equation}
+    \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)} 
+    \label{eq:GCF-minus-IP}
+\end{equation}
 \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-study} contains the GCF ablation study, where all GCF modifications still have the inner product between users and items, except for LightGCN.
 The methods are as described here:\\
 \textcolor{red}{(We might also be required to test this with dropout to prevent overfitting on the methods that utilizes concatenation as layer combination, and see what effect this has on the results.)}
@@ -13,9 +32,9 @@ The methods are as described here:\\
     \item \textbf{GCF-minus-IP-and-sc}: Same as GCF-minus-IP, but without self connections. \textcolor{red}{Results missing}
     \item \textbf{LightGCN-concat}: LightGCN with concatenation as layer combination.
     \item \textbf{LightGCN}: Original LightGCN as described in \autoref{subsubsec:LightGCN-embed-propagation}.
+    \item \textbf{LightGCN-plus-sc}: LightGCN, but with self connections. \textcolor{red}{Results missing}
     \item \textbf{GCF-sum-only-IP}: Implemented as GCF-only-IP except that the layer combination method used is weighted summation.
     \item \textbf{GCF-sum}: GCF where the layer combination has been changed to weighted summation instead of concatenation.
-    \item \textbf{GCF-sum-minus-IP}: As GCF sum, but without inner product. \textcolor{red}{Results missing}
     \item \textbf{GCF-sum-minus-sc}: Implemented as GCF-sum but without self connections.
 \end{itemize}
 \begin{figure}[h!]
