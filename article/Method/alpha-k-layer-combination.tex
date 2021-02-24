@@ -1,8 +1,9 @@
 \subsection{Optimizing layer combination}
 \subsubsection{Removing $\alpha_k$}
 % Overvej om denne sektion bør flyttes til appendix med en reference til den.
-To see the impact of $\alpha_k$ we simply removed it.
-If this would result in small changes in performance, it could indicate that it would not be worth while to pursuit the opportunity to optimize $\alpha_k$.
+Before trying to optimize $\alpha_k$ we wanted to investigate how large the impact of it is.
+A simple experiment to see the impact of $\alpha_k$ is by simply removing it.
+If this results in small changes in performance, it can indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
 \begin{equation}
     \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
     \label{eq:lightgcn-sum}
@@ -11,11 +12,11 @@ The result of the experiment can be seen in \autoref{subsubsec:remove-alpha-k}
 
 \subsubsection{Optimizing $\alpha_k$}
 % Definer matematikken
-The initial idea of optimizing $\alpha_k$ is change each layers effect depending on how many connection each node has.
+The initial idea of optimizing $\alpha_k$ is to change each layer's effect depending on how many connections each node has.
 An example can be seen \autoref{tab:alpha-example}.
-The numbers shown on the table are arbitrary and different variables needs to be tested to see how well it performs.
+The numbers shown on the table are arbitrary and different variables need to be tested to see how well it performs.
 The intuition behind this is that each given node needs different kinds of impact.
-A node with only 1 connection will not benefit much from the first convolution, but will be richer in information in the third convolution.
+A node with only 1 connection will not benefit much from the first convolution but will be richer in information in the third convolution.
 For a node with 200 connections, the third convolution might actually be harmful, as the node gets impacted too much by too many nodes, where 1 convolution is enough to make it perform well.
 
 \begin{table}[]
