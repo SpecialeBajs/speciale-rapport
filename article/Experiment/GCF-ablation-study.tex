@@ -27,11 +27,11 @@ The methods are as described here:\\
     \item \textbf{GCF-minus-sc}: GCF without self connections
     \item \textbf{GCF-only-IP}:  GCF where $e_i^{(k)}$ has been removed in \autoref{eq:GCF-embedding}, so that GCF's graph convolutions only considers the inner product of users and items.
     \item \textbf{GCF-only-IP-minus-sc}: Implemented as GCF-only-ip but without self connections.
-    \item \textbf{GCF-minus-IP}: GCF where inner product has been removed. \textcolor{red}{Results missing}
-    \item \textbf{GCF-minus-IP-and-sc}: Same as GCF-minus-IP, but without self connections. \textcolor{red}{Results missing}
+    \item \textbf{GCF-minus-IP}: GCF where inner product has been removed.
+    \item \textbf{GCF-minus-IP-and-sc}: Same as GCF-minus-IP, but without self connections.
     \item \textbf{LightGCN-concat}: LightGCN with concatenation as layer combination.
     \item \textbf{LightGCN}: Original LightGCN as described in \autoref{subsubsec:LightGCN-embed-propagation}.
-    \item \textbf{LightGCN-plus-sc}: LightGCN, but with self connections. \textcolor{red}{Results missing}
+    \item \textbf{LightGCN-plus-sc}: LightGCN, but with self connections.
     \item \textbf{GCF-sum-only-IP}: Implemented as GCF-only-IP except that the layer combination method used is weighted summation.
     \item \textbf{GCF-sum}: GCF where the layer combination has been changed to weighted summation instead of concatenation.
     \item \textbf{GCF-sum-minus-sc}: Implemented as GCF-sum but without self connections.
