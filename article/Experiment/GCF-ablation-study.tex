@@ -21,6 +21,7 @@ When LightGCN is tested with concatenation as layer combination it is called \te
     \label{eq:GCF-minus-IP}
 \end{equation}
 \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-study} contains the GCF ablation study, where all GCF modifications still have the inner product between users and items, except for LightGCN.
+The x-axis describes the every time the epochs increases by 20, and the y-axis is how well it performs regarding to NDCG or Recall.
 The methods are as described here:\\
 \begin{itemize}
     \item \textbf{GCF}: The original GCF method as described in \autoref{subsubsec:GCF-embed-propagation}.
@@ -50,7 +51,6 @@ From \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-
 The results can also be seen on \autoref{tab:ablation-results}
 It is also noticeable that most concatenation methods learn faster than the summation methods.
 These experiments all have the dropout ratio at 0, so it could be because the concatenation methods starts overfitting.
-Additionally we can see that convolutions of items and user are beneficial, when using concatenation as layer combination, but decreases performance when using weighted summation as layer combination, while combining it with inner product.
 This is likely because weighted summation is more sensitive to changes in the embedding, and using both neighboring convolutions and inner product can create contradictions.
 \begin{table}[]
     \centering
@@ -95,5 +95,5 @@ Looking at \autoref{fig:GCF-sum-NDCG-ablation-study} and \autoref{fig:GCF-sum-re
     \label{fig:GCF-recall-concat-ablation-study}
 \end{figure}
 On \autoref{fig:GCF-NDCG-concat-ablation-study} and \autoref{fig:GCF-recall-concat-ablation-study} GCF without self connections performs a small amount better than GCF.
-Removing inner product or only keeping inner product makes them perform worse when using concatenation as layer combination.
+Only keeping inner product makes them perform worse when using concatenation as layer combination.
 Interestingly \textit{gcf-only-ip-minus-sc} performs better than \textit{gcf-only-ip}, which can indicate that self connections are harmful for performance, if you only use inner product in the convolutions.
