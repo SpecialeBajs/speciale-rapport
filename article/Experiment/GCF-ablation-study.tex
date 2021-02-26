@@ -1,8 +1,8 @@
 \subsection{Ablation study for GCF}
 Meng Liu et. al does not present an ablation study for BiTGCF and GCF, which LightGCN showed is important with their regards to NGCF \cite{lightgcn,BiTGCF}.
-In this section we conduct an ablation study on GCF to get an understanding on the effect of the different parts of the embedding propagation and layer combination.
+In this section we conduct an ablation study on GCF to get an understanding of the effect that the different parts of embedding propagation and layer combination have.
 Examples of the equations can be seen on \autoref{eq:GCF-minus-sc}, \autoref{eq:GCF-only-IP} and \autoref{eq:GCF-minus-IP}.
-On \autoref{eq:GCF-minus-sc} the self-connection has been removed and is called \textit{GCF-minus-sc}.
+\textit{GCF-minus-sc} can be seen on \autoref{eq:GCF-minus-sc} where the self-connection has been removed.
 On \autoref{eq:GCF-only-IP} only the inner product of the neighbor remains, and is called \textit{GCF-only-IP}
 \autoref{eq:GCF-minus-IP} the inner product has been removed and is called \textit{GCF-minus-IP}.
 There are also examples where GCF utilizes weighted summation as layer combination as used in LightGCN which can be seen on \autoref{eq:lightgcn-sum}.
@@ -47,11 +47,11 @@ The methods are as described here:\\
     \caption{Recall@50 on the Yelp2020 dataset.}
     \label{fig:GCF-recall-ablation-study}
 \end{figure}
-From \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-study} it can be seen that the methods that do utilize concatenation as layer combination generally performs worse than the methods that utilize weigthed summation.
+From \autoref{fig:GCF-NDCG-ablation-study} and \autoref{fig:GCF-recall-ablation-study} it can be seen that the methods that do utilize concatenation as layer combination generally perform worse than the methods that utilize weigthed summation.
 The results can also be seen on \autoref{tab:ablation-results}
 It is also noticeable that most concatenation methods learn faster than the summation methods.
 These experiments all have the dropout ratio at 0, so it could be because the concatenation methods starts overfitting.
-This is likely because weighted summation is more sensitive to changes in the embedding, and using both neighboring convolutions and inner product can create contradictions.
+This is likely because weighted summation is more sensitive to changes in the embeddings, and using both neighboring convolutions and inner product can create contradictions.
 \begin{table}[]
     \centering
     \begin{tabular}{|l|l|l|}
