@@ -2,7 +2,7 @@
 
 \subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
 % Overvej om denne subsubsection er interessant nok at have med i sidste udgave af artiklen, eller om den skal i appendix.
-The most simple experiment to conduct is by changing $\alpha_k$ from $(1 / (K + 1))$ to $1$ and essentially removing the variable to see what impact it has on the results.
+The simplest experiment to conduct is by changing $\alpha_k$ from $(1 / (K + 1))$ to $1$ and essentially removing the variable to see what impact it has on the results.
 This method is called LightGCN-Ak1 which stands for LightGCN $\alpha_k = 1$.
 This will result in the embeddings scaling more than it otherwise would have with $\alpha_k$ as normalization.
 As can be seen on \autoref{fig:ndcg-yelp2020-alpha-k} and \autoref{fig:recall-yelp2020-alpha-k} removing $\alpha_k$ decreases performance of LightGCN on the yelp2020 dataset.
