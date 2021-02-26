@@ -1,9 +1,9 @@
 \subsection{Optimizing layer combination}
 \subsubsection{Removing $\alpha_k$}
 % Overvej om denne sektion bør flyttes til appendix med en reference til den.
-Before trying to optimize $\alpha_k$ we wanted to investigate what impact it has.
+Before trying to optimize $\alpha_k$ we wanted to investigate what impact it had.
 The simplest experiment is to remove it.
-If this results in small changes in performance, it can indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
+If this results in small changes in performance, it could indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
 \begin{equation}
     \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
     \label{eq:lightgcn-sum}
@@ -12,10 +12,10 @@ The result of the experiment can be seen in \autoref{subsubsec:remove-alpha-k}
 
 \subsubsection{Optimizing $\alpha_k$}
 % Definer matematikken
-The initial idea of optimizing $\alpha_k$ is to change each layer's effect depending on how many connections each node has.
+The initial idea of optimizing $\alpha_k$ was to change each layer's effect depending on how many connections each node has.
 An example can be seen \autoref{tab:alpha-example}.
 The numbers shown on the table are arbitrary and different variables need to be tested to see how well it performs.
-The intuition behind this is that each given node needs different kinds of impact.
+The intuition behind this is that the effect of each layer in the GCN being dependent on the number of connections that the node has would be beneficial.
 A node with only 1 connection will not benefit much from the first convolution but will be richer in information in the third convolution.
 For a node with 200 connections, the third convolution might actually be harmful, as the node gets impacted too much by too many nodes, where 1 convolution is enough to make it perform optimally.
 
