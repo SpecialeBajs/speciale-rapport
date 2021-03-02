@@ -66,7 +66,7 @@ The final embedding is calculated by concatenating each embedding layer as seen 
     \label{eq:ngcf-concat-embed}
 \end{equation}
 
-\subsubsection{Embedding Propagation in LightGCN}
+\subsubsection{Embedding Propagation in LightGCN}\label{subsubsec:LightGCN-embed-propagation}
 The embedding propagation for LightGCN is defined as \cite{lightgcn},
 \begin{equation}
     \mathbf{e}_{u}^{(k+1)} = \sum^{}_{i \in \mathcal{N}_u} \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)}
@@ -80,10 +80,11 @@ Additionally LightGCN changes the layer combination from concatenation to weight
 where $K$ is the total number of layers and $\alpha_k$ is a hyper parameter used to denote the importance of the $k$-th embedding \cite{lightgcn}.
 $\alpha_k$ is set to $1 /(K + 1)$ for simplicity.
 
-\subsubsection{Embedding Propagation in GCF.}
+\subsubsection{Embedding Propagation in GCF}\label{subsubsec:GCF-embed-propagation}
 The embedding propagation in GCF is defined as \cite{BiTGCF},
 \begin{equation}
     \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}\left( \mathbf{e}_i^{(k)} + \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)} \right)
+    \label{eq:GCF-embedding}
 \end{equation}
 As can be seen GCF adds the self connections and the inner product between the users and items compared to LightGCN.
 The purpose of the inner product is that the more the user and item nodes have in common the greater the value will be passed to the center node \cite{BiTGCF}.

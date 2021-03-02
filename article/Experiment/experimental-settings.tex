@@ -1,0 +1,7 @@
+\subsection{Experimental Settings}
+
+\subsubsection{Ablation study}
+BiTGCF and GCF utilized the binary cross entropy loss function as this works well for cross domains, but as we only investigate GCF, we decided to change this to BPR to be able to compare this with LightGCN and NGCF.
+We use 3 convolution layers for each method.
+The embedding size is 64 and mini batch is 2048.
+The learning rate is set to 0.001 and the dropout is initially set to 0.
