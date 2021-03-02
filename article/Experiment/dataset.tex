@@ -4,7 +4,7 @@ These are \textit{yelp-2020}, \textit{amazon-book} and \textit{amazon-cell-sport
 The data split is 20\% testing and 80\% training where 10\% of the training data is used as validation data.
 A comparison of the datasets can be seen on \autoref{tab:dataset-comparison}.
 \\
-\textbf{The \textit{amazon-book} dataset} is the largest and simplest dataset that we used.
+\textbf{The \textit{amazon-book} dataset} is the largest dataset we used.
 It is taken from the \cite{lightgcn} paper and only contains ID's for users and items.
 As in \cite{lightgcn} we have used the 10-core setting \textit{i.e.} only removing users and items with less than ten interactions.
 \\
@@ -20,6 +20,7 @@ PUP needs both price and category in addition to user and item IDs so a dataset 
 Both methods used a different version of Yelp's datasets which were incompatible so utilizing Yelp's newest dataset (at the time) was decided.
 Inspired by PUP the dataset only retains businesses belonging to the restaurant category where each restaurant have one or more sub-categories such as Mexican, Chinese, etc.
 To make the data simpler only one sub-category is retained for each item, this is what is considered its category in the rest of the text.
+In this dataset also we have also utilized the 10-core setting.
 
 
 \begin{table*}[]
