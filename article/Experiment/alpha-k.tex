@@ -29,3 +29,25 @@ These results indicates that $\alpha_k$ is an important part of the layer combin
     \caption{Recall@50 of LightGCN and LightGCN-Ak1 on amazon-book}
     \label{fig:recall-amazon-alpha-k}
 \end{figure}
+
+\subsubsection{Utilizing only one layer}
+As we showed previously that removing $\alpha_k$ is harmful for performance, we want to investigate the influence of the different layers.
+In this section we experiment with removing the layer combination, and only utilizing a specific convolution layer.
+$\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
+
+\begin{table*}[]
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+                          & Amazon-Cell-Sport & Yelp2020 & Amazon-Book \\ \hline
+    Weighted sum          & 0.03255           &          &             \\ \hline
+    $\mathbf{e}^{(0)}$    & 0.02241           &          &             \\ \hline
+    $\mathbf{e}^{(1)}$    & 0.02563           &          &             \\ \hline
+    $\mathbf{e}^{(2)}$    & 0.03419           &          &             \\ \hline
+    $\mathbf{e}^{(3)}$    & 0.03449           &          &             \\ \hline
+    $\mathbf{e}^{(4)}$    &                   &          &             \\ \hline
+    $\mathbf{e}^{(5)}$    &                   &          &             \\ \hline
+    \end{tabular}
+    \centering
+    \caption{Experiment on LightGCN where different layers are used as the final embedding.}
+    \label{tab:only-use-one-layer-experiment}
+ \end{table*}
