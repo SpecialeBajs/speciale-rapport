@@ -2,7 +2,7 @@
 LGC-ACF (Light GCN based Aspect-level Collaborative Filtering) is a recommendation model developed by Denghua Mei et. al that utilizes LightGCN and side information \cite{LGC-ACF}.
 As described in \autoref{sec:pre-specialization-paper} in our pre-specialization paper tried to extend LightGCN by changing the input parameters to include a more diverse graph that included side information.
 These results showed that inputting a more diverse graph was not feasible to improve the results of LightGCN \cite{Pre-specialisation}.
-LGC-ACF utilizes side information differently, where they include multiple graphs and showed improvements of LightGCN between 2\% and 14\% in their experiments \cite{LGC-ACF}.
+LGC-ACF utilizes side information differently, where they include multiple aspect-level user-item interaction graphs and showed improvements of LightGCN between 2\% and 14\% in their experiments \cite{LGC-ACF}.
 On \autoref{fig:lgc-acf} the model of LGC-ACF can be seen.
 The input to the model is a user-movie graph and a user-director graph, where the users are the same.
 In the user-movie graph, 1 is inserted if there is a connection between a user and a movie.
