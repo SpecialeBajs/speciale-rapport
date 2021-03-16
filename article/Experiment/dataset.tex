@@ -5,17 +5,17 @@ The data split is 20\% testing and 80\% training where 10\% of the training data
 A comparison of the datasets can be seen on \autoref{tab:dataset-comparison}.
 \\
 \textbf{The \textit{amazon-book} dataset} is the largest dataset we used.
-It is taken from the \cite{lightgcn} paper and only contains ID's for users and items.
-As in \cite{lightgcn} we have used the 10-core setting \textit{i.e.} only removing users and items with less than ten interactions.
+It is taken from the LightGCN paper and only contains ID's for users and items \cite{lightgcn}.
+We have used the same settings as LightGCN with 15-core setting for users and 5 core settings for items \textit{i.e.} removing users with less than 15 interactions and items with less than 5 interactions.
 \\
-\textbf{The \textit{amazon-cell-sport} dataset} is taken from \cite{BiTGCF}.
+\textbf{The \textit{amazon-cell-sport} dataset} is taken from BiTGCF \cite{BiTGCF}.
 This dataset contains two domains \textit{cell} short for Cell Phones and \textit{sport} short for Sports and Outdoors.
-It contains two domains because \cite{BiTGCF} builds an extension of \cite{lightgcn} which utilizes a cross-domain recommendation technique.
+It contains two domains because BiTGCF builds an extension of LightGCN which utilizes a cross-domain transfer learning recommendation model \cite{BiTGCF}.
 To build a cross-domain dataset first all the overlapping users were found.
 Then all the users with five or more interactions were retained.
 Items from each domain have both been split into training and testing before being merged.
 \\
-\textbf{The \textit{yelp-2020} dataset} was made as a compromise to test both \cite{lightgcn} and \cite{PUP}.
+\textbf{The \textit{yelp-2020} dataset} was made as a compromise to test both LightGCN and Price-aware User Preference-modeling (PUP) \cite{PUP, lightgcn}.
 PUP needs both price and category in addition to user and item IDs so a dataset was needed which could be used to validate both methods.
 Both methods used a different version of Yelp's datasets which were incompatible so utilizing Yelp's newest dataset (at the time) was decided.
 Inspired by PUP the dataset only retains businesses belonging to the restaurant category where each restaurant have one or more sub-categories such as Mexican, Chinese, etc.
@@ -26,14 +26,14 @@ In this dataset also we have also utilized the 10-core setting.
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
-    \hline
-                                & Users     & Items     & Items/users ratio   & Interactions      & Sparsity  \\ \hline
-        Amazon-cell             & 4,998     & 14,618    & 2.924               & 47,444            & 99.9351\% \\ \hline
-        Amazon-sport            & 4,998     & 22,101    & 4.421               & 55,556            & 99.9497\% \\ \hline
-        Amazon-cell-sport       & 4,998     & 36,719    & 7.347               & 103,000           & 99.9438\% \\ \hline
-        Amazon-book             & 52,643    & 91,599    & 1.74                & 2,984,108         & 99.9381\% \\ \hline
-        Yelp2020                & 24,384    & 20,091    & 0.824               & 594,196           & 99.8787\% \\ \hline
+        \hline
+                          & Users  & Items  & Items/users ratio & Interactions & Sparsity  \\ \hline
+        Amazon-cell       & 4,998  & 14,618 & 2.924             & 47,444       & 99.9351\% \\ \hline
+        Amazon-sport      & 4,998  & 22,101 & 4.421             & 55,556       & 99.9497\% \\ \hline
+        Amazon-cell-sport & 4,998  & 36,719 & 7.347             & 103,000      & 99.9438\% \\ \hline
+        Amazon-book       & 52,643 & 91,599 & 1.74              & 2,984,108    & 99.9381\% \\ \hline
+        Yelp2020          & 24,384 & 20,091 & 0.824             & 594,196      & 99.8787\% \\ \hline
     \end{tabular}
-    \caption{Difference between the datasets}
+    \caption{Comparisons on the datasets}
     \label{tab:dataset-comparison}
 \end{table*}
