@@ -21,8 +21,6 @@ Both methods used a different version of Yelp's datasets which were incompatible
 Inspired by PUP the dataset only retains businesses belonging to the restaurant category where each restaurant have one or more sub-categories such as Mexican, Chinese, etc.
 To make the data simpler only one sub-category is retained for each item, this is what is considered its category in the rest of the text.
 In this dataset also we have also utilized the 10-core setting.
-
-
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -36,4 +34,42 @@ In this dataset also we have also utilized the 10-core setting.
     \end{tabular}
     \caption{Comparisons on the datasets}
     \label{tab:dataset-comparison}
+\end{table*}
+
+\subsubsection{Interactions in datasets}
+As we expect there is a relation between the number of connections for each node and the performance of a convolution layer, we analyzed the different datasets used for our test.
+On \autoref{tab:dataset-item-and-user-splits} the amount of users and items that have a certain amount of interactions can be seen.
+It can be easily seen, that the datasets in general are very different, where users in Amazon-book have 45 interactions in average and users in Amazon-Cell-Sport and Yelp2020 have around 17.07 and 19.04 interactions in average respectively.
+For Amazon-Cell-Sport the average of connections for items is at 2.58, where Yelp2020 and Amazon-Book have an average of 23.31 and 25.99 respectively.
+As with our hypothesis we expect that a Amazon-Book will perform better with a small number of convolutions, where Amazon-Cell-Sport will perform better with many convolutions.
+
+\begin{table*}[]% Overvej om denne tabel skal i appendix.
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+            & \multicolumn{2}{l|}{Yelp2020} & \multicolumn{2}{l|}{Amazon-Cell-Sport} & \multicolumn{2}{l|}{Amazon-Book} \\ \hline
+    Range   & User splits   & Item splits   & User splits        & Item splits       & User splits     & Item splits    \\ \hline
+    1-5     & 0             & 5185          & 0                  & 30152             & 0               & 4393           \\ \hline
+    6-10    & 7298          & 4652          & 1190               & 1677              & 0               & 20562          \\ \hline
+    11-15   & 7175          & 2505          & 1890               & 565               & 0               & 21561          \\ \hline
+    16-20   & 3862          & 1622          & 936                & 270               & 17098           & 12092          \\ \hline
+    21-25   & 1742          & 1135          & 396                & 137               & 8234            & 7638           \\ \hline
+    26-30   & 1160          & 814           & 211                & 78                & 5257            & 5092           \\ \hline
+    31-35   & 749           & 624           & 115                & 44                & 3722            & 3791           \\ \hline
+    36-40   & 664           & 487           & 78                 & 27                & 3154            & 2891           \\ \hline
+    41-45   & 380           & 398           & 46                 & 19                & 2029            & 2301           \\ \hline
+    46-50   & 243           & 323           & 31                 & 14                & 1591            & 1775           \\ \hline
+    51-60   & 409           & 475           & 36                 & 13                & 2581            & 2407           \\ \hline
+    61-70   & 200           & 316           & 19                 & 5                 & 1664            & 1662           \\ \hline
+    71-80   & 126           & 271           & 13                 & 6                 & 1379            & 1183           \\ \hline
+    81-90   & 102           & 199           & 5                  & 4                 & 954             & 883            \\ \hline
+    91-100  & 71            & 145           & 6                  & 0                 & 745             & 619            \\ \hline
+    101-150 & 127           & 434           & 23                 & 6                 & 2120            & 1528           \\ \hline
+    151-200 & 52            & 179           & 2                  & 1                 & 892             & 553            \\ \hline
+    201-250 & 17            & 64            & 0                  & 0                 & 469             & 251            \\ \hline
+    251-300 & 1             & 36            & 0                  & 0                 & 254             & 146            \\ \hline
+    300+    & 7             & 61            & 1                  & 0                 & 500             & 271            \\ \hline
+    Avg connection & 19.04         & 23.31         & 17.07              & 2.58             & 45.22           & 25.99          \\ \hline
+        \end{tabular}
+    \caption{This table shows the number of nodes in a certain interaction range can be seen for each dataset and in different splits. The Avg connection shows how many connections each user or item have in average} % OMFORMULER denne lorte beskrivelse
+    \label{tab:dataset-item-and-user-splits}
 \end{table*}
