@@ -36,18 +36,20 @@ In this section we experiment with removing the layer combination, and only util
 $\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
 
 \begin{table*}[]
-    \begin{tabular}{|l|l|l|l|}
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|}
         \hline
-                             & Amazon-Cell-Sport  & Yelp2020           & Amazon-Book         \\ \hline
-        Weighted sum (3 con) & 0.03237            & 0.1064             &                     \\ \hline
-        Weighted sum (4 con) & 0.03253            & 0.1084             &                     \\ \hline
-        Weighted sum (5 con) & 0.03285            & \textbf{0.1089}    &                     \\ \hline
-        $\mathbf{e}^{(0)}$   & 0.02169            & 0.08177            & 0.03669             \\ \hline
-        $\mathbf{e}^{(1)}$   & 0.02523            & 0.1019             & \textbf{0.0458}     \\ \hline
-        $\mathbf{e}^{(2)}$   & 0.03419            & \underline{0.1086} & \underline{0.04487} \\ \hline
-        $\mathbf{e}^{(3)}$   & 0.03483            & 0.09956            & 0.0372              \\ \hline
-        $\mathbf{e}^{(4)}$   & \underline{0.0366} & 0.08863            & 0.03247             \\ \hline
-        $\mathbf{e}^{(5)}$   & \textbf{0.03733}   & 0.0819             & 0.02923             \\ \hline
+                             & \multicolumn{2}{l|}{Amazon-Cell-Sport} & \multicolumn{2}{l|}{Yelp2020} & \multicolumn{2}{l|}{Amazon-Book}                                                                 \\ \hline
+                             & NDCG@50                                & Recall@50                     & NDCG@50                          & Recall@50         & NDCG@50             & Recall@50           \\ \hline
+        Weighted sum (3 con) & 0.03237                                & 0.06447                       & 0.1064                           & 0.2106            & 0.04668             & 0.08129             \\ \hline
+        Weighted sum (4 con) & 0.03253                                & 0.06394                       & 0.1084                           & 0.2157            & 0.04617             & 0.08033             \\ \hline
+        Weighted sum (5 con) & 0.03285                                & 0.06451                       & \textbf{0.1089}                  & \textbf{0.2177}   & temp                & temp                \\ \hline
+        $\mathbf{e}^{(0)}$   & 0.02169                                & 0.04447                       & 0.08177                          & 0.1674            & 0.03669             & 0.06373             \\ \hline
+        $\mathbf{e}^{(1)}$   & 0.02523                                & 0.04859                       & 0.1019                           & 0.2039            & \textbf{0.0458}     & \textbf{0.079}      \\ \hline
+        $\mathbf{e}^{(2)}$   & 0.03419                                & 0.06809                       & \underline{0.1086}               & \underline{0.217} & \underline{0.04487} & \underline{0.07755} \\ \hline
+        $\mathbf{e}^{(3)}$   & 0.03483                                & 0.06972                       & 0.09956                          & 0.2001            & 0.0372              & 0.06412             \\ \hline
+        $\mathbf{e}^{(4)}$   & \underline{0.0366}                     & \textbf{0.07377}              & 0.08863                          & 0.1788            & 0.03247             & 0.05607             \\ \hline
+        $\mathbf{e}^{(5)}$   & \textbf{0.03733}                       & \underline{0.07318}           & 0.0819                           & 0.1643            & 0.02923             & 0.05022             \\ \hline
     \end{tabular}
     \centering
     \caption{Experiment on LightGCN where different layers are used as the final embedding.}
