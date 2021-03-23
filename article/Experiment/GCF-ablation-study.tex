@@ -66,7 +66,7 @@ Generally it can be seen that GCF and GCF-minus-sc performs better than the othe
                              & \multicolumn{2}{c|}{Yelp2020} & \multicolumn{2}{c|}{Amazon-Cell-Sport} & \multicolumn{2}{c|}{Amazon-Book}                                                                   \\ \hline
                              & NDCG@50                       & Recall@50                              & NDCG@50                          & Recall@50           & NDCG@50             & Recall@50           \\ \hline
         GCF                  & 0.09092                       & 0.1869                                 & \underline{0.03398}              & \underline{0.06536} & 0.04032             & 0.07035             \\ \hline
-        GCF-minus-sc         & 0.09084                       & 0.1879                                 & \textbf{0.03472}                 & \textbf{0.06656}    &                     &                     \\ \hline
+        GCF-minus-sc         & 0.09084                       & 0.1879                                 & \textbf{0.03472}                 & \textbf{0.06656}    & 0.04108             & 0.07261             \\ \hline
         GCF-minus-ip         & 0.09179                       & 0.1881                                 & 0.03197                          & 0.06294             & 0.03977             & 0.06998             \\ \hline
         GCF-only-ip          & 0.07659                       & 0.1587                                 & 0.01818                          & 0.03832             & 0.03765             & 0.06607             \\ \hline
         GCF-only-ip-minus-sc & 0.08338                       & 0.1712                                 & 0.02578                          & 0.05535             & 0.03777             & 0.06621             \\ \hline
@@ -113,8 +113,10 @@ These result can indicate that utilizing inner product is favorable when using s
 \subsubsection{Self connections}
 When comparing the counter parting methods on \autoref{tab:ablation-results} that either utilize or do not utilize self connections it can be seen that there often is a minimal difference on the results.
 For LightGCN, GCF and GCF sum, the counter parts with or without self connections makes a small difference.
+For \textit{LightGCN} and \textit{LightGCN-plus-sc} it varies which one performs best, but \textit{GCF-minus-sc} outperforms \textit{GCF} by a small amount most of the time.
 Interestingly \textit{gcf-only-ip-minus-sc} performs significantly better than \textit{gcf-only-ip} on Yelp2020 and Amazon-Cell-Sport, which can indicate that self connections are harmful for performance, if you only use inner product in the convolutions.
 However on Amazon-Book it makes a small difference.
+
 \subsubsection{Conclusion}
 It can be seen that the best performing methods is either GCF or LightGCN with or without self connections.
 GCF is the best performing on Amazon-Cell-Sport, which is the smallest datasets, that also includes a lot of items with very few interactions.
