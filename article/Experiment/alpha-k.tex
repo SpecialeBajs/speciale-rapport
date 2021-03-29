@@ -33,15 +33,15 @@ These results indicates that $\alpha_k$ is an important part of the layer combin
 As we showed previously that removing $\alpha_k$ is harmful for performance, we want to investigate the influence of the different layers.
 In this section we experiment with removing the layer combination, and only utilizing a specific convolution layer.
 $\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
-
+These are compared to LightGCN where weighted sum is utilized with a different number of layers.
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l|}
         \hline
                              & \multicolumn{2}{l|}{Amazon-Cell-Sport} & \multicolumn{2}{l|}{Yelp2020} & \multicolumn{2}{l|}{Amazon-Book}                                                                 \\ \hline
                              & NDCG@50                                & Recall@50                     & NDCG@50                          & Recall@50         & NDCG@50             & Recall@50           \\ \hline
-        Weighted sum (1 con) &                                        &                               &                                  &                   &                     &                     \\ \hline
-        Weighted sum (2 con) &                                        &                               &                                  &                   &                     &                     \\ \hline
+        Weighted sum (1 con) & 0.02804                                & 0.05503                       & 0.0969                           & 0.1955            & 0.0427              & 0.07408             \\ \hline
+        Weighted sum (2 con) & 0.03132                                & 0.06133                       & 0.1008                           & 0.2015            & 0.0463              & 0.08055             \\ \hline
         Weighted sum (3 con) & 0.03237                                & 0.06447                       & 0.1064                           & 0.2106            & \textbf{0.04668}    & \textbf{0.08129}    \\ \hline
         Weighted sum (4 con) & 0.03253                                & 0.06394                       & 0.1084                           & 0.2157            & \underline{0.04617} & \underline{0.08033} \\ \hline
         Weighted sum (5 con) & 0.03285                                & 0.06451                       & \textbf{0.1089}                  & \textbf{0.2177}   & 0.04515             & 0.07861             \\ \hline
@@ -63,4 +63,5 @@ This could be because Amazon-Cell-Sport consists of many nodes with few interact
 For Yelp2020 the best result is weighted sum with 5 convolutions closely followed by $e^{(2)}$.
 This dataset varies more in terms of the number of convolutions between the users.
 For Amazon-Book the weighted sum with 3 convolutions performs best and this could be because there is a larger variation
-
+One of the features of average is that it stabilizes the results compared to using one final embedding.
+The difference on the results of weighted sum is in each dataset not that different compared to using one embedding layer.
