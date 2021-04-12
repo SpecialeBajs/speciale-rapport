@@ -22,6 +22,7 @@
     201-250 & 0.13015                    & 0.11866                    & 0.12730                    & 0.13091                    & 0.11999                           \\ \hline
     251-300 & 0.20810                    & 0.17787                    & 0.19453                    & 0.22210                    & 0.21693                           \\ \hline
     301+    & 0.10245                    & 0.21585                    & 0.20725                    & 0.22121                    & 0.23305                           \\ \hline
+    Average &                            &                            &                            &                            &                                   \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Yelp2020 with a different number of convolutions}
     \label{tab:yelp2020-con-evaluation}
@@ -50,6 +51,7 @@
     201-250   & 0.09952                    & 0.09160                    & 0.10636                    & 0.11138                    & 0.10450                    \\ \hline
     251-300   & 0.16667                    & 0.13889                    & 0.15278                    & 15278                      & 0.15278                    \\ \hline
     300+      & 0.07625                    & 0.09024                    & 0.07919                    & 0.08636                    & 0.09083                           \\ \hline
+    Average &                            &                            &                            &                            &                                   \\ \hline
     \end{tabular}
     \caption{Recall@50 for Yelp2020 with a different number of convolutions}
     \label{tab:Yelp2020-recall-evaluation-mean}
@@ -76,12 +78,13 @@
     101-150   & 0.09462                    & 0.11410                    & 0.11453                    & 0.12082                    & 0.12200                    \\ \hline
     151-200   & 0.05435                    & 0.09783                    & 0.09978                    & 0.08891                    & 0.10173                    \\ \hline
     300+      & 0.05195                    & 0.06494                    & 0.06494                    & 0.09091                    & 0.07792                    \\ \hline
+    Average   & 0.05504                    & 0.06251                    & 0.06375                    & 0.06515                    &                    \\ \hline
     \end{tabular}
     \caption{Recall@50 for Amazon-Cell-Sport with a different number of convolutions}
     \label{tab:Amazon-Cell-Sport-recall-evaluation-mean}
 \end{table}
 
-\begin{table}[]
+\begin{table*}[]
     \begin{tabular}{|l|l|l|l|l|l|}
     \hline
     NDCG@50 & \multicolumn{1}{c|}{1 con} & \multicolumn{1}{c|}{2 con} & \multicolumn{1}{c|}{3 con} & \multicolumn{1}{c|}{4 con} & \multicolumn{1}{c|}{5 con} \\ \hline
@@ -102,7 +105,8 @@
     101-150 & 0.09431                    & 0.10686                    & 0.10512                    & 0.10775                    & 0.11290                    \\ \hline
     151-200 & 0.04864                    & 0.09700                    & 0.09278                    & 0.08609                    & 0.09668                    \\ \hline
     301+    & 0.06569                    & 0.15789                    & 0.17848                    & 0.18099                    & 0.16771                    \\ \hline
+    Average & 0.02888                    & 0.03175                    & 0.03201                    & 0.03389                    &                    \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Cell-Sport with a different number of convolutions}
     \label{tab:Amazon-cell-sport-con-evaluation}
-    \end{table}
+\end{table*}
