@@ -63,7 +63,7 @@ For Amazon-Cell-Sport only considering $e^{(4)}$ and $e^{(5)}$ gives the best re
 This could be because Amazon-Cell-Sport consists of many nodes with few interactions, and therefore the later convolutions have the largest impact. 90 \% of all items within this dataset have 5 interactions, which is one of the reasons that the later convolutions perform so well.
 For Yelp2020 the best results were weighted sum with 5 convolutions closely followed by $e^{(2)}$.
 This dataset varies more in terms of the number of interactions that the users have.
-For Amazon-Book the weighted sum with 3 convolutions performs best and this could be because there is a larger variation
+For Amazon-Book weighted sum with 3 convolutions performs best and this could be because there is a large variation of how many interactions the users have.
 One of the advantages of weighted sum is that it stabilizes the results.
 This might have a positive effect in some cases compared to our method where we only use the embedding from one of the layers.
 The difference on the results of weighted sum is in each dataset not that different compared to using one embedding layer.
