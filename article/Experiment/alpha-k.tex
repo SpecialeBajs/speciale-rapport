@@ -30,8 +30,9 @@ These results indicates that $\alpha_k$ is an important part of the layer combin
 \end{figure}
 
 \subsubsection{Utilizing only one layer}
-As we showed previously that removing $\alpha_k$ is harmful for performance, we want to investigate the influence of the different layers.
-In this section we experiment with removing the layer combination, and only utilizing a specific convolution layer.
+We showed previously that removing $\alpha_k$ was harmful for the performance. 
+Therefore we want to investigate what influence the different layers have on the performance.
+In this section we experiment with removing the layer combination, and only utilizing a specific convolution layers.
 $\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
 These are compared to LightGCN where weighted sum is utilized with a different number of layers.
 \begin{table*}[]
@@ -57,11 +58,11 @@ These are compared to LightGCN where weighted sum is utilized with a different n
     \label{tab:only-use-one-layer-experiment}
 \end{table*}
 
-As can be seen on \autoref{tab:only-use-one-layer-experiment} the results varies a lot depending on the dataset.
-For Amazon-Cell-Sport only considering $e^{(4)}$ and $e^{(5)}$ gives the best results which performs around 13 \% better than weighted sum with 5 convolutions.
-This could be because Amazon-Cell-Sport consists of many nodes with few interactions, and hereby the higher number of convolutions are most important. 90 \% of all items within this dataset has 5 interactions, which is one of the reasons that the high number of convolutions perform so well.
-For Yelp2020 the best result is weighted sum with 5 convolutions closely followed by $e^{(2)}$.
-This dataset varies more in terms of the number of convolutions between the users.
+As can be seen on \autoref{tab:only-use-one-layer-experiment} the results vary a lot depending on the dataset.
+For Amazon-Cell-Sport only considering $e^{(4)}$ and $e^{(5)}$ gives the best results which perform around 13 \% better than weighted sum with 5 convolutions.
+This could be because Amazon-Cell-Sport consists of many nodes with few interactions, and therefore the later convolutions have the largest impact. 90 \% of all items within this dataset have 5 interactions, which is one of the reasons that the later convolutions perform so well.
+For Yelp2020 the best results were weighted sum with 5 convolutions closely followed by $e^{(2)}$.
+This dataset varies more in terms of the number of interactions that the users have.
 For Amazon-Book the weighted sum with 3 convolutions performs best and this could be because there is a larger variation
 One of the features of average is that it stabilizes the results compared to using one final embedding.
 The difference on the results of weighted sum is in each dataset not that different compared to using one embedding layer.
