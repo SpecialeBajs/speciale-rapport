@@ -1,13 +1,15 @@
 \subsection{Node degree experiment}
 In this experiment we investigated how the nodes within a certain range of node degree performs.
 Our initial hypothesis was that the fewer connections a node had, the more it would benefit from a higher number of convolutions.
-However the results does not show a obvious result that this should be the case.
+However the results does obviously confirm that this should be the case.
 The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation}.
 The rightmost column is the result of the best performing original LightGCN method, that was run with 1 to 5 convolutions and these results for NDCG and Recall can be found in Appendix \ref{app:degree-experiment}
-The experiment for Amazon-Cell-Sport seen on  and \autoref{tab:Amazon-Cell-Sport-recall-evaluation} showcase for that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing and nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
-It is also worth noting that $E^{(5)}$ outperforms
-It does however perform second best for many node degree ranges.
+The experiment for Amazon-Cell-Sport can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{tab:Amazon-Cell-Sport-recall-evaluation} and showcase that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing and nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
+It does however often perform second best for many node degree ranges.
+It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperforms LightGCN with 5 convolutions.
+This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings needs more convolution to be able to gain enough information in the rest of the graph.
 Looking at \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results does not seem to be depending the degree of the nodes, as almost all results either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
+These datasets does not have the problems with few connections neither for users or items and as both of these have above 19 connections in average in both datasets the nodes gain knowledge about the graph faster than in amazon-cell-sport.
 % Yelp2020 NDCG
 \begin{table*}[]
     \centering
