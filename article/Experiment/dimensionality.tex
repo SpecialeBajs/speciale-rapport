@@ -1,21 +1,30 @@
 \subsection{Node degree experiment}
-In this experiment we investigated how the nodes within a certain range of node degree performs.
+In this experiment we investigated how the nodes within a certain range of node degree perform. [nævn at degree'en er mængden af connections en node har ved 0 convolutions]
 Our initial hypothesis was that the fewer connections a node had, the more it would benefit from a higher number of convolutions.
-However the results does obviously confirm that this should be the case.
+However the results obviously confirm that this is not the case.
 The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation}.
-The results have been evaluated within a certain node degree, and "All con" is where all nodes has been evaluated.
+The results have been evaluated within a certain node degree, and "All nodes [Husk at ændre i tabel]" is where all nodes has been evaluated.
 The \textbf{bold} results are the best performing and the \underline{underlined} results are the second best performing.
 The rightmost column is the result of the best performing original LightGCN method, that was run with 1 to 5 convolutions and these results for NDCG and Recall can be found in Appendix \ref{app:degree-experiment}
 The experiment for Amazon-Cell-Sport can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{tab:Amazon-Cell-Sport-recall-evaluation} and showcase that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing and nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
 It does however often perform second best for many node degree ranges.
 It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperforms LightGCN with 5 convolutions.
 This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings needs more convolution to be able to gain enough information in the rest of the graph.
-96.37 \% of all items have lower than 10 connections, and 91 \% have less than 6 connections, then the collaborative signals are quite limited in reaching other nodes.
-Looking at \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results does not seem to be depending the degree of the nodes, as almost all results either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
-These datasets does not have the problems with few connections neither for users or items and as both of these have above 19 connections in average in both datasets the nodes gain knowledge about the graph faster than in amazon-cell-sport.
-For Amazon-Cell-Sport the performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book it instead decreases with a larger degree.
+[lav intro til yelp2020 og ama-book så man er ops på at vi skifter context her]
+Looking at \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results does not seem to be depending on the degree of the nodes, as almost all results either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
+These datasets does not have the problems with few connections neither for users or items and as both of these have above 19 connections in average therefore the nodes gain knowledge about the graph faster than in amazon-cell-sport.
+For Amazon-Cell-Sport the Recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book it instead decreases with a larger node degree.
 This could be because that the nodes with many connections get to much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
 % Also interesting that the performances generally goes up when having more connections.
+
+[tanker:]
+[ignore de dårligst embeddings og kun tag de bedst performance med når man laver layer combination]
+[- frederik model og std model]
+[fjern 0 embeding]
+[undersøg om der er en bestemt mængde connections en user/item kan have der giver optimal prediction]
+[- ud fra dette kunne man holde op med at lave con's for en user når de når en hvis mængde connections for at undgå støj]
+[lav simpel model der tager avg connections og vælger en mængde lag der skal have størst inflydelse]
+[måske have flere dataset som vi kan teste på]
 
 % Yelp2020 NDCG
 \begin{table*}[]
