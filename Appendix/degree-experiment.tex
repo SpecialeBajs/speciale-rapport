@@ -1,9 +1,8 @@
 \section{Degree Experiment}\label{app:degree-experiment}
 
-\subsection{Individual Recall results}
-
+\subsection{Individual Recall results}\label{app:individual-recall-degree-experiment}
 %Yelp2020 Recall
-\begin{table*}[]
+\begin{table*}[h!]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l||l|}
         \hline
@@ -36,12 +35,12 @@
 \begin{figure}[h!]
     \includegraphics[width=0.5\textwidth]{figures/evaluation/yelp-recall-evaluation.png}
     \centering
-    \caption{}
-    \label{}
+    \caption{Recall results for Yelp2020}
+    \label{fig:recall-yelp2020-individual-embedding-evaluation}
 \end{figure}
 
 %Recall for amazon book.
-\begin{table*}[]
+\begin{table*}[h!]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l||l|}
         \hline
@@ -70,13 +69,13 @@
 \begin{figure}[h!]
     \includegraphics[width=0.5\textwidth]{figures/evaluation/amazon-book-recall.png}
     \centering
-    \caption{}
-    \label{}
+    \caption{Recall results for Amazon-Book}
+    \label{fig:recall-yelp2020-individual-embedding-evaluation}
 \end{figure}
 
 
 % Amazon-cell-sport-Recall
-\begin{table*}[]
+\begin{table*}[h!]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l||l|}
         \hline
@@ -109,11 +108,12 @@
 \begin{figure}[h!]
     \includegraphics[width=0.5\textwidth]{figures/evaluation/amazon-cell-sport-recall.png}
     \centering
-    \caption{}
-    \label{}
+    \caption{Recall results for amazon-cell-sport}
+    \label{fig:Amazon-Cell-Sport-recall-evaluation}
 \end{figure}
+\clearpage
 
-\subsection{Average LightGCN results}
+\subsection{Average LightGCN results}\label{app:average-lightgcn-results}
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -287,3 +287,4 @@
     \caption{Recall@50 for Amazon-Cell-Sport with a different number of convolutions}
     \label{tab:Amazon-Cell-Sport-recall-evaluation-mean}
 \end{table*}
+\clearpage
