@@ -40,7 +40,8 @@ The basic idea of this algorithm is to look at the performance of the individual
 Given four layers each layer will have 25\% effect on the final embedding at the start.
 The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
 Meanwhile the 15 is split evenly among the other 3 layers who now have a effect of 30\%.
-The same process is then repeated but the worst performing layer from the previous iteration is excluded until only on layer remains.
+The same process is then repeated but the worst performing layer from the previous iteration is excluded.
+This continues until all layers have gotten an effect penalty except the best performing layer.
 This can result in one or more layers having 0 effect in the end.
 A more balanced version can be done by not excluding the worst performing layer from the previous iteration.
 On \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal} examples of the algorithm can be seen.
