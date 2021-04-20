@@ -33,17 +33,17 @@ For a node with 200 connections, the third convolution might actually be harmful
 \end{table}
 
 \paragraph{Layer effect based on performance} \label{fredsplit}
-After the experiments done on node degree [ref her tak] it was decided to make an algorithm that chose the layers' effect based on how they perform compared to each other.
+After the experiments done on node degree \autoref{subsec:degree-experiment} it was decided to make an algorithm that chose the layers' effect based on how they perform compared to each other.
 It was clearly seen that some layers performed substantially better than others and therefore the worst layers might have a negative effect on the final embedding.
 \\
-The basic idea of this algorithm is to look at the performance of the individual layers, then based on how many percent worse they performe compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
+The basic idea of this algorithm is to look at the performance of the individual layers, then based on how many percent worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
 Given four layers each layer will have 25\% effect on the final embedding at the start.
 The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
-Meanwhile the 15 is split evenly among the other 3 layers who now have a effect of 30\%.
+Meanwhile, the 15 is split evenly among the other 3 layers who now have an effect of 30\%.
 The same process is then repeated but the worst performing layer from the previous iteration is excluded.
 This continues until all layers have gotten an effect penalty except the best performing layer.
-This can result in one or more layers having 0 effect in the end.
-A more balanced version can be done by not excluding the worst performing layer from the previous iteration.
+This can result in one or more layers having 0 \% effect in the end.
+A more balanced version can be done by not excluding the worst-performing layer from the previous iteration.
 On \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal} examples of the algorithm can be seen.
 
 \begin{figure}
