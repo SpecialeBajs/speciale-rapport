@@ -1,30 +1,41 @@
 \subsection{Node degree experiment}
-In this experiment we investigated how the nodes within a certain range of node degree perform. [nævn at degree'en er mængden af connections en node har ved 0 convolutions]
+In this experiment we investigated how the nodes within a certain range of node degree perform. 
+The node degree is the number of connections the node has in the original interaction graph.
 Our initial hypothesis was that the fewer connections a node had, the more it would benefit from a higher number of convolutions.
 However the results obviously confirm that this is not the case.
-The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation}.
-The results have been evaluated within a certain node degree, and "All nodes [Husk at ændre i tabel]" is where all nodes has been evaluated.
+The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{fig:ndcg-individual-evaluation-amazon-book}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{fig:yelp2020-ndcg-individual-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{fig:amazon-cell-sport-individual-evaluation-ndcg}.
+The results have been evaluated within a certain node degree, and "All nodes" is where all nodes has been evaluated.
 The \textbf{bold} results are the best performing and the \underline{underlined} results are the second best performing.
-The rightmost column is the result of the best performing original LightGCN method, that was run with 1 to 5 convolutions and these results for NDCG and Recall can be found in Appendix \ref{app:degree-experiment}
-The experiment for Amazon-Cell-Sport can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{tab:Amazon-Cell-Sport-recall-evaluation} and showcase that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing and nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
+The rightmost column is the result of the best performing original LightGCN method, that was run with 1 to 5 convolutions and these results for NDCG and Recall can be found in Appendix \ref{app:average-lightgcn-results}.
+The tables and figures with the recall results can be found in Appendix \ref{app:individual-recall-degree-experiment}.
+The experiment for Amazon-Cell-Sport can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} showcase that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing and nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
 It does however often perform second best for many node degree ranges.
 It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperforms LightGCN with 5 convolutions.
 This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings needs more convolution to be able to gain enough information in the rest of the graph.
-[lav intro til yelp2020 og ama-book så man er ops på at vi skifter context her]
-Looking at \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results does not seem to be depending on the degree of the nodes, as almost all results either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
+Looking at the yelp2020 and amazon-book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results does not seem to be depending on the degree of the nodes, as almost all results either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
 These datasets does not have the problems with few connections neither for users or items and as both of these have above 19 connections in average therefore the nodes gain knowledge about the graph faster than in amazon-cell-sport.
 For Amazon-Cell-Sport the Recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book it instead decreases with a larger node degree.
 This could be because that the nodes with many connections get to much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
-% Also interesting that the performances generally goes up when having more connections.
+The best result for all nodes in Amazon-Book is 3 convolution with average.
+$E^{(1)}$ and $E^{(2)}$ significantly outperforms the other embedding layers.  
+For Yelp2020 the 5 convolution average performs best, while the $E^{(1)}$, $E^{(2)}$ and $E^{(3)}$ embedding layer are the best individual performing layer.
+For Amazon-Cell-Sport $E^{(5)}$ outperforms 5 convolution average, and $E^{(2)}$, $E^{(3)}$ and $E^{(4)}$ also outperforms 5 convolution average.
+\\
+From these results we see an opportunity to change the layer combination in different ways to investigate if these will improve the results.
+One experiment is simply to remove $E^{(0)}$, as this often is performing quite poorly on all used datasets.
+Another experiment to conduct is to use the three best embedding layers for each method.
+The last method is to use \autoref{fred-split} method to optimize the hyper parameters.
+As no direct link between the number of connections a user has and its performance was found, it could be interesting to look further into the number of connections a user has once the convolutions has been performed. 
+It could be an naïve assumption, that the degree of the node has a high influence on the individual nodes performance when the nodes it is connected to has a even higher influence in graph convolutional network.
 
-[tanker:]
-[ignore de dårligst embeddings og kun tag de bedst performance med når man laver layer combination]
-[- frederik model og std model]
-[fjern 0 embeding]
-[undersøg om der er en bestemt mængde connections en user/item kan have der giver optimal prediction]
-[- ud fra dette kunne man holde op med at lave con's for en user når de når en hvis mængde connections for at undgå støj]
-[lav simpel model der tager avg connections og vælger en mængde lag der skal have størst inflydelse]
-[måske have flere dataset som vi kan teste på]
+%[tanker:]
+%[ignore de dårligst embeddings og kun tag de bedst performance med når man laver layer combination]
+%[- frederik model og std model]
+%[fjern 0 embeding]
+%[undersøg om der er en bestemt mængde connections en user/item kan have der giver optimal prediction]
+%[- ud fra dette kunne man holde op med at lave con's for en user når de når en hvis mængde connections for at undgå støj]
+%[lav simpel model der tager avg connections og vælger en mængde lag der skal have størst inflydelse]
+%[måske have flere dataset som vi kan teste på]
 
 % Yelp2020 NDCG
 \begin{table*}[]
@@ -51,42 +62,18 @@ This could be because that the nodes with many connections get to much noise in 
         201-250     & \textbf{0.1231}                & \underline{0.1217}             & 0.11866                        & 0.1009                         & 0.09105                        & 0.09490                         & \textbf{0.11999}           \\ \hline
         251-300     & 0.2238                         & 0.2224                         & 0.17787                        & 0.2538                         & 0.2806                         & \textbf{0.2917}                 & 0.21693                    \\ \hline
         301+        & 0.1752                         & 0.1989                         & \underline{0.21585}            & 0.2093                         & 0.1719                         & 0.1880                          & \textbf{0.23305}           \\ \hline
-        All con     & 0.08177                        & \underline{0.1019}             & 0.1086                         & 0.09956                        & 0.08863                        & 0.0819                          & \textbf{0.1089}            \\ \hline
+        All nodes   & 0.08177                        & 0.1019                         & \underline{0.1086}                         & 0.09956                        & 0.08863                        & 0.0819                          & \textbf{0.1089}            \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Yelp2020 where only one convolution layer is used and compared with the best performing LightGCN convolution for Yelp2020.}
     \label{tab:yelp2020-ndcg-evaluation}
 \end{table*}
 
-%Yelp2020 Recall
-\begin{table*}[]
+\begin{figure*}[]
+    \includegraphics[width=0.5\textwidth]{figures/evaluation/yelp-ndcg-evaluation.png}
     \centering
-    \begin{tabular}{|l|l|l|l|l|l|l||l|}
-        \hline
-        Node degree & \multicolumn{1}{c|}{$E^{(0)}$} & \multicolumn{1}{c|}{$E^{(1)}$} & \multicolumn{1}{c|}{$E^{(2)}$} & \multicolumn{1}{c|}{$E^{(3)}$} & \multicolumn{1}{c|}{$E^{(4)}$} & \multicolumn{1}{c||}{$E^{(5)}$} & \multicolumn{1}{c|}{5 con} \\ \hline
-        6-10        & 0.1766                         & \underline{0.2139}             & 0.21017                        & 0.2125                         & 0.1905                         & 0.1717                          & \textbf{0.23023}           \\ \hline
-        11-15       & 0.1713                         & \underline{0.2107}             & 0.20798                        & 0.2087                         & 0.1847                         & 0.1672                          & \textbf{0.22722}           \\ \hline
-        16-20       & 0.1740                         & \underline{0.2091}             & 0.20607                        & 0.2038                         & 0.1843                         & 0.1675                          & \textbf{0.22093}           \\ \hline
-        21-25       & 0.1673                         & 0.1957                         & \underline{0.19795}            & 0.1895                         & 0.1723                         & 0.1599                          & \textbf{0.21102}           \\ \hline
-        26-30       & 0.1489                         & \underline{0.1854}             & 0.18368                        & 0.1830                         & 0.1712                         & 0.1601                          & \textbf{0.19883}           \\ \hline
-        31-35       & 0.1543                         & 0.1884                         & \underline{0.18999}            & 0.1807                         & 0.1602                         & 0.1486                          & \textbf{0.20093}           \\ \hline
-        36-40       & 0.1541                         & 0.1781                         & \underline{0.17817}            & 0.1687                         & 0.1528                         & 0.1459                          & \textbf{0.19039}           \\ \hline
-        41-45       & 0.1395                         & 0.1562                         & \underline{0.16017}            & 0.1534                         & 0.1456                         & 0.1347                          & \textbf{0.16928}           \\ \hline
-        46-50       & 0.1354                         & \underline{0.1643}             & 0.15675                        & 0.1639                         & 0.1501                         & 0.1420                          & \textbf{0.17777}           \\ \hline
-        51-60       & 0.1340                         & 0.1509                         & \underline{0.15542}            & 0.1554                         & 0.1432                         & 0.1420                          & \textbf{0.16653}           \\ \hline
-        61-70       & 0.1279                         & 0.143                          & \underline{0.14453}            & 0.1440                         & 0.1299                         & 0.1274                          & \textbf{0.15473}           \\ \hline
-        71-80       & 0.1288                         & \underline{0.1537}             & 0.14475                        & 0.1418                         & 0.1347                         & 0.1313                          & \textbf{0.16026}           \\ \hline
-        81-90       & 0.1112                         & 0.1214                         & \underline{0.12355}            & 0.1119                         & 0.1089                         & 0.1068                          & \textbf{0.12724}           \\ \hline
-        91-100      & 0.1182                         & \underline{0.1407}             & 0.13647                        & 0.1370                         & 0.1325                         & 0.1300                          & \textbf{0.14825}           \\ \hline
-        101-150     & 0.09917                        & 0.1153                         & \underline{0.12302}            & 0.1174                         & 0.1144                         & 0.1155                          & \textbf{0.13183}           \\ \hline
-        151-200     & 0.08331                        & 0.1025                         & 0.10502                        & 0.1045                         & 0.1053                         & \textbf{0.1132}                 & 0.11065                    \\ \hline
-        201-250     & \underline{0.1035}             & 0.09954                        & 0.09160                        & 0.09430                        & 0.08280                        & 0.08620                         & \textbf{0.10450}           \\ \hline
-        251-300     & 0.1667                         & 0.1667                         & 0.13889                        & \textbf{0.1944}                & 0.1806                         & \textbf{0.1944}                 & 0.15278                    \\ \hline
-        300+        & 0.07180                        & 0.0803                         & \underline{0.09024}            & 0.08523                        & 0.06765                        & 0.06990                         & \textbf{0.09083}           \\ \hline
-        All con     & 0.1674                         & 0.2039                         & 0.217                          & 0.2001                         & 0.01788                        & 0.1643                          & \textbf{0.2177}            \\ \hline
-    \end{tabular}
-    \caption{Recall@50 for Yelp2020}
-    \label{tab:yelp2020-recall-evaluation}
-\end{table*}
+    \caption{NDCG performance for the individual embedding layers on Yelp2020}
+    \label{fig:yelp2020-ndcg-individual-evaluation}
+\end{figure*}
 
 % Amazon-book
 \begin{table*}[]
@@ -111,39 +98,17 @@ This could be because that the nodes with many connections get to much noise in 
         201-250     & 0.02613                        & 0.03228                        & \textbf{0.03312}               & 0.03096                        & 0.02925                        & 0.02914                        & \underline{0.03242}        \\ \hline
         251-300     & 0.03153                        & \textbf{0.03682}               & 0.03492                        & 0.03594                        & 0.03508                        & 0.03581                        & \underline{0.03617}        \\ \hline
         301+        & 0.03219                        & 0.03874                        & \textbf{0.04227}               & 0.04137                        & 0.04169                        & \underline{0.04207}            & 0.04130                    \\ \hline
-        All con     & 0.03669                        & \underline{0.0458}             & 0.04487                        & 0.0372                         & 0.03247                        & 0.02923                        & \textbf{0.04668}           \\ \hline
+        All nodes     & 0.03669                        & \underline{0.0458}             & 0.04487                        & 0.0372                         & 0.03247                        & 0.02923                        & \textbf{0.04668}           \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Book}
     \label{tab:amazon-book-NDCG-evaluation}
 \end{table*}
-
-%Recall for amazon book.
-\begin{table*}[]
+\begin{figure*}[]
+    \includegraphics[width=0.5\textwidth]{figures/evaluation/amazon-book-ndcg.png}
     \centering
-    \begin{tabular}{|l|l|l|l|l|l|l||l|}
-        \hline
-        Node degree & \multicolumn{1}{c|}{$E^{(0)}$} & \multicolumn{1}{c|}{$E^{(1)}$} & \multicolumn{1}{c|}{$E^{(2)}$} & \multicolumn{1}{c|}{$E^{(3)}$} & \multicolumn{1}{c|}{$E^{(4)}$} & \multicolumn{1}{c|}{$E^{(5)}$} & \multicolumn{1}{c|}{3 con} \\ \hline
-        16-20       & 0.07856                        & \underline{0.09708}            & 0.09492                        & 0.07688                        & 0.06712                        & 0.05949                        & \textbf{0.09968}           \\ \hline
-        21-25       & 0.07259                        & \underline{0.09056}            & 0.0895                         & 0.07192                        & 0.06258                        & 0.05611                        & \textbf{0.09102}           \\ \hline
-        26-30       & 0.06510                        & \underline{0.08314}            & 0.08181                        & 0.06617                        & 0.05848                        & 0.05270                        & \textbf{0.08366}           \\ \hline
-        31-35       & 0.06404                        & 0.07888                        & \underline{0.07923}            & 0.06632                        & 0.05816                        & 0.05369                        & \textbf{0.08022}           \\ \hline
-        36-40       & 0.05481                        & \underline{0.07316}            & 0.07235                        & 0.06066                        & 0.05222                        & 0.04680                        & \textbf{0.07347}           \\ \hline
-        41-45       & 0.05572                        & \textbf{0.06625}               & 0.06567                        & 0.05713                        & 0.04960                        & 0.04508                        & \underline{0.06621}        \\ \hline
-        46-50       & 0.05072                        & \underline{0.06469}            & \textbf{0.06536}               & 0.05670                        & 0.04990                        & 0.04589                        & 0.06414                    \\ \hline
-        51-60       & 0.04664                        & \textbf{0.06012}               & 0.05824                        & 0.04883                        & 0.04301                        & 0.03945                        & \underline{0.06002}        \\ \hline
-        61-70       & 0.04275                        & \underline{0.05449}            & \textbf{0.05477}               & 0.04623                        & 0.04170                        & 0.03952                        & 0.05359                    \\ \hline
-        71-80       & 0.04068                        & \textbf{0.05224}               & \underline{0.05174}            & 0.04564                        & 0.04162                        & 0.03902                        & 0.05036                    \\ \hline
-        81-90       & 0.03445                        & 0.04458                        & \underline{0.04545}            & 0.03973                        & 0.03678                        & 0.03381                        & \textbf{0.04557}           \\ \hline
-        91-100      & 0.03458                        & 0.04517                        & \underline{0.04575}            & 0.03872                        & 0.03462                        & 0.03189                        & \textbf{0.04576}           \\ \hline
-        101-150     & 0.02960                        & 0.03731                        & \underline{0.03732}            & 0.03326                        & 0.02979                        & 0.02815                        & \textbf{0.03746}           \\ \hline
-        151-200     & 0.02537                        & \underline{0.03047}            & \textbf{0.03086}               & 0.02760                        & 0.02582                        & 0.02442                        & 0.02945                    \\ \hline
-        201-250     & 0.02193                        & \underline{0.02781}            & \textbf{0.02824}               & 0.02672                        & 0.02493                        & 0.02436                        & 0.02762                    \\ \hline
-        251-300     & 0.02276                        & \textbf{0.02480}               & 0.02437                        & 0.02438                        & 0.02351                        & 0.02418                        & \underline{0.02463}        \\ \hline
-        301+        & 0.01397                        & 0.01689                        & 0.01768                        & \underline{0.01783}            & \textbf{0.01797}               & 0.01796                        & 0.01763                    \\ \hline
-        All con     & 0.06373                        & \underline{0.079}              & 0.07755                        & 0.06412                        & 0.05607                        & 0.05022                        & \textbf{0.08129}           \\ \hline
-    \end{tabular}
-    \caption{Recall@50 for Amazon-Book where only one convolution layer is used.}
-\end{table*}
+    \caption{NDCG performance for the individual embedding layers on Amazon-Book}
+    \label{fig:ndcg-individual-evaluation-amazon-book}
+\end{figure*}
 
 % Amazon-Cell-sport NDCG
 \begin{table*}[]
@@ -170,39 +135,14 @@ This could be because that the nodes with many connections get to much noise in 
         201-250     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
         251-300     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
         300+        & 0.11521                        & 0.16210                        & 0.12260                        & \underline{0.1752}             & \textbf{0.1786}                & 0.1680                          & 0.16771                    \\ \hline
-        All con     & 0.02169                        & 0.02523                        & 0.03419                        & 0.03483                        & \underline{0.0366}             & \textbf{0.03733}                & 0.03285                    \\ \hline
+        All nodes     & 0.02169                        & 0.02523                        & 0.03419                        & 0.03483                        & \underline{0.0366}             & \textbf{0.03733}                & 0.03285                    \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Cell-Sport where only one convolution layer is used.}
     \label{tab:Amazon-Cell-Sport-ndcg-evaluation}
 \end{table*}
-
-% Amazon-cell-sport-Recall
-\begin{table*}[]
+\begin{figure*}[]
+    \includegraphics[width=0.5\textwidth]{figures/evaluation/amazon-cell-sport-ndcg.png}
     \centering
-    \begin{tabular}{|l|l|l|l|l|l|l||l|}
-        \hline
-        Node degree & \multicolumn{1}{c|}{$E^{(0)}$} & \multicolumn{1}{c|}{$E^{(1)}$} & \multicolumn{1}{c|}{$E^{(2)}$} & \multicolumn{1}{c|}{$E^{(3)}$} & \multicolumn{1}{c|}{$E^{(4)}$} & \multicolumn{1}{c||}{$E^{(5)}$} & \multicolumn{1}{c|}{5 con} \\ \hline
-        6-10        & 0.02437                        & 0.05126                        & 0.05000                        & 0.05210                        & \textbf{0.05546}               & {\ul 0.05420}                   & 0.04706                    \\ \hline
-        11-15       & 0.04286                        & 0.06305                        & 0.06067                        & 0.06764                        & {\ul 0.07143}                  & \textbf{0.07213}                & 0.06429                    \\ \hline
-        16-20       & 0.05224                        & 0.06870                        & 0.07192                        & 0.07338                        & {\ul 0.07415}                  & \textbf{0.08123}                & 0.07557                    \\ \hline
-        21-25       & 0.06957                        & 0.07769                        & 0.08148                        & {\ul 0.08611}                  & 0.08430                        & \textbf{0.08944}                & 0.08262                    \\ \hline
-        26-30       & 0.06574                        & 0.07475                        & {\ul 0.08599}                  & 0.08492                        & \textbf{0.08790}               & 0.08176                         & 0.08784                    \\ \hline
-        31-35       & 0.06837                        & 0.09441                        & \textbf{0.10828}               & 0.1011                         & 0.1025                         & {\ul 0.1050}                    & 0.10000                    \\ \hline
-        36-40       & 0.07322                        & 0.07343                        & 0.08794                        & 0.09234                        & {\ul 0.09341}                  & \textbf{0.09957}                & 0.08603                    \\ \hline
-        41-45       & 0.08924                        & 0.09060                        & 0.09939                        & 0.09934                        & \textbf{0.1045}                & {\ul 0.1030}                    & 0.09644                    \\ \hline
-        46-50       & 0.13245                        & {\ul 0.15787}                  & \textbf{0.16085}               & 0.1459                         & 0.1518                         & 0.1577                          & 0.14301                    \\ \hline
-        51-60       & 0.06920                        & 0.09088                        & 0.10339                        & {\ul 0.1075}                   & \textbf{0.1227}                & 0.1163                          & 0.09665                    \\ \hline
-        61-70       & {\ul 0.10338}                  & 0.08628                        & 0.09633                        & 0.08954                        & \textbf{0.1069}                & 0.09962                         & 0.08252                    \\ \hline
-        71-80       & 0.06541                        & 0.07399                        & 0.08256                        & \textbf{0.09443}               & 0.08206                        & {\ul 0.08658}                   & 0.08231                    \\ \hline
-        81-90       & 0.05063                        & 0.07967                        & \textbf{0.09073}               & 0.08120                        & \textbf{0.09073}               & 0.09020                         & 0.07068                    \\ \hline
-        91-100      & 0.08926                        & 0.08070                        & 0.09555                        & \textbf{0.1038}                & 0.09618                        & 0.1031                          & \underline{0.10312}        \\ \hline
-        101-150     & 0.08992                        & 0.11622                        & \textbf{0.12334}               & {\ul 0.1231}                   & 0.1226                         & 0.1228                          & 0.12200                    \\ \hline
-        151-200     & 0.07804                        & 0.08696                        & \textbf{0.11455}               & 0.08891                        & 0.1017                         & 0.8891                          & \underline{0.10173}        \\ \hline
-        201-250     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
-        251-300     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
-        300+        & 0.05195                        & 0.05195                        & 0.05195                        & \textbf{0.07792}               & 0.06494                        & 0.06494                         & \textbf{0.07792}           \\ \hline
-        All con     & 0.04447                        & 0.04859                        & 0.06809                        & 0.06972                        & 0.7377                         & 0.07318                         & 0.06451                    \\ \hline
-    \end{tabular}
-    \caption{Recall@50 for Amazon-Cell-Sport}
-    \label{tab:Amazon-Cell-Sport-recall-evaluation}
-\end{table*}
+    \caption{NDCG performance for the individual embedding layers on Amazon-Cell-Sport}
+    \label{fig:amazon-cell-sport-individual-evaluation-ndcg}
+\end{figure*}

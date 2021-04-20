@@ -1,4 +1,119 @@
 \section{Degree Experiment}\label{app:degree-experiment}
+
+\subsection{Individual Recall results}
+
+%Yelp2020 Recall
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l||l|}
+        \hline
+        Node degree & \multicolumn{1}{c|}{$E^{(0)}$} & \multicolumn{1}{c|}{$E^{(1)}$} & \multicolumn{1}{c|}{$E^{(2)}$} & \multicolumn{1}{c|}{$E^{(3)}$} & \multicolumn{1}{c|}{$E^{(4)}$} & \multicolumn{1}{c||}{$E^{(5)}$} & \multicolumn{1}{c|}{5 con} \\ \hline
+        6-10        & 0.1766                         & \underline{0.2139}             & 0.21017                        & 0.2125                         & 0.1905                         & 0.1717                          & \textbf{0.23023}           \\ \hline
+        11-15       & 0.1713                         & \underline{0.2107}             & 0.20798                        & 0.2087                         & 0.1847                         & 0.1672                          & \textbf{0.22722}           \\ \hline
+        16-20       & 0.1740                         & \underline{0.2091}             & 0.20607                        & 0.2038                         & 0.1843                         & 0.1675                          & \textbf{0.22093}           \\ \hline
+        21-25       & 0.1673                         & 0.1957                         & \underline{0.19795}            & 0.1895                         & 0.1723                         & 0.1599                          & \textbf{0.21102}           \\ \hline
+        26-30       & 0.1489                         & \underline{0.1854}             & 0.18368                        & 0.1830                         & 0.1712                         & 0.1601                          & \textbf{0.19883}           \\ \hline
+        31-35       & 0.1543                         & 0.1884                         & \underline{0.18999}            & 0.1807                         & 0.1602                         & 0.1486                          & \textbf{0.20093}           \\ \hline
+        36-40       & 0.1541                         & 0.1781                         & \underline{0.17817}            & 0.1687                         & 0.1528                         & 0.1459                          & \textbf{0.19039}           \\ \hline
+        41-45       & 0.1395                         & 0.1562                         & \underline{0.16017}            & 0.1534                         & 0.1456                         & 0.1347                          & \textbf{0.16928}           \\ \hline
+        46-50       & 0.1354                         & \underline{0.1643}             & 0.15675                        & 0.1639                         & 0.1501                         & 0.1420                          & \textbf{0.17777}           \\ \hline
+        51-60       & 0.1340                         & 0.1509                         & \underline{0.15542}            & 0.1554                         & 0.1432                         & 0.1420                          & \textbf{0.16653}           \\ \hline
+        61-70       & 0.1279                         & 0.143                          & \underline{0.14453}            & 0.1440                         & 0.1299                         & 0.1274                          & \textbf{0.15473}           \\ \hline
+        71-80       & 0.1288                         & \underline{0.1537}             & 0.14475                        & 0.1418                         & 0.1347                         & 0.1313                          & \textbf{0.16026}           \\ \hline
+        81-90       & 0.1112                         & 0.1214                         & \underline{0.12355}            & 0.1119                         & 0.1089                         & 0.1068                          & \textbf{0.12724}           \\ \hline
+        91-100      & 0.1182                         & \underline{0.1407}             & 0.13647                        & 0.1370                         & 0.1325                         & 0.1300                          & \textbf{0.14825}           \\ \hline
+        101-150     & 0.09917                        & 0.1153                         & \underline{0.12302}            & 0.1174                         & 0.1144                         & 0.1155                          & \textbf{0.13183}           \\ \hline
+        151-200     & 0.08331                        & 0.1025                         & 0.10502                        & 0.1045                         & 0.1053                         & \textbf{0.1132}                 & 0.11065                    \\ \hline
+        201-250     & \underline{0.1035}             & 0.09954                        & 0.09160                        & 0.09430                        & 0.08280                        & 0.08620                         & \textbf{0.10450}           \\ \hline
+        251-300     & 0.1667                         & 0.1667                         & 0.13889                        & \textbf{0.1944}                & 0.1806                         & \textbf{0.1944}                 & 0.15278                    \\ \hline
+        300+        & 0.07180                        & 0.0803                         & \underline{0.09024}            & 0.08523                        & 0.06765                        & 0.06990                         & \textbf{0.09083}           \\ \hline
+        All nodes   & 0.1674                         & 0.2039                       & \underline{0.217}                          & 0.2001                         & 0.01788                        & 0.1643                          & \textbf{0.2177}            \\ \hline
+    \end{tabular}
+    \caption{Recall@50 for Yelp2020}
+    \label{tab:yelp2020-recall-evaluation}
+\end{table*}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.5\textwidth]{figures/evaluation/yelp-recall-evaluation.png}
+    \centering
+    \caption{}
+    \label{}
+\end{figure}
+
+%Recall for amazon book.
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l||l|}
+        \hline
+        Node degree & \multicolumn{1}{c|}{$E^{(0)}$} & \multicolumn{1}{c|}{$E^{(1)}$} & \multicolumn{1}{c|}{$E^{(2)}$} & \multicolumn{1}{c|}{$E^{(3)}$} & \multicolumn{1}{c|}{$E^{(4)}$} & \multicolumn{1}{c|}{$E^{(5)}$} & \multicolumn{1}{c|}{3 con} \\ \hline
+        16-20       & 0.07856                        & \underline{0.09708}            & 0.09492                        & 0.07688                        & 0.06712                        & 0.05949                        & \textbf{0.09968}           \\ \hline
+        21-25       & 0.07259                        & \underline{0.09056}            & 0.0895                         & 0.07192                        & 0.06258                        & 0.05611                        & \textbf{0.09102}           \\ \hline
+        26-30       & 0.06510                        & \underline{0.08314}            & 0.08181                        & 0.06617                        & 0.05848                        & 0.05270                        & \textbf{0.08366}           \\ \hline
+        31-35       & 0.06404                        & 0.07888                        & \underline{0.07923}            & 0.06632                        & 0.05816                        & 0.05369                        & \textbf{0.08022}           \\ \hline
+        36-40       & 0.05481                        & \underline{0.07316}            & 0.07235                        & 0.06066                        & 0.05222                        & 0.04680                        & \textbf{0.07347}           \\ \hline
+        41-45       & 0.05572                        & \textbf{0.06625}               & 0.06567                        & 0.05713                        & 0.04960                        & 0.04508                        & \underline{0.06621}        \\ \hline
+        46-50       & 0.05072                        & \underline{0.06469}            & \textbf{0.06536}               & 0.05670                        & 0.04990                        & 0.04589                        & 0.06414                    \\ \hline
+        51-60       & 0.04664                        & \textbf{0.06012}               & 0.05824                        & 0.04883                        & 0.04301                        & 0.03945                        & \underline{0.06002}        \\ \hline
+        61-70       & 0.04275                        & \underline{0.05449}            & \textbf{0.05477}               & 0.04623                        & 0.04170                        & 0.03952                        & 0.05359                    \\ \hline
+        71-80       & 0.04068                        & \textbf{0.05224}               & \underline{0.05174}            & 0.04564                        & 0.04162                        & 0.03902                        & 0.05036                    \\ \hline
+        81-90       & 0.03445                        & 0.04458                        & \underline{0.04545}            & 0.03973                        & 0.03678                        & 0.03381                        & \textbf{0.04557}           \\ \hline
+        91-100      & 0.03458                        & 0.04517                        & \underline{0.04575}            & 0.03872                        & 0.03462                        & 0.03189                        & \textbf{0.04576}           \\ \hline
+        101-150     & 0.02960                        & 0.03731                        & \underline{0.03732}            & 0.03326                        & 0.02979                        & 0.02815                        & \textbf{0.03746}           \\ \hline
+        151-200     & 0.02537                        & \underline{0.03047}            & \textbf{0.03086}               & 0.02760                        & 0.02582                        & 0.02442                        & 0.02945                    \\ \hline
+        201-250     & 0.02193                        & \underline{0.02781}            & \textbf{0.02824}               & 0.02672                        & 0.02493                        & 0.02436                        & 0.02762                    \\ \hline
+        251-300     & 0.02276                        & \textbf{0.02480}               & 0.02437                        & 0.02438                        & 0.02351                        & 0.02418                        & \underline{0.02463}        \\ \hline
+        301+        & 0.01397                        & 0.01689                        & 0.01768                        & \underline{0.01783}            & \textbf{0.01797}               & 0.01796                        & 0.01763                    \\ \hline
+        All nodes     & 0.06373                        & \underline{0.079}              & 0.07755                        & 0.06412                        & 0.05607                        & 0.05022                        & \textbf{0.08129}           \\ \hline
+    \end{tabular}
+    \caption{Recall@50 for Amazon-Book where only one convolution layer is used.}
+\end{table*}
+\begin{figure}[h!]
+    \includegraphics[width=0.5\textwidth]{figures/evaluation/amazon-book-recall.png}
+    \centering
+    \caption{}
+    \label{}
+\end{figure}
+
+
+% Amazon-cell-sport-Recall
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l||l|}
+        \hline
+        Node degree & \multicolumn{1}{c|}{$E^{(0)}$} & \multicolumn{1}{c|}{$E^{(1)}$} & \multicolumn{1}{c|}{$E^{(2)}$} & \multicolumn{1}{c|}{$E^{(3)}$} & \multicolumn{1}{c|}{$E^{(4)}$} & \multicolumn{1}{c||}{$E^{(5)}$} & \multicolumn{1}{c|}{5 con} \\ \hline
+        6-10        & 0.02437                        & 0.05126                        & 0.05000                        & 0.05210                        & \textbf{0.05546}               & {\ul 0.05420}                   & 0.04706                    \\ \hline
+        11-15       & 0.04286                        & 0.06305                        & 0.06067                        & 0.06764                        & {\ul 0.07143}                  & \textbf{0.07213}                & 0.06429                    \\ \hline
+        16-20       & 0.05224                        & 0.06870                        & 0.07192                        & 0.07338                        & {\ul 0.07415}                  & \textbf{0.08123}                & 0.07557                    \\ \hline
+        21-25       & 0.06957                        & 0.07769                        & 0.08148                        & {\ul 0.08611}                  & 0.08430                        & \textbf{0.08944}                & 0.08262                    \\ \hline
+        26-30       & 0.06574                        & 0.07475                        & {\ul 0.08599}                  & 0.08492                        & \textbf{0.08790}               & 0.08176                         & 0.08784                    \\ \hline
+        31-35       & 0.06837                        & 0.09441                        & \textbf{0.10828}               & 0.1011                         & 0.1025                         & {\ul 0.1050}                    & 0.10000                    \\ \hline
+        36-40       & 0.07322                        & 0.07343                        & 0.08794                        & 0.09234                        & {\ul 0.09341}                  & \textbf{0.09957}                & 0.08603                    \\ \hline
+        41-45       & 0.08924                        & 0.09060                        & 0.09939                        & 0.09934                        & \textbf{0.1045}                & {\ul 0.1030}                    & 0.09644                    \\ \hline
+        46-50       & 0.13245                        & {\ul 0.15787}                  & \textbf{0.16085}               & 0.1459                         & 0.1518                         & 0.1577                          & 0.14301                    \\ \hline
+        51-60       & 0.06920                        & 0.09088                        & 0.10339                        & {\ul 0.1075}                   & \textbf{0.1227}                & 0.1163                          & 0.09665                    \\ \hline
+        61-70       & {\ul 0.10338}                  & 0.08628                        & 0.09633                        & 0.08954                        & \textbf{0.1069}                & 0.09962                         & 0.08252                    \\ \hline
+        71-80       & 0.06541                        & 0.07399                        & 0.08256                        & \textbf{0.09443}               & 0.08206                        & {\ul 0.08658}                   & 0.08231                    \\ \hline
+        81-90       & 0.05063                        & 0.07967                        & \textbf{0.09073}               & 0.08120                        & \textbf{0.09073}               & 0.09020                         & 0.07068                    \\ \hline
+        91-100      & 0.08926                        & 0.08070                        & 0.09555                        & \textbf{0.1038}                & 0.09618                        & 0.1031                          & \underline{0.10312}        \\ \hline
+        101-150     & 0.08992                        & 0.11622                        & \textbf{0.12334}               & {\ul 0.1231}                   & 0.1226                         & 0.1228                          & 0.12200                    \\ \hline
+        151-200     & 0.07804                        & 0.08696                        & \textbf{0.11455}               & 0.08891                        & 0.1017                         & 0.8891                          & \underline{0.10173}        \\ \hline
+        201-250     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
+        251-300     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
+        300+        & 0.05195                        & 0.05195                        & 0.05195                        & \textbf{0.07792}               & 0.06494                        & 0.06494                         & \textbf{0.07792}           \\ \hline
+        All nodes     & 0.04447                        & 0.04859                        & 0.06809                        & 0.06972                        & 0.7377                         & 0.07318                         & 0.06451                    \\ \hline
+    \end{tabular}
+    \caption{Recall@50 for Amazon-Cell-Sport}
+    \label{tab:Amazon-Cell-Sport-recall-evaluation}
+\end{table*}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.5\textwidth]{figures/evaluation/amazon-cell-sport-recall.png}
+    \centering
+    \caption{}
+    \label{}
+\end{figure}
+
+\subsection{Average LightGCN results}
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -23,7 +138,7 @@
         201-250 & 0.13015                    & 0.11866                    & \underline{0.12730}        & \textbf{0.13091}           & 0.11999                    \\ \hline
         251-300 & 0.20810                    & 0.17787                    & 0.19453                    & \textbf{0.22210}           & \underline{0.21693}        \\ \hline
         301+    & 0.10245                    & 0.21585                    & 0.20725                    & \underline{0.22121}        & \textbf{0.23305}           \\ \hline
-        Average & 0.0969                     & 0.1008                     & 0.1064                     & \underline{0.1084}         & \textbf{0.1089}            \\ \hline
+        All nodes & 0.0969                     & 0.1008                     & 0.1064                     & \underline{0.1084}         & \textbf{0.1089}            \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Yelp2020 with a different number of convolutions}
     \label{tab:yelp2020-con-evaluation}
@@ -53,7 +168,7 @@
         201-250   & 0.09952                    & 0.09160                    & \underline{0.10636}        & \textbf{0.11138}           & 0.10450                    \\ \hline
         251-300   & 0.16667                    & 0.13889                    & \textbf{0.15278}           & \textbf{0.15278}           & \textbf{0.15278}           \\ \hline
         300+      & 0.07625                    & \underline{0.09024}        & 0.07919                    & 0.08636                    & \textbf{0.09083}           \\ \hline
-        Average   & 0.1955                     & 0.2015                     & 0.2106                     & \underline{0.2157}         & \textbf{0.2177}            \\ \hline
+        All nodes   & 0.1955                     & 0.2015                     & 0.2106                     & \underline{0.2157}         & \textbf{0.2177}            \\ \hline
     \end{tabular}
     \caption{Recall@50 for Yelp2020 with a different number of convolutions}
     \label{tab:Yelp2020-recall-evaluation-mean}
@@ -82,7 +197,7 @@
         201-250 & 0.02921                    & 0.03217                    & \underline{0.03242}        & \textbf{0.03317}           & 0.03272                    \\ \hline
         251-300 & 0.03205                    & 0.03414                    & \textbf{0.03617}           & \underline{0.03607}        & 0.03602                    \\ \hline
         300+    & 0.03643                    & 0.03707                    & \textbf{0.04130}           & \underline{0.04110}        & 0.04207                    \\ \hline
-        Average & 0.0427                     & 0.0463                     & \textbf{0.04668}           & \underline{0.04617}        & 0.04515                    \\ \hline
+        All nodes & 0.0427                     & 0.0463                     & \textbf{0.04668}           & \underline{0.04617}        & 0.04515                    \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Book with a different number of convolutions}
     \label{tab:Amazon-book-ndcg-evaluation-mean}
@@ -111,7 +226,7 @@
         201-250   & 0.02487                    & 0.02713                    & \underline{0.02762}        & \textbf{0.02782}           & 0.02757                    \\ \hline
         251-300   & 0.02279                    & 0.02376                    & 0.02463                    & \underline{0.02485}        & \textbf{0.02496}           \\ \hline
         300+      & 0.01542                    & 0.01594                    & \underline{0.01763}        & 0.01735                    & \textbf{0.01790}           \\ \hline
-        Average   & 0.07408                    & \underline{0.08055}        & \textbf{0.08129}           & 0.08033                    & 0.07861                    \\ \hline
+        All nodes   & 0.07408                    & \underline{0.08055}        & \textbf{0.08129}           & 0.08033                    & 0.07861                    \\ \hline
     \end{tabular}
     \caption{Recall@50 for Amazon-Book with a different number of convolutions}
     \label{tab:Amazon-book-recall-evaluation-mean}
@@ -139,7 +254,7 @@
         101-150 & 0.09431                    & 0.10686                    & 0.10512                    & \underline{0.10775}        & \textbf{0.11290}           \\ \hline
         151-200 & 0.04864                    & \textbf{0.09700}           & 0.09278                    & 0.08609                    & \underline{0.09668}        \\ \hline
         301+    & 0.06569                    & 0.15789                    & \underline{0.17848}        & \textbf{0.18099}           & 0.16771                    \\ \hline
-        Average & 0.02804                    & 0.03132                    & 0.03237                    & \underline{0.03253}        & \textbf{0.03285}           \\ \hline
+        All nodes & 0.02804                    & 0.03132                    & 0.03237                    & \underline{0.03253}        & \textbf{0.03285}           \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Cell-Sport with a different number of convolutions}
     \label{tab:Amazon-cell-sport-con-evaluation}
@@ -167,7 +282,7 @@
         101-150   & 0.09462                    & 0.11410                    & 0.11453                    & \underline{0.12082}        & \textbf{0.12200}           \\ \hline
         151-200   & 0.05435                    & 0.09783                    & \underline{0.09978}        & 0.08891                    & \textbf{0.10173}           \\ \hline
         300+      & 0.05195                    & 0.06494                    & 0.06494                    & \textbf{0.09091}           & \underline{0.07792}        \\ \hline
-        Average   & 0.05503                    & 0.06133                    & \underline{0.6447}         & 0.06394                    & \textbf{0.06451}           \\ \hline
+        All nodes   & 0.05503                    & 0.06133                    & \underline{0.6447}         & 0.06394                    & \textbf{0.06451}           \\ \hline
     \end{tabular}
     \caption{Recall@50 for Amazon-Cell-Sport with a different number of convolutions}
     \label{tab:Amazon-Cell-Sport-recall-evaluation-mean}
