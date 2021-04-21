@@ -4,28 +4,30 @@ The node degree is the number of connections the node has in the original intera
 Our initial hypothesis was that the fewer connections a node had, the more it would benefit from a higher number of convolutions.
 However the results obviously confirm that this is not the case.
 The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{fig:ndcg-individual-evaluation-amazon-book}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{fig:yelp2020-ndcg-individual-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{fig:amazon-cell-sport-individual-evaluation-ndcg}.
-The results have been evaluated within a certain node degree, and "All nodes" is where all nodes has been evaluated.
+The results have been evaluated within a certain node degree, and "All nodes" is where all nodes have been evaluated together to get the overall performance.
 The \textbf{bold} results are the best performing and the \underline{underlined} results are the second best performing.
-The rightmost column is the result of the best performing original LightGCN method, that was run with 1 to 5 convolutions and these results for NDCG and Recall can be found in Appendix \ref{app:average-lightgcn-results}.
-The tables and figures with the recall results can be found in Appendix \ref{app:individual-recall-degree-experiment}.
-The experiment for Amazon-Cell-Sport can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} showcase that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing and nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
-It does however often perform second best for many node degree ranges.
-It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperforms LightGCN with 5 convolutions.
-This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings needs more convolution to be able to gain enough information in the rest of the graph.
-Looking at the yelp2020 and amazon-book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results does not seem to be depending on the degree of the nodes, as almost all results either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
+The rightmost column is the result of the best performing original LightGCN method, that were run with 1 to 5 convolutions.
+All of the results for NDCG and Recall can be found in Appendix \ref{app:average-lightgcn-results}.
+The tables and figures containing the results of the recall performance for the different degree ranges can be found in Appendix \ref{app:individual-recall-degree-experiment}.
+The experiments for Amazon-Cell-Sport dataset can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}.
+These results showcase that for nodes with less than 46 connections that $E^{(5)}$ is usually the best performing embedding and for nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
+$E^{(5)}$ does however often perform second best for many node degree ranges.
+It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperform LightGCN with 5 convolutions.
+This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings need more convolution to capture the collaborative signals.
+Looking at the yelp2020 and amazon-book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results do not seem to be dependent on the degree of the nodes, as almost all node degree ranges either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
 These datasets does not have the problems with few connections neither for users or items and as both of these have above 19 connections in average therefore the nodes gain knowledge about the graph faster than in amazon-cell-sport.
 For Amazon-Cell-Sport the Recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book it instead decreases with a larger node degree.
-This could be because that the nodes with many connections get to much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
+This could be because the nodes with many connections get too much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
 The best result for all nodes in Amazon-Book is 3 convolution with average.
 $E^{(1)}$ and $E^{(2)}$ significantly outperforms the other embedding layers.  
 For Yelp2020 the 5 convolution average performs best, while the $E^{(1)}$, $E^{(2)}$ and $E^{(3)}$ embedding layer are the best individual performing layer.
 For Amazon-Cell-Sport $E^{(2)}$, $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ outperforms the 5 convolution average.
 \\
-From these results we see an opportunity to change the layer combination in different ways to investigate if these will improve the results.
-One experiment is simply to remove $E^{(0)}$, as this often is performing quite poorly on all used datasets.
+From these results we see an opportunity to change the layer combination in different ways to investigate if this will improve the results.
+One experiment is simply to remove $E^{(0)}$, as it is often performing quite poorly on all used datasets.
 Another experiment to conduct is to use the three best embedding layers for each method.
 The last method is to use \autoref{fredsplit} method to optimize the hyper parameters.
-As no direct link between the number of connections a user has and its performance was found, it could be interesting to look further into the number of connections a user has once the convolutions has been performed. 
+As no direct link between the number of connections a user has and its performance was found, it could be interesting to look further into the number of implicit connections a user has once the convolutions have been performed. 
 The conclusion on the results are that the individual degree of a node has a smaller effect on the final result than we initially expected.
 
 %[tanker:]
