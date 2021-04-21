@@ -37,6 +37,7 @@ Based on the results from the node degree experiments seen in \autoref{subsec:de
 It could clearly be seen that some layers performed substantially better than others and therefore the worst layers might have a negative effect on the final embedding.
 \\
 The algorithm looks at the performance of each individual layers and then based on how many percent's worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
+An example of the algorithm can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}.
 Given four layers each layer will have 25\% effect on the final embedding at the start.
 The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
 Meanwhile, the 15 is split evenly among the other 3 layers who now have an effect of 30\%.
@@ -44,7 +45,6 @@ The same process is then repeated but the worst performing layer from the previo
 This continues until all layers have gotten an effect penalty except the best performing layer.
 This can result in one or more layers having 0 \% effect in the end.
 A more balanced version can be done by not excluding the worst-performing layer from the previous iteration.
-On \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal} examples of the algorithm can be seen.
 
 \begin{figure}
     \includegraphics[width=0.5\textwidth]{figures/fredsplit/aggresiveAlgo.png}
