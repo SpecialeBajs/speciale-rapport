@@ -31,3 +31,30 @@ For a node with 200 connections, the third convolution might actually be harmful
     \caption{Example of the changed effect to $\alpha_k$. }
     \label{tab:alpha-example}
 \end{table}
+
+\paragraph{Layer effect based on performance} \label{fredsplit}
+Based on the results from the node degree experiments seen in \autoref{subsec:degree-experiment}, we decided to make an algorithm that calculated each layers' effect based on how they performed compared to each other.
+It could clearly be seen that some layers performed substantially better than others and therefore the worst layers might have a negative effect on the final embedding.
+\\
+The algorithm looks at the performance of each individual layers and then based on how many percent's worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
+An example of the algorithm can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}.
+Given four layers each layer will have 25\% effect on the final embedding at the start.
+The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
+Meanwhile, the 15 is split evenly among the other 3 layers who now have an effect of 30\%.
+The same process is then repeated but the worst performing layer from the previous iteration is excluded.
+This continues until all layers have gotten an effect penalty except the best performing layer.
+This can result in one or more layers having 0 \% effect in the end.
+A more balanced version can be done by not excluding the worst-performing layer from the previous iteration.
+
+\begin{figure}
+    \includegraphics[width=0.5\textwidth]{figures/fredsplit/aggresiveAlgo.png}
+    \centering
+    \caption{Example of aggressive splitting of layer effect based on performance}
+    \label{fig:fredsplitAgg}
+\end{figure}
+\begin{figure}
+    \includegraphics[width=0.5\textwidth]{figures/fredsplit/balancedAlgo.png}
+    \centering
+    \caption{Example of balanced splitting of layer effect based on performance}
+    \label{fig:fredsplitBal}
+\end{figure}
