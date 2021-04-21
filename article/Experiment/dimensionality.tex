@@ -15,7 +15,7 @@ $E^{(5)}$ does however often perform second best for many node degree ranges.
 It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperform LightGCN with 5 convolutions.
 This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings need more convolution to capture the collaborative signals.
 Looking at the yelp2020 and amazon-book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results do not seem to be dependent on the degree of the nodes, as almost all node degree ranges either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
-In both of these datasets nodes have above 19 connections in average and therefore the nodes gain knowledge much faster about the graph than in amazon-cell-sport.
+In both of these datasets nodes have above 19 connections in average and therefore the amount of collaborative signals increase much faster for each node in the graph compared to amazon-cell-sport.
 For Amazon-Cell-Sport the Recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book it instead decreases with a larger node degree.
 This could be because the nodes with many connections get too much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
 The best result for all nodes in Amazon-Book is 3 convolution with average.
