@@ -24,7 +24,7 @@ For Amazon-Cell-Sport $E^{(5)}$ outperforms 5 convolution average, and $E^{(2)}$
 From these results we see an opportunity to change the layer combination in different ways to investigate if these will improve the results.
 One experiment is simply to remove $E^{(0)}$, as this often is performing quite poorly on all used datasets.
 Another experiment to conduct is to use the three best embedding layers for each method.
-The last method is to use \autoref{fred-split} method to optimize the hyper parameters.
+The last method is to use \autoref{fredsplit} method to optimize the hyper parameters.
 As no direct link between the number of connections a user has and its performance was found, it could be interesting to look further into the number of connections a user has once the convolutions has been performed. 
 It could be an naïve assumption, that the degree of the node has a high influence on the individual nodes performance when the nodes it is connected to has a even higher influence in graph convolutional network.
 
