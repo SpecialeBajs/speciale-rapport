@@ -44,7 +44,35 @@ The same process is then repeated but the worst performing layer from the previo
 This continues until all layers have gotten an effect penalty except the best performing layer.
 This can result in one or more layers having 0 \% effect in the end.
 A more balanced version can be done by not excluding the worst-performing layer from the previous iteration.
+On \autoref{alg:layereffect} the pseudocode for the algorithm can be seen.
+The algorithm is given a list of how much worse each layer performed in percentage compared to the best performing layer in the same list.
+At the start each layers' influence \textit{Inf} is set to be the same.
+After this the list \textit{L} is iterated over and the last element gets popped.
+Since L is ordered the last element is the worst performing one.
+Based on the start influence and how bad the layer has performed its new lower influence is calculated as well as the other layers influence increased.
 On \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal} examples of the algorithm can be seen.
+
+
+\begin{algorithm}
+    \caption{Algorithm for layer effect based on performance}
+    \SetAlgoLined
+    \KwResult{A list of how much influence each layer has on the final embedding }
+     L = Ordered list of performance of each layer \\
+     Inf = List of current influence for each layer \\
+     \While{i < L.length; i++}{
+         Inf[i] = 100 / L.length \\
+     }
+     \While{L.length > 1; i++}{
+      worseP = L.pop()\\
+      newInf = max(Inf[i] - worseP, 0)\\
+      \While{k < L.length; k++}{
+          Inf[k] = Inf[k] + ((Inf[i] - newInf) / L.length)\\
+      }
+      Inf[i] = newInf\\
+     }
+     \Return{Inf.orderBy(layerId)}
+     \label{alg:layereffect}
+    \end{algorithm}
 
 \begin{figure}
     \includegraphics[width=0.5\textwidth]{figures/fredsplit/aggresiveAlgo.png}
