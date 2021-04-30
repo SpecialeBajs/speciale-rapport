@@ -2,9 +2,13 @@
 LightGCN suggests to personalize the layer combination, so that sparse users can benefit more from higher-order neighbors \cite{lightgcn}.
 In \autoref{subsec:degree-experiment} we showed indications that there are no direct correlation between the degree of the node and the performance.
 Instead of running experiments as LightGCN originally suggested where sparse users utilized higher convolution layers more, we used the results from \autoref{subsec:degree-experiment} and calculated the splits with \autoref{fredsplit}.
-The results for this experiment can be seen in Appendix \ref{subsec:adjusted-layer-combi}.
+\subsubsection{Degree depending layer combination}
+The results for this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
 The results for this experiment is poor.
 Our assumption for the poor results is that it is harmful to split nodes differently depending on the connections of the nodes.
 For example, if a user with 10 connections is connected to the same items as a user with 20 connections, these embeddings will be related.
-When we do a different layer combination on these two nodes they will become less related.
-For that reason we continue our experiments with balanced split and aggressive split, abandon the split on the node degrees.
+When we do a different layer combination depending on the degree of the nodes these will become less related.
+For that reason we continue our experiments with balanced split and aggressive split, but the split is the same for all nodes and hereby abandoning the split on the node degrees.
+
+\subsubsection{Balanced and aggressive splits on overall}
+% Continues with writing about the results on the overall.
