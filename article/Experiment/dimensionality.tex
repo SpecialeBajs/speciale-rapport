@@ -15,13 +15,13 @@ $E^{(5)}$ does however often perform second best for many node degree ranges.
 It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperform LightGCN with 5 convolutions.
 This could be because that utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings need more convolution to capture the collaborative signals.
 Looking at the yelp2020 and amazon-book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results do not seem to be dependent on the degree of the nodes, as almost all node degree ranges either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
-In both of these datasets nodes have above 19 connections in average and therefore the amount of collaborative signals increase much faster for each node in the graph compared to amazon-cell-sport.
+In both of these datasets nodes have above 19 connections on average and therefore the amount of collaborative signals increase much faster for each node in the graph compared to amazon-cell-sport.
 For Amazon-Cell-Sport the Recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book it instead decreases with a larger node degree.
 This could be because the nodes with many connections get too much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
 The best result for all nodes in Amazon-Book is 3 convolution with average.
-$E^{(1)}$ and $E^{(2)}$ significantly outperforms the other embedding layers.
+$E^{(1)}$ and $E^{(2)}$ significantly outperform the other embedding layers.  
 For Yelp2020 the 5 convolution average performs best, while the $E^{(1)}$, $E^{(2)}$ and $E^{(3)}$ embedding layer are the best individual performing layer.
-For Amazon-Cell-Sport $E^{(2)}$, $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ outperforms the 5 convolution average.
+For Amazon-Cell-Sport $E^{(2)}$, $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ outperform the 5 convolution average.
 \\
 From these results we see an opportunity to change the layer combination in different ways to investigate if this will improve the results.
 One experiment is simply to remove $E^{(0)}$, as it is often performing quite poorly on all used datasets.
@@ -29,15 +29,6 @@ Another experiment to conduct is to use the three best embedding layers for each
 The last method is to use \autoref{fredsplit} method to optimize the hyper parameters.
 As no direct link between the number of connections a user has and its performance was found, it could be interesting to look further into the number of implicit connections a user has once the convolutions have been performed.
 The conclusion on the results are that the individual degree of a node has a smaller effect on the final result than we initially expected.
-
-%[tanker:]
-%[ignore de dårligst embeddings og kun tag de bedst performance med når man laver layer combination]
-%[- frederik model og std model]
-%[fjern 0 embeding]
-%[undersøg om der er en bestemt mængde connections en user/item kan have der giver optimal prediction]
-%[- ud fra dette kunne man holde op med at lave con's for en user når de når en hvis mængde connections for at undgå støj]
-%[lav simpel model der tager avg connections og vælger en mængde lag der skal have størst inflydelse]
-%[måske have flere dataset som vi kan teste på]
 
 % Yelp2020 NDCG
 \begin{table*}[]
