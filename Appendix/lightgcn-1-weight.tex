@@ -1,0 +1,25 @@
+\subsection{LightGCN - One weight added}
+The core difference between NGCF and LightGCN is that LightGCN does not utilize weights and activation functions.
+Our intuition behind adding one weight would be that this could learn the layer combination, as there are weights for each layers.
+The equation can be seen on \autoref{eq:lightgcn-1-weight}
+Therefore we experimented with three different layer combinations: sum (\autoref{eq:sum-combi}), average (\autoref{eq:average-combi}) and concatenation (\autoref{eq:concat-combi}).
+
+\begin{equation}
+    E^{(k+1)} = \sum_{i \in \mathcal{N}_u} \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}\left( \mathbf{e}_i^{(k)} \mathbf{W}^{(k)} \right)
+    \label{eq:lightgcn-1-weight}
+\end{equation}
+
+\begin{equation}
+    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
+    \label{eq:sum-combi}
+\end{equation}
+
+\begin{equation}
+    \mathbf{e}_u = \sum_{k=0}^{K} \frac{1}{k} \mathbf{e}_u^{(k)},
+    \label{eq:average-combi}
+\end{equation}
+
+\begin{equation}
+    \mathbf{e}_u = \mathbf{e}_u^{(0)}|| \cdots || \mathbf{e}_u^{(K)},
+    \label{eq:concat-combi}
+\end{equation}
