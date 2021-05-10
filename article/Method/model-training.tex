@@ -1,0 +1,8 @@
+\subsection{Model training}
+For LightGCN the
+
+
+\begin{equation}
+    L_{BPR} = - \sum_{u=1}^{M} \sum_{i \in \mathcal{N}_u} \sum_{j \notin \mathcal{N}_u} ln \sigma (\hat{y}_{ui} - \hat{y}_{uj}) + \lambda || \mathbf{E}^{(0)}||^2
+\end{equation}
+
