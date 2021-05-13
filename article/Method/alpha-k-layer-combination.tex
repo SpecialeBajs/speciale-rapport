@@ -1,14 +1,9 @@
 \subsection{Optimizing layer combination}
-\subsubsection{Removing $\alpha_k$}
-% Overvej om denne sektion bør flyttes til appendix med en reference til den.
-Before trying to optimize $\alpha_k$ we wanted to investigate what impact it had.
-The simplest experiment is to change the value of $\alpha_k$ to 1 which essentially removes it.
-If this results in small changes in performance, it could indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
-\begin{equation}
-    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
-    \label{eq:lightgcn-sum}
-\end{equation}
-The result of the experiment can be seen in \autoref{subsubsec:remove-alpha-k}
+% BLC / ALC (Uddyb meget)
+% Definer matematikken
+% Algorithm 
+% Example of algorithm.
+% Model training
 
 \subsubsection{Optimizing $\alpha_k$}
 % Definer matematikken
@@ -113,6 +108,7 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
     \caption{Example of aggressive splitting of layer effect based on performance}
     \label{fig:fredsplitAgg}
 \end{figure}
+
 \begin{figure}
     \includegraphics[width=0.5\textwidth]{figures/fredsplit/balancedAlgo.png}
     \centering

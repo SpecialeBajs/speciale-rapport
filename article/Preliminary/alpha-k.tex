@@ -1,7 +1,14 @@
 \subsection{Changing $\alpha_k$}
 
 \subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
-In this experiment we changed $\alpha_k$ from $(1 / (K + 1))$ to $1$ and essentially removed the variable to see what impact it had on the results.
+% Overvej om denne sektion bør flyttes til appendix med en reference til den.
+Before trying to optimize $\alpha_k$ we wanted to investigate what impact it had.
+The simplest experiment is to change the value of $\alpha_k$ to 1 which essentially removes it.
+If this results in small changes in performance, it could indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
+\begin{equation}
+    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
+    \label{eq:lightgcn-sum}
+\end{equation}
 This method is called LightGCN-Ak1 which stands for LightGCN $\alpha_k = 1$.
 This will result in the embeddings scaling more than they otherwise would have with $\alpha_k$ as normalization.
 As can be seen on \autoref{fig:ndcg-yelp2020-alpha-k} and \autoref{fig:recall-yelp2020-alpha-k} changing $\alpha_k$ decreases performance of LightGCN on the yelp2020 dataset.
