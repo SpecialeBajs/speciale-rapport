@@ -33,18 +33,79 @@ For a node with 200 connections, the third convolution might actually be harmful
 \end{table}
 
 \paragraph{Layer effect based on performance} \label{fredsplit}
-Based on the results from the node degree experiments seen in \autoref{subsec:degree-experiment}, we decided to make an algorithm that calculated each layers' effect based on how they performed compared to each other.
-It could clearly be seen that some layers performed substantially better than others and therefore the worst layers might have a negative effect on the final embedding.
-\\
-The algorithm looks at the performance of each individual layers and then based on how many percent's worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
-An example of the algorithm can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}.
-Given four layers each layer will have 25\% effect on the final embedding at the start.
+%%% Måske sandt, men er ikke så god en intro når læseren ikke er kommet dertil.
+% Based on the results from the node degree experiments seen in \autoref{subsec:degree-experiment}, we decided to make an algorithm that calculated each layers' effect based on how they performed compared to each other.
+% It could clearly be seen that some layers performed substantially better than others and therefore the worst layers might have a negative effect on the final embedding.
+Instead of utilizing average as the weighted sum, two algorithms were developed to do weighted sum based on the performance of each layer.
+The algorithm looks at the performance of each individual layer and then based on how much worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
+Two algorithms have been created where one has a more aggressive approach, that can completely remove certain layers, and the other one has a more balanced approach, where each layer will be ensured influence.
+An advantage to the aggresive algorithm is that it is able to completely remove certain layers that has performed poorly, but there seems to be a beneficial factor to aggregating different layers, which in some cases will be eliminated with this algorithm.
+For the balanced algorithm, it ensures that all layers will have influence, but in some cases an layer might perform so bad, that it is harmful to add it.
+An example of the aggressive algorithm can be seen on \autoref{fig:fredsplitAgg} and an example of the balanced algorithm can be seen on \autoref{fig:fredsplitBal}.
+Given four layers on \autoref{fig:fredsplitAgg} each layer will have 25\% effect on the final embedding initially.
 The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
-Meanwhile, the 15 is split evenly among the other 3 layers who now have an effect of 30\%.
+Meanwhile, the 15 is split evenly among the 3 other layers who now have an effect of 30\%.
 The same process is then repeated but the worst performing layer from the previous iteration is excluded.
 This continues until all layers have gotten an effect penalty except the best performing layer.
 This can result in one or more layers having 0 \% effect in the end.
-A more balanced version can be done by not excluding the worst-performing layer from the previous iteration.
+In the balanced version the worst-performing layer is not excluded from the previous iteration.
+\\
+On \autoref{alg:aggresive-layereffect} the pseudocode for the aggressive algorithm can be seen.
+The algorithm is given a list of how much worse each layer performed in percentages compared to the best performing layer in the same list.
+Initially each layers' \textit{effect} is set to be the same.
+After this the list \textit{L} is iterated over and the last element gets popped.
+Since L is ordered the last element is the worst performing one.
+Based on the initial effect and the performance of the layer its effect is lowered while the other layers effect is increased.
+On \autoref{alg:bal-layereffect} the pseudocode for the balanced method can be seen.
+Examples of how the aggressive and balanced algorithms work can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}
+In both examples we have 4 layers from 0 to 3 and each layer has an initial effect of 25\%.
+Their performance is color coded to make it easier to follow which values are used to calculate the new effect.
+The yellow squares mark which layer is getting a lower effect in the current iteration and green marks the specific layer's final effect.
+Comparing these two algorithms it can be seen that there is a larger diversion in the aggressive algorithm than in the balanced algorithm.
+\begin{algorithm}
+    \caption{Algorithm for the aggressive layer combination based on performance}
+    \SetAlgoLined
+    \KwResult{A list of how much effect each layer has on the final embedding }
+    L = Ordered list of performance of each layer \\
+    effect  = List of current effect for each layer \\
+    \While{i < L.length; i++}{
+        effect [i] = 100 / L.length \\
+    }
+    \While{L.length > 1; i++}{
+        worseP = L.pop()\\
+        newEffect  = max(Inf[i] - worseP, 0)\\
+        \While{k < L.length; k++}{
+            effect[k] = effect[k] + ((effect[i] - newEffect ) / L.length)\\
+        }
+        effect[i] = newEffect \\
+    }
+    \Return{effect.orderBy(layerId)}
+    \label{alg:aggresive-layereffect}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Algorithm for the balanced layer combination based on performance}
+    \SetAlgoLined
+    \KwResult{A list of how much effect each layer has on the final embedding }
+    L = Ordered list of performance of each layer \\
+    effect  = List of current effect for each layer \\
+    \While{i < L.length; i++}{
+        effect [i] = 100 / L.length \\
+    }
+    \While{i = 0; i < L.length; i++}{
+        worseP = L.[i]\\
+        newEffect  = max(effect[i] - worseP, 0)\\
+        \While{k = 0; k < L.length; k++}{
+            if(k != i){
+                    effect[k] = effect[k] + ((effect[i] - newEffect ) / (L.length-1))\\
+                }
+        }
+        effect[i] = newEffect \\
+    }
+    \Return{effect.orderBy(layerId)}
+    \label{alg:bal-layereffect}
+\end{algorithm}
+
 
 \begin{figure}
     \includegraphics[width=0.5\textwidth]{figures/fredsplit/aggresiveAlgo.png}
