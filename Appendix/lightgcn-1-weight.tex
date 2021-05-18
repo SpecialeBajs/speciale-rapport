@@ -1,5 +1,5 @@
 \subsection{LightGCN - One weight added}
-The core difference between NGCF and LightGCN is that LightGCN does not utilize weights and activation functions.
+The core difference between NGCF and LightGCN is that LightGCN does not utilize weights and an activation function.
 Our intuition behind adding one weight would be that this could learn the layer combination, as there are weights for each layers.
 The equation can be seen on \autoref{eq:lightgcn-1-weight}
 Therefore we experimented with three different layer combinations: sum (\autoref{eq:sum-combi}), average (\autoref{eq:average-combi}) and concatenation (\autoref{eq:concat-combi}).
