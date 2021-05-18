@@ -2,9 +2,9 @@
 % Skal omskrives. Er skrevet til forkert data.
 LightGCN suggests to personalize the layer combination, so that sparse users can benefit more from higher-order neighbors \cite{lightgcn}.
 In \autoref{subsec:degree-experiment} we showed indications that there are no direct correlation between the degree of the node and the performance.
-Instead of running experiments as LightGCN originally suggested where sparse users utilized higher convolution layers more, we used the results from \autoref{subsec:degree-experiment} and calculated the splits with \autoref{fredsplit}.
+In this experiment we used the results from \autoref{subsec:degree-experiment} and calculated the splits with \autoref{fredsplit} only on the overall performance in each layer, and not depending on the node degree.
+
 \subsubsection{Degree depending layer combination}
-% Skal omskrives til nye resultater.
 The results for this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
 The results for this experiment is poor.
 Our assumption for the poor results is that it is harmful to split nodes differently depending on the connections of the nodes.
@@ -22,7 +22,7 @@ The splits in the following itemize were calculated from this method.
     \item \textbf{Yelp2020}: $\mathbf{E}^{(0)}$: 0.10576, $\mathbf{E}^{(1)}$: 0.23173, $\mathbf{E}^{(2)}$: 0.30576, $\mathbf{E}^{(3)}$: 0.20587, $\mathbf{E}^{(4)}$: 0.08510, $\mathbf{E}^{(5)}$: 0.06576
 \end{itemize}
 
-The results can be seen in \autoref{tab:balanced-layer-combination-ndcg} and \autoref{tab:balanced-layer-combination-recall}.
+The results can be seen in \autoref{tab:balanced-layer-combination}.
 Generally it can be observed that there is an improvement on all three datasets. % Tjek efter om dette også er sandt når Amazon-book er kørt igen.
 For Amazon-Cell-Sport improves with 7.03 \% from this method.
 This is a substantial amount more than the improvement on Yelp2020 and Amazon-Book.
@@ -34,62 +34,13 @@ For Yelp2020 there is a small improvement of 1.15 \%.
     \centering
     \begin{tabular}{|l|r|r|r||l|r|r||l|l|l|}
         \hline
-        NDCG@50 & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c||}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                                                \\ \hline
-        Method  & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{BLC}       & \multicolumn{1}{l||}{impr}             & 5 con   & \multicolumn{1}{l|}{BLC} & \multicolumn{1}{l||}{impr}            & 3 con   & BLC                    & impr                   \\ \hline
-        6-10    & 0.01972                                 & 0.02352                        & \textbf{\textcolor{OliveGreen}{19.27}} & 0.10095 & 0.10221                  & \textbf{\textcolor{OliveGreen}{1.25}} & 0.0     & \multicolumn{1}{r|}{0} & \multicolumn{1}{r|}{0} \\ \hline
-        11-15   & 0.02984                                 & 0.02998                        & \textbf{\textcolor{OliveGreen}{0.47}}  & 0.10408 & 0.1046                   & \textbf{\textcolor{OliveGreen}{0.50}} & 0.0     & \multicolumn{1}{r|}{0} & \multicolumn{1}{r|}{0} \\ \hline
-        16-20   & 0.03701                                 & 0.03475                        & \textbf{\textcolor{Maroon}{-6.11}}     & 0.11451 & 0.11517                  & \textbf{\textcolor{OliveGreen}{0.58}} & 0.04963 & 0.04830                & -2,67                  \\ \hline
-        21-25   & 0.04438                                 & 0.04699                        & \textbf{\textcolor{OliveGreen}{5.88}}  & 0.11790 & 0.11728                  & \textbf{\textcolor{Maroon}{-0.53}}    & 0.04949 & 0.04792                & -3,17                  \\ \hline
-        26-30   & 0.04815                                 & 0.05144                        & \textbf{\textcolor{OliveGreen}{6.83}}  & 0.11909 & 0.12197                  & \textbf{\textcolor{OliveGreen}{2.42}} & 0.04843 & 0.04720                & -2,53                  \\ \hline
-        31-35   & 0.07514                                 & 0.06997                        & \textbf{\textcolor{Maroon}{-6.88}}     & 0.12833 & 0.12964                  & \textbf{\textcolor{OliveGreen}{1.02}} & 0.04907 & 0.04824                & -1,69                  \\ \hline
-        36-40   & 0.05475                                 & 0.05837                        & \textbf{\textcolor{OliveGreen}{6.61}}  & 0.12711 & 0.12723                  & \textbf{\textcolor{OliveGreen}{0.09}} & 0.04593 & 0.04536                & -1,24                  \\ \hline
-        41-45   & 0.07634                                 & 0.07618                        & \textbf{\textcolor{Maroon}{-0.21}}     & 0.11638 & 0.11957                  & \textbf{\textcolor{OliveGreen}{2.74}} & 0.04347 & 0.04235                & -2,57                  \\ \hline
-        46-50   & 0.10074                                 & 0.10826                        & \textbf{\textcolor{OliveGreen}{7.46}}  & 0.12537 & 0.12445                  & \textbf{\textcolor{Maroon}{-0.73}}    & 0.04582 & 0.04480                & -2,22                  \\ \hline
-        51-60   & 0.08827                                 & 0.09282                        & \textbf{\textcolor{OliveGreen}{5.15}}  & 0.12459 & 0.12587                  & \textbf{\textcolor{OliveGreen}{1.03}} & 0.04241 & 0.04128                & -2,66                  \\ \hline
-        61-70   & 0.07718                                 & 0.0952                         & \textbf{\textcolor{OliveGreen}{23.35}} & 0.12377 & 0.12619                  & \textbf{\textcolor{OliveGreen}{1.96}} & 0.04084 & 0.04039                & -1,10                  \\ \hline
-        71-80   & 0.05834                                 & 0.05519                        & \textbf{\textcolor{Maroon}{-5.40}}     & 0.13007 & 0.13309                  & \textbf{\textcolor{OliveGreen}{2.32}} & 0.04029 & 0.03990                & -0,96                  \\ \hline
-        81-90   & 0.07351                                 & 0.07843                        & \textbf{\textcolor{OliveGreen}{6.69}}  & 0.11042 & 0.11302                  & \textbf{\textcolor{OliveGreen}{2.35}} & 0.03725 & 0.03616                & -2,92                  \\ \hline
-        91-100  & 0.08968                                 & 0.09006                        & \textbf{\textcolor{OliveGreen}{0.42}}  & 0.14010 & 0.14595                  & \textbf{\textcolor{OliveGreen}{4.18}} & 0.03931 & 0.03861                & -1,78                  \\ \hline
-        101-150 & 0.1129                                  & 0.11024                        & \textbf{\textcolor{Maroon}{-2.36}}     & 0.12676 & 0.12788                  & \textbf{\textcolor{OliveGreen}{0.88}} & 0.03508 & 0.03456                & -1,48                  \\ \hline
-        151-200 & 0.09668                                 & 0.074                          & \textbf{\textcolor{Maroon}{-23.46}}    & 0.11889 & 0.11901                  & \textbf{\textcolor{OliveGreen}{0.10}} & 0.03120 & 0.03107                & -0,41                  \\ \hline
-        201-250 & 0                                       & 0                              & 0                                      & 0.11999 & 0.12413                  & \textbf{\textcolor{OliveGreen}{3.45}} & 0.03485 & 0.03396                & -2,55                  \\ \hline
-        251-300 & 0                                       & 0                              & 0                                      & 0.21693 & 0.23556                  & \textbf{\textcolor{OliveGreen}{8.59}} & 0.03692 & 0.03666                & -0,70                  \\ \hline
-        301+    & 0.16771                                 & 0.16985                        & \textbf{\textcolor{OliveGreen}{1.28}}  & 0.23305 & 0.23213                  & \textbf{\textcolor{Maroon}{-0.39}}    & 0.04304 & 0.04419                & 2,67                   \\ \hline
-        Average & 0.03285                                 & 0.03516                        & \textbf{\textcolor{OliveGreen}{7.03}}  & 0.1089  & 0.11015                  & \textbf{\textcolor{OliveGreen}{1.15}} & 0.04647 & 0.04537                & -2,36                  \\ \hline
+                  & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c||}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                                              \\ \hline
+                  & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{BLC}       & \multicolumn{1}{l||}{impr}            & 5 con  & \multicolumn{1}{l|}{BLC} & \multicolumn{1}{l||}{impr}            & 3 con   & BLC     & impr                                  \\ \hline
+        NDCG@50   & 0.03285                                 & 0.03516                        & \textbf{\textcolor{OliveGreen}{7.03}} & 0.1089 & 0.11015                  & \textbf{\textcolor{OliveGreen}{1.15}} & 0.04647 & 0.04537 & \textbf{\textcolor{Maroon}{-2,36}}    \\ \hline
+        Recall@50 & 0.06451                                 & 0.06928                        & \textbf{\textcolor{OliveGreen}{7.39}} & 0.2177 & 0.21917                  & \textbf{\textcolor{OliveGreen}{0.68}} & 0,08129 & 0,08066 & \textbf{\textcolor{OliveGreen}{0,78}} \\ \hline
     \end{tabular}
-    \caption{NDCG@50 results for balanced layer combination, where it was not based on the node degree.}
-    \label{tab:balanced-layer-combination-ndcg}
-\end{table*}
-
-\begin{table*}[]% Overvej om vi kun skal bruge combined results. 
-    \centering
-    \begin{tabular}{|l|r|r|r||r|r|r||l|l|l|}
-        \hline
-        Recall@50 & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c|}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                                       \\ \hline
-        Method    & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{BLC}      & \multicolumn{1}{l||}{impr}             & \multicolumn{1}{l|}{5 con} & \multicolumn{1}{l|}{BLC} & \multicolumn{1}{l||}{impr}            & 3 con   & BLC (5 con) & impr  \\ \hline
-        6-10      & 0.04706                                 & 0.0521                        & \textbf{\textcolor{OliveGreen}{10.71}} & 0.23023                    & 0.23342                  & \textbf{\textcolor{OliveGreen}{1.39}} & 0.0     & 0           & 0     \\ \hline
-        11-15     & 0.06429                                 & 0.06623                       & \textbf{\textcolor{OliveGreen}{3.02}}  & 0.22722                    & 0.22756                  & \textbf{\textcolor{OliveGreen}{0.15}} & 0.0     & 0           & 0     \\ \hline
-        16-20     & 0.07557                                 & 0.07222                       & \textbf{\textcolor{Maroon}{-4.43}}     & 0.22093                    & 0.22149                  & \textbf{\textcolor{OliveGreen}{0.25}} & 0,09968 & 0,10011     & -0,42 \\ \hline
-        21-25     & 0.08262                                 & 0.08476                       & \textbf{\textcolor{OliveGreen}{2.59}}  & 0.21102                    & 0.21001                  & \textbf{\textcolor{Maroon}{-0.48}}    & 0,09102 & 0,09318     & -2,31 \\ \hline
-        26-30     & 0.08784                                 & 0.091                         & \textbf{\textcolor{OliveGreen}{3.60}}  & 0.19883                    & 0.1994                   & \textbf{\textcolor{OliveGreen}{0.29}} & 0,08366 & 0,08525     & -1,86 \\ \hline
-        31-35     & 0.1                                     & 0.09576                       & \textbf{\textcolor{Maroon}{-4.24}}     & 0.20093                    & 0.19928                  & \textbf{\textcolor{Maroon}{-0.82}}    & 0,08022 & 0,08152     & -1,59 \\ \hline
-        36-40     & 0.08603                                 & 0.09293                       & \textbf{\textcolor{OliveGreen}{8.02}}  & 0.19039                    & 0.18925                  & \textbf{\textcolor{Maroon}{-0.60}}    & 0,07347 & 0,0745      & -1,38 \\ \hline
-        41-45     & 0.09644                                 & 0.09906                       & \textbf{\textcolor{OliveGreen}{2.72}}  & 0.16928                    & 0.17305                  & \textbf{\textcolor{OliveGreen}{2.23}} & 0,06621 & 0,06653     & -0,48 \\ \hline
-        46-50     & 0.14301                                 & 0.16012                       & \textbf{\textcolor{OliveGreen}{11.96}} & 0.17777                    & 0.17848                  & \textbf{\textcolor{OliveGreen}{0.40}} & 0,06414 & 0,0673      & -4,69 \\ \hline
-        51-60     & 0.09665                                 & 0.11397                       & \textbf{\textcolor{OliveGreen}{17.92}} & 0.16653                    & 0.17079                  & \textbf{\textcolor{OliveGreen}{2.56}} & 0,06002 & 0,06058     & -0,92 \\ \hline
-        61-70     & 0.08252                                 & 0.09962                       & \textbf{\textcolor{OliveGreen}{20.72}} & 0.15473                    & 0.15989                  & \textbf{\textcolor{OliveGreen}{3.33}} & 0,05359 & 0,05498     & -2,52 \\ \hline
-        71-80     & 0.08231                                 & 0.07801                       & \textbf{\textcolor{Maroon}{-5.22}}     & 0.16026                    & 0.16022                  & \textbf{\textcolor{Maroon}{-0.02}}    & 0,05036 & 0,05168     & -2,55 \\ \hline
-        81-90     & 0.07068                                 & 0.0812                        & \textbf{\textcolor{OliveGreen}{14.88}} & 0.12724                    & 0.13362                  & \textbf{\textcolor{OliveGreen}{5.01}} & 0,04557 & 0,04621     & -1,38 \\ \hline
-        91-100    & 0.10312                                 & 0.10375                       & \textbf{\textcolor{OliveGreen}{0.61}}  & 0.14825                    & 0.14877                  & \textbf{\textcolor{OliveGreen}{0.35}} & 0,04576 & 0,0473      & -3,25 \\ \hline
-        101-150   & 0.122                                   & 0.11663                       & \textbf{\textcolor{Maroon}{-4.40}}     & 0.13183                    & 0.13345                  & \textbf{\textcolor{OliveGreen}{1.23}} & 0,03746 & 0,03901     & -3,97 \\ \hline
-        151-200   & 0.10173                                 & 0.07609                       & \textbf{\textcolor{Maroon}{-25.20}}    & 0.11065                    & 0.1113                   & \textbf{\textcolor{OliveGreen}{0.59}} & 0,02945 & 0,03156     & -6,68 \\ \hline
-        201-250   & 0.0                                     & 0.0                           & 0.0                                    & 0.1045                     & 0.10689                  & \textbf{\textcolor{OliveGreen}{2.29}} & 0,02762 & 0,02976     & -7,19 \\ \hline
-        251-300   & 0.0                                     & 0.0                           & 0.0                                    & 0.15278                    & 0.16667                  & \textbf{\textcolor{OliveGreen}{9.09}} & 0,02463 & 0,02547     & -3,29 \\ \hline
-        301+      & 0.07792                                 & 0.06494                       & \textbf{\textcolor{Maroon}{-16.66}}    & 0.09083                    & 0.09003                  & \textbf{\textcolor{Maroon}{-0.88}}    & 0,01763 & 0,01802     & -2,16 \\ \hline
-        Average   & 0.06451                                 & 0.06928                       & \textbf{\textcolor{OliveGreen}{7.39}}  & 0.2177                     & 0.21917                  & \textbf{\textcolor{OliveGreen}{0.68}} & 0,08129 & 0,08066     & 0,78  \\ \hline
-    \end{tabular}
-    \caption{Recall for balanced layer combination, where it was not based on the node degree.}
-    \label{tab:balanced-layer-combination-recall}
+    \caption{NDCG@50 and Recall@50 results for balanced layer combination, where it was not based on the node degree.}
+    \label{tab:balanced-layer-combination}
 \end{table*}
 
 \paragraph{Aggressive Layer Combination}
@@ -100,7 +51,7 @@ The splits were calculated from NDCG @50 and can be seen in the following itemiz
     \item \textbf{Amazon-Cell-Sport}: $\mathbf{E}^{(0)}$: 0.0, $\mathbf{E}^{(1)}$: 0.0, $\mathbf{E}^{(2)}$: 0.1658853, $\mathbf{E}^{(3)}$:  0.2110679, $\mathbf{E}^{(4)}$: 0.291968, $\mathbf{E}^{(5)}$: 0.331078
     \item \textbf{Yelp2020}: $\mathbf{E}^{(0)}$: 0.0, $\mathbf{E}^{(1)}$: 0.2912216, $\mathbf{E}^{(2)}$: 0.4146101, $\mathbf{E}^{(3)}$: 0.228054, $\mathbf{E}^{(4)}$: 0.0661141, $\mathbf{E}^{(5)}$: 0.0
 \end{itemize}
-The results can be seen in \autoref{tab:aggressive-layer-combination-ndcg} and \autoref{tab:aggressive-layer-combination-recall}
+The results can be seen in \autoref{tab:aggressive-layer-combination}.
 For Amazon-Cell-Sport it performs 8.37 \% better in NDCG and 8.54 \% better in recall than 5 convolution average.
 This is a better performance increase than BLC.
 For Yelp2020 it performs a small amount better with 0.57 \% in NDCG and 0.17 \% in Recall.
@@ -111,63 +62,15 @@ For Amazon-Book the decrease in performance for NDCG is smaller than for BLC, an
     \centering
     \begin{tabular}{|l|r|r|r||l|r|r||l|l|l|}
         \hline
-        NDCG@50 & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c||}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                                                  \\ \hline
-        Method  & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{ALC}       & \multicolumn{1}{l||}{impr}       & \multicolumn{1}{l|}{5 con} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l||}{impr} & 3 con   & ALC                    & impr                   \\ \hline
-        6-10    & 0.01972                                 & 0.02149                        & 8.97                             & 0.10095                    &                          &                            & 0.0     & \multicolumn{1}{r|}{0} & \multicolumn{1}{r|}{0} \\ \hline
-        11-15   & 0.02984                                 & 0.03062                        & 2.61                             & 0.10408                    &                          &                            & 0.0     & \multicolumn{1}{r|}{0} & \multicolumn{1}{r|}{0} \\ \hline
-        16-20   & 0.03701                                 & 0.03744                        & 1.16                             & 0.11451                    &                          &                            & 0.04963 & 0.04889                & -1.49                  \\ \hline
-        21-25   & 0.04438                                 & 0.04798                        & 8.11                             & 0.11790                    &                          &                            & 0.04949 & 0.0483                 & -2.40                  \\ \hline
-        26-30   & 0.04815                                 & 0.04648                        & -3.46                            & 0.11909                    &                          &                            & 0.04843 & 0.04779                & -1.32                  \\ \hline
-        31-35   & 0.07514                                 & 0.07727                        & 2.83                             & 0.12833                    &                          &                            & 0.04907 & 0.04798                & -2.22                  \\ \hline
-        36-40   & 0.05475                                 & 0.05532                        & 1.04                             & 0.12711                    &                          &                            & 0.04593 & 0.04499                & -2.04                  \\ \hline
-        41-45   & 0.07634                                 & 0.08551                        & 12.01                            & 0.11638                    &                          &                            & 0.04347 & 0.04208                & -3.19                  \\ \hline
-        46-50   & 0.10074                                 & 0.10789                        & 7.09                             & 0.12537                    &                          &                            & 0.04582 & 0.04451                & -2.85                  \\ \hline
-        51-60   & 0.08827                                 & 0.09689                        & 9.76                             & 0.12459                    &                          &                            & 0.04241 & 0.04231                & -0.23                  \\ \hline
-        61-70   & 0.07718                                 & 0.10029                        & 29.94                            & 0.12377                    &                          &                            & 0.04084 & 0.04094                & 0.24                   \\ \hline
-        71-80   & 0.05834                                 & 0.06123                        & 4.95                             & 0.13007                    &                          &                            & 0.04029 & 0.04068                & 0.96                   \\ \hline
-        81-90   & 0.07351                                 & 0.08855                        & 20.45                            & 0.11042                    &                          &                            & 0.03725 & 0.03665                & -1.61                  \\ \hline
-        91-100  & 0.08968                                 & 0.08379                        & -6.567                           & 0.14010                    &                          &                            & 0.03931 & 0.04032                & 2.56                   \\ \hline
-        101-150 & 0.1129                                  & 0.11527                        & 2.09                             & 0.12676                    &                          &                            & 0.03508 & 0.03457                & -1.45                  \\ \hline
-        151-200 & 0.09668                                 & 0.07557                        & -21.83                           & 0.11889                    &                          &                            & 0.03120 & 0.03097                & -0.73                  \\ \hline
-        201-250 & 0.0                                     & 0.0                            & 0.0                              & 0.11999                    &                          &                            & 0.03485 & 0.03363                & -3.50                  \\ \hline
-        251-300 & 0.0                                     & 0.0                            & 0.0                              & 0.21693                    &                          &                            & 0.03692 & 0.03696                & 0.10                   \\ \hline
-        301+    & 0.16771                                 & 0.19679                        & 17.33                            & 0.23305                    &                          &                            & 0.04304 & 0.04372                & 1.57                   \\ \hline
-        Average & 0.03285                                 & 0.0356                         & 8.37                             & 0.1089                     & 0.10953                  & 0.57                       & 0.04647 & 0.04574                & -1.57                  \\ \hline
+                  & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c||}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                                                                  \\ \hline
+                  & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{ALC}       & \multicolumn{1}{l||}{impr}            & \multicolumn{1}{l|}{5 con} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l||}{impr}            & 3 con   & ALC     & impr                                  \\ \hline
+        NDCG@50   & 0.03285                                 & 0.0356                         & \textbf{\textcolor{OliveGreen}{8.37}} & 0.1089                     & 0.10953                  & \textbf{\textcolor{OliveGreen}{0.57}} & 0.04647 & 0.04574 & \textbf{\textcolor{Maroon}{-1.57}}    \\ \hline
+        Recall@50 & 0.06451                                 & 0.07002                        & \textbf{\textcolor{OliveGreen}{8.54}} & 0.2177                     & 0,.21809                 & \textbf{\textcolor{OliveGreen}{0.17}} & 0.08129 & 0.07919 & \textbf{\textcolor{OliveGreen}{2.65}} \\ \hline
     \end{tabular}
-    \caption{NDCG@50 results for aggressive layer combination, where it was not based on the node degree.}
-    \label{tab:aggressive-layer-combination-ndcg}
+    \caption{NDCG@50 and Recall@50 results for aggressive layer combination, where it was not based on the node degree.}
+    \label{tab:aggressive-layer-combination}
 \end{table*}
 
-\begin{table*}[]% Overvej om vi kun skal bruge combined results. 
-    \centering
-    \begin{tabular}{|l|r|r|r||r|r|r||l|l|l|}
-        \hline
-        Recall@50 & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c|}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                  \\ \hline
-        Method    & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{ALC}      & \multicolumn{1}{l||}{impr}       & \multicolumn{1}{l|}{5 con} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l||}{impr} & 3 con   & ALC     & impr  \\ \hline
-        6-10      & 0.04706                                 & 0.05168                       & 9.81                             & 0.23023                    &                          &                            & 0.0     & 0.0     & 0.0   \\ \hline
-        11-15     & 0.06429                                 & 0.06658                       & 3.56                             & 0.22722                    &                          &                            & 0.0     & 0.0     & 0.0   \\ \hline
-        16-20     & 0.07557                                 & 0.07616                       & 0.78                             & 0.22093                    &                          &                            & 0.09968 & 0.09864 & 1.05  \\ \hline
-        21-25     & 0.08262                                 & 0.08523                       & 3.15                             & 0.21102                    &                          &                            & 0.09102 & 0.09018 & 0.93  \\ \hline
-        26-30     & 0.08784                                 & 0.08418                       & -4.16                            & 0.19883                    &                          &                            & 0.08366 & 0.08372 & -0.07 \\ \hline
-        31-35     & 0.1                                     & 0.10859                       & 8.59                             & 0.20093                    &                          &                            & 0.08022 & 0.07999 & 0.28  \\ \hline
-        36-40     & 0.08603                                 & 0.08424                       & -2.08                            & 0.19039                    &                          &                            & 0.07347 & 0.07273 & 1.01  \\ \hline
-        41-45     & 0.09644                                 & 0.1034                        & 7.21                             & 0.16928                    &                          &                            & 0.06621 & 0.06425 & 3.05  \\ \hline
-        46-50     & 0.14301                                 & 0.14594                       & 2.04                             & 0.17777                    &                          &                            & 0.06414 & 0.06577 & -2.47 \\ \hline
-        51-60     & 0.09665                                 & 0.11776                       & 21.84                            & 0.16653                    &                          &                            & 0.06002 & 0.06015 & -0.21 \\ \hline
-        61-70     & 0.08252                                 & 0.10313                       & 24.97                            & 0.15473                    &                          &                            & 0.05359 & 0.05512 & -2.77 \\ \hline
-        71-80     & 0.08231                                 & 0.09108                       & 10.65                            & 0.16026                    &                          &                            & 0.05036 & 0.05233 & -3.76 \\ \hline
-        81-90     & 0.07068                                 & 0.10073                       & 42.51                            & 0.12724                    &                          &                            & 0.04557 & 0.04565 & -0.17 \\ \hline
-        91-100    & 0.10312                                 & 0.0886                        & -14.08                           & 0.14825                    &                          &                            & 0.04576 & 0.04842 & -5.49 \\ \hline
-        101-150   & 0.122                                   & 0.12473                       & 2.23                             & 0.13183                    &                          &                            & 0.03746 & 0.03867 & -3.12 \\ \hline
-        151-200   & 0.10173                                 & 0.07609                       & -25.20                           & 0.11065                    &                          &                            & 0.02945 & 0.03118 & -5.54 \\ \hline
-        201-250   & 0.0                                     & 0.0                           & 0.0                              & 0.1045                     &                          &                            & 0.02762 & 0.02858 & -3.35 \\ \hline
-        251-300   & 0.0                                     & 0.0                           & 0.0                              & 0.15278                    &                          &                            & 0.02463 & 0.02537 & -2.91 \\ \hline
-        301+      & 0.07792                                 & 0.06494                       & -16.65                           & 0.09083                    &                          &                            & 0.01763 & 0.0187  & -5.72 \\ \hline
-        Average   & 0.06451                                 & 0.07002                       & 8.54                             & 0.2177                     & 0,.21809                 & 0,17                       & 0.08129 & 0.07919 & 2.65  \\ \hline
-    \end{tabular}
-    \caption{Recall for Aggressive layer combination, where it was not based on the node degree.}
-    \label{tab:aggressive-layer-combination-recall}
-\end{table*}
 
 \subsection{Conclusion on BLC and ALC}
 Our results in this test shows that our method is not an extension that should be used for all datasets.
