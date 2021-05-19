@@ -1,6 +1,6 @@
 \subsection{LightGCN - One weight added}
-The core difference between NGCF and LightGCN is that LightGCN does not utilize weights and an activation function.
-Our intuition behind adding one weight would be that this could learn the layer combination, as there are weights for each layers.
+The core difference between NGCF and LightGCN is that LightGCN does not utilize weights and an activation function \cite{lightgcn,NGCF_2019}.
+Our intuition behind adding weights would be that this could learn the layer combination required, as there are weight matrices for each layers.
 The equation can be seen on \autoref{eq:lightgcn-1-weight}
 Therefore we experimented with three different layer combinations: sum (\autoref{eq:sum-combi}), average (\autoref{eq:average-combi}) and concatenation (\autoref{eq:concat-combi}).
 As can be seen on \autoref{tab:lightgcn-1-weight} the results were quite poor compared to "autoref this to the baseline methods."
@@ -27,10 +27,10 @@ As can be seen on \autoref{tab:lightgcn-1-weight} the results were quite poor co
 \begin{table*}[]
     \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
         \hline
-                          & \multicolumn{3}{l|}{Amazon-Cell-Sport} & \multicolumn{3}{l|}{Yelp2020} & \multicolumn{3}{l|}{Amazon-Book}                                                                          \\ \hline
-        Layer combination & Concat                                 & Sum                           & Mean                             & Concat & Sum        & Mean        & Concat  & Sum                 & Mean             \\ \hline
-        NDCG@50           & \textbf{0.02381}                       & 0.01867                       & \underline{0.02075}              &        & 0.07482    & 0.08514     & 0.03144 & \underline{0.03376} & \textbf{0.03624} \\ \hline
-        Recall@50         & \textbf{0.04777}                       & 0.03910                       & \underline{0.04241}              &        & 0.15509    & 0.17398     & 0.05345 & \underline{0.05828} & \textbf{0.06197} \\ \hline
+                          & \multicolumn{3}{l|}{Amazon-Cell-Sport} & \multicolumn{3}{l|}{Yelp2020} & \multicolumn{3}{l|}{Amazon-Book}                                                                                 \\ \hline
+        Layer combination & Concat                                 & Sum                           & Mean                             & Concat & Sum     & Mean    & Concat  & Sum                 & Mean             \\ \hline
+        NDCG@50           & \textbf{0.02381}                       & 0.01867                       & \underline{0.02075}              &        & 0.07482 & 0.08514 & 0.03144 & \underline{0.03376} & \textbf{0.03624} \\ \hline
+        Recall@50         & \textbf{0.04777}                       & 0.03910                       & \underline{0.04241}              &        & 0.15509 & 0.17398 & 0.05345 & \underline{0.05828} & \textbf{0.06197} \\ \hline
     \end{tabular}
     \caption{Results for LightGCN with different layer combinations, where one weighted is added to the embedding propagation}
     \label{tab:lightgcn-1-weight}
