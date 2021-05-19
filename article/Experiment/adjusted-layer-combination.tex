@@ -23,21 +23,22 @@ The splits in the following itemize were calculated from this method.
 \end{itemize}
 
 The results can be seen in \autoref{tab:balanced-layer-combination}.
-Generally it can be observed that there is an improvement on all three datasets. % Tjek efter om dette også er sandt når Amazon-book er kørt igen.
+Generally it can be observed that there is different performance improvements depending on the dataset.
 For Amazon-Cell-Sport improves with 7.03 \% from this method.
 This is a substantial amount more than the improvement on Yelp2020 and Amazon-Book.
 However, for Amazon-Cell-Sport only utilizing $\mathbf{e^{(4)}}$ or $\mathbf{e^{(5)}}$ as seen on \autoref{tab:only-use-one-layer-experiment} is an better alternative.
 It seem that for this dataset, the first convolutions are more harmful, than the combination is beneficial as it is with Yelp2020 and Amazon-Book.
-For Yelp2020 there is a small improvement of 1.15 \%.
+For Yelp2020 there is a small improvement of 1.15 \% on NDCG and 0.68 \% in Recall.
+For Amazon-Book there is a decrease in performance by -2.36 \% and an improvement on 0.78 \% for recall.
 
-\begin{table*}[h!] % Overvej om vi kun skal bruge combined results.
+\begin{table*}[h!]
     \centering
     \begin{tabular}{|l|r|r|r||l|r|r||l|l|l|}
         \hline
                   & \multicolumn{3}{c||}{Amazon-Cell-Sport} & \multicolumn{3}{c||}{Yelp2020} & \multicolumn{3}{c|}{Amazon-Book}                                                                                                                                              \\ \hline
                   & \multicolumn{1}{l|}{5 con}              & \multicolumn{1}{l|}{BLC}       & \multicolumn{1}{l||}{impr}            & 5 con  & \multicolumn{1}{l|}{BLC} & \multicolumn{1}{l||}{impr}            & 3 con   & BLC     & impr                                  \\ \hline
-        NDCG@50   & 0.03285                                 & 0.03516                        & \textbf{\textcolor{OliveGreen}{7.03}} & 0.1089 & 0.11015                  & \textbf{\textcolor{OliveGreen}{1.15}} & 0.04647 & 0.04537 & \textbf{\textcolor{Maroon}{-2,36}}    \\ \hline
-        Recall@50 & 0.06451                                 & 0.06928                        & \textbf{\textcolor{OliveGreen}{7.39}} & 0.2177 & 0.21917                  & \textbf{\textcolor{OliveGreen}{0.68}} & 0,08129 & 0,08066 & \textbf{\textcolor{OliveGreen}{0,78}} \\ \hline
+        NDCG@50   & 0.03285                                 & 0.03516                        & \textbf{\textcolor{OliveGreen}{7.03}} & 0.1089 & 0.11015                  & \textbf{\textcolor{OliveGreen}{1.15}} & 0.04647 & 0.04537 & \textbf{\textcolor{Maroon}{-2.36}}    \\ \hline
+        Recall@50 & 0.06451                                 & 0.06928                        & \textbf{\textcolor{OliveGreen}{7.39}} & 0.2177 & 0.21917                  & \textbf{\textcolor{OliveGreen}{0.68}} & 0,08129 & 0,08066 & \textbf{\textcolor{OliveGreen}{0.78}} \\ \hline
     \end{tabular}
     \caption{NDCG@50 and Recall@50 results for balanced layer combination, where it was not based on the node degree.}
     \label{tab:balanced-layer-combination}
