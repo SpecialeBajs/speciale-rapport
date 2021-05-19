@@ -1,19 +1,18 @@
 \subsection{Adjusted layer combination}
 % Skal omskrives. Er skrevet til forkert data.
-LightGCN suggests to personalize the layer combination, so that sparse users can benefit more from higher-order neighbors \cite{lightgcn}.
-In \autoref{subsec:degree-experiment} we showed indications that there are no direct correlation between the degree of the node and the performance.
+One suggestion made by LightGCN was to personalize the layer combination, so that sparse users could benefit more from higher-order neighbors \cite{lightgcn}.
+The results seen in \autoref{subsec:degree-experiment} indicate that there are is no direct correlation between the degree of a node and the nodes performance.
 In this experiment we used the results from \autoref{subsec:degree-experiment} and calculated the splits with \autoref{fredsplit} only on the overall performance in each layer, and not depending on the node degree.
 
 \subsubsection{Degree depending layer combination}
-The results for this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
-The results for this experiment is poor.
+The results from this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
 Our assumption for the poor results is that it is harmful to split nodes differently depending on the connections of the nodes.
-For example, if a user with 10 connections is connected to the same items as a user with 20 connections, these embeddings will be related.
-When we do a different layer combination depending on the degree of the nodes these will become less related.
-For that reason we continue our experiments with balanced split and aggressive split, but the split is the same for all nodes and hereby abandoning the split on the node degrees.
+For example, if a user with 10 connections is connected to the same items as a user with 20 connections, these users will be related.
+If we calculate different layer effects depending on the initial degree of the nodes then some of the collaborative signals that would have been beneficial might get weaker.
+For that reason we continue our experiments with balanced layer effects and aggressive layer effects, but the calculated layer effects are the same for all nodes.
 
 \subsubsection{Balanced Layer Combination}
-The balanced method described in \autoref{fredsplit} is used in this section.
+The experiments conducted using the balanced method described in \autoref{fredsplit} are described in this section.
 It was calculated from NDCG @50.
 The splits in the following itemize were calculated from this method.
 \begin{itemize}
@@ -22,14 +21,14 @@ The splits in the following itemize were calculated from this method.
     \item \textbf{Yelp2020}: $\mathbf{E}^{(0)}$: 0.10576, $\mathbf{E}^{(1)}$: 0.23173, $\mathbf{E}^{(2)}$: 0.30576, $\mathbf{E}^{(3)}$: 0.20587, $\mathbf{E}^{(4)}$: 0.08510, $\mathbf{E}^{(5)}$: 0.06576
 \end{itemize}
 
-The results can be seen in \autoref{tab:balanced-layer-combination}.
-Generally it can be observed that there is different performance improvements depending on the dataset.
-For Amazon-Cell-Sport improves with 7.03 \% from this method.
-This is a substantial amount more than the improvement on Yelp2020 and Amazon-Book.
+The results from this experiment can be seen in \autoref{tab:balanced-layer-combination}.
+Generally it can be observed that the results vary depending on the dataset.
+For Amazon-Cell-Sport improves with 7.03 \% using this method.
+This is a substantial improvement compared to the results from Yelp2020 and Amazon-Book.
 However, for Amazon-Cell-Sport only utilizing $\mathbf{e^{(4)}}$ or $\mathbf{e^{(5)}}$ as seen on \autoref{tab:only-use-one-layer-experiment} is an better alternative.
 It seem that for this dataset, the first convolutions are more harmful, than the combination is beneficial as it is with Yelp2020 and Amazon-Book.
-For Yelp2020 there is a small improvement of 1.15 \% on NDCG and 0.68 \% in Recall.
-For Amazon-Book there is a decrease in performance by -2.36 \% and an improvement on 0.78 \% for recall.
+For Yelp2020 there is a small improvement of 1.15 \% in NDCG and 0.68 \% in Recall.
+For Amazon-Book there is a decrease in performance by -2.36 \% in NDCG and an improvement of 0.78 \% in recall.
 
 \begin{table*}[h!]
     \centering
@@ -45,7 +44,7 @@ For Amazon-Book there is a decrease in performance by -2.36 \% and an improvemen
 \end{table*}
 
 \paragraph{Aggressive Layer Combination}
-The aggressive layer combination is described in \autoref{fredsplit} is used in this section.
+The experiments conducted using the aggressive method described in \autoref{fredsplit} are described in this section
 The splits were calculated from NDCG @50 and can be seen in the following itemize.
 \begin{itemize}
     \item \textbf{Amazon-Book}: $\mathbf{E}^{(0)}$: 0.051091, $\mathbf{E}^{(1)}$: 0.43049, $\mathbf{E}^{(2)}$: 0.38988, $\mathbf{E}^{(3)}$:  0.12852
@@ -53,9 +52,9 @@ The splits were calculated from NDCG @50 and can be seen in the following itemiz
     \item \textbf{Yelp2020}: $\mathbf{E}^{(0)}$: 0.0, $\mathbf{E}^{(1)}$: 0.2912216, $\mathbf{E}^{(2)}$: 0.4146101, $\mathbf{E}^{(3)}$: 0.228054, $\mathbf{E}^{(4)}$: 0.0661141, $\mathbf{E}^{(5)}$: 0.0
 \end{itemize}
 The results can be seen in \autoref{tab:aggressive-layer-combination}.
-For Amazon-Cell-Sport it performs 8.37 \% better in NDCG and 8.54 \% better in recall than 5 convolution average.
+For Amazon-Cell-Sport it performed 8.37 \% better in NDCG and 8.54 \% better in recall than 5 convolution average.
 This is a better performance increase than BLC.
-For Yelp2020 it performs a small amount better with 0.57 \% in NDCG and 0.17 \% in Recall.
+For Yelp2020 there is a small increase in performance with 0.57 \% in NDCG and 0.17 \% in Recall.
 Here the BLC method made a better improvement.
 For Amazon-Book the decrease in performance for NDCG is smaller than for BLC, and increase in recall by -1.57 and 2.65 \% respectively.
 
@@ -73,5 +72,5 @@ For Amazon-Book the decrease in performance for NDCG is smaller than for BLC, an
 \end{table*}
 
 \subsection{Conclusion on adjusted layer combination}
-Our results in this test shows that our method is not an extension that should be used for all datasets.
-It does show an significant improvement, but this improvement is still smaller than the 13 \% improvement on Amazon-Cell-Sport by only taking $e^{(5)}$ into account.
+The results from these experiments show that our method is not an extension that would be beneficial for all datasets.
+It does show a significant improvement, but this improvement is still smaller than the 13 \% improvement on Amazon-Cell-Sport by only taking $e^{(5)}$ into account.
