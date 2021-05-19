@@ -1,32 +1,35 @@
-\subsection{Adjusted layer combination}
-% Skal omskrives. Er skrevet til forkert data.
+\subsection{Adjusted layer combination}\label{subsec:adjusted-layer-combination}
 One suggestion made by LightGCN was to personalize the layer combination, so that sparse users could benefit more from higher-order neighbors \cite{lightgcn}.
 The results seen in \autoref{subsec:degree-experiment} indicate that there are is no direct correlation between the degree of a node and the nodes performance.
-In this experiment we used the results from \autoref{subsec:degree-experiment} and calculated the splits with \autoref{fredsplit} only on the overall performance in each layer, and not depending on the node degree.
+In this experiment we used the results from \autoref{subsec:degree-experiment} and calculate the layer effects with \autoref{fredsplit} only on the overall performance in each layer, and not depending on the node degree.
 
 \subsubsection{Degree depending layer combination}
+% Skal omskrives når vi har indsat resultaterne i appendix
 The results from this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
-Our assumption for the poor results is that it is harmful to split nodes differently depending on the connections of the nodes.
-For example, if a user with 10 connections is connected to the same items as a user with 20 connections, these users will be related.
-If we calculate different layer effects depending on the initial degree of the nodes then some of the collaborative signals that would have been beneficial might get weaker.
-For that reason we continue our experiments with balanced layer effects and aggressive layer effects, but the calculated layer effects are the same for all nodes.
+Needs
 
 \subsubsection{Balanced Layer Combination}
 The experiments conducted using the balanced method described in \autoref{fredsplit} are described in this section.
-It was calculated from NDCG @50.
+It was calculated from the NDCG@50 results on each layer, seen on \autoref{tab:yelp2020-ndcg-evaluation}, \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}.
 The splits in the following itemize were calculated from this method.
-\begin{itemize}
-    \item \textbf{Amazon-Book}: $\mathbf{E}^{(0)}$: 0.12045, $\mathbf{E}^{(1)}$: 0.38566, $\mathbf{E}^{(2)}$: 0.35858, $\mathbf{E}^{(3)}$:  0.13529
-    \item \textbf{Amazon-Cell-Sport}: $\mathbf{E}^{(0)}$: 0.07412, $\mathbf{E}^{(1)}$: 0.03412, $\mathbf{E}^{(2)}$: 0.17319, $\mathbf{E}^{(3)}$:  0.19376, $\mathbf{E}^{(4)}$: 0.25066, $\mathbf{E}^{(5)}$: 0.27412
-    \item \textbf{Yelp2020}: $\mathbf{E}^{(0)}$: 0.10576, $\mathbf{E}^{(1)}$: 0.23173, $\mathbf{E}^{(2)}$: 0.30576, $\mathbf{E}^{(3)}$: 0.20587, $\mathbf{E}^{(4)}$: 0.08510, $\mathbf{E}^{(5)}$: 0.06576
-\end{itemize}
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|r|r|r|r|r|r|}
+        \hline
+                          & $\mathbf{E}^{(0)}$ & $\mathbf{E}^{(1)}$ & $\mathbf{E}^{(2)}$ & $\mathbf{E}^{(3)}$ & $\mathbf{E}^{(4)}$ & $\mathbf{E}^{(5)}$ \\ \hline
+        Amazon-Cell-Sport & 0.07412            & 0.03412            & 0.17319            & 0.19376            & 0.25066            & 0.27412            \\ \hline
+        Yelp2020          & 0.10576            & 0.23173            & 0.30576            & 0.20587            & 0.08510            & 0.06576            \\ \hline
+        Amazon-Book       & 0.12045            & 0.38566            & 0.35858            & 0.13529            &                    &                    \\ \hline
+    \end{tabular}
+    \caption{Layer effects for the different datasets for the balanced method..}
+    \label{tab:layer-effect}
+\end{table*}
 
 The results from this experiment can be seen in \autoref{tab:balanced-layer-combination}.
 Generally it can be observed that the results vary depending on the dataset.
 For Amazon-Cell-Sport improves with 7.03 \% using this method.
 This is a substantial improvement compared to the results from Yelp2020 and Amazon-Book.
 However, for Amazon-Cell-Sport only utilizing $\mathbf{e^{(4)}}$ or $\mathbf{e^{(5)}}$ as seen on \autoref{tab:only-use-one-layer-experiment} is an better alternative.
-It seem that for this dataset, the first convolutions are more harmful, than the combination is beneficial as it is with Yelp2020 and Amazon-Book.
 For Yelp2020 there is a small improvement of 1.15 \% in NDCG and 0.68 \% in Recall.
 For Amazon-Book there is a decrease in performance by -2.36 \% in NDCG and an improvement of 0.78 \% in recall.
 
@@ -40,24 +43,30 @@ For Amazon-Book there is a decrease in performance by -2.36 \% in NDCG and an im
         Recall@50 & 0.06451                                 & 0.06928                        & \textbf{\textcolor{OliveGreen}{7.39}} & 0.2177 & 0.21917                  & \textbf{\textcolor{OliveGreen}{0.68}} & 0,08129 & 0,08066 & \textbf{\textcolor{OliveGreen}{0.78}} \\ \hline
     \end{tabular}
     \caption{NDCG@50 and Recall@50 results for balanced layer combination, where it was not based on the node degree.}
-    \label{tab:balanced-layer-combination}
+    \label{tab:balanced-layer-effect}
 \end{table*}
 
 \paragraph{Aggressive Layer Combination}
 The experiments conducted using the aggressive method described in \autoref{fredsplit} are described in this section
-The splits were calculated from NDCG @50 and can be seen in the following itemize.
-\begin{itemize}
-    \item \textbf{Amazon-Book}: $\mathbf{E}^{(0)}$: 0.051091, $\mathbf{E}^{(1)}$: 0.43049, $\mathbf{E}^{(2)}$: 0.38988, $\mathbf{E}^{(3)}$:  0.12852
-    \item \textbf{Amazon-Cell-Sport}: $\mathbf{E}^{(0)}$: 0.0, $\mathbf{E}^{(1)}$: 0.0, $\mathbf{E}^{(2)}$: 0.1658853, $\mathbf{E}^{(3)}$:  0.2110679, $\mathbf{E}^{(4)}$: 0.291968, $\mathbf{E}^{(5)}$: 0.331078
-    \item \textbf{Yelp2020}: $\mathbf{E}^{(0)}$: 0.0, $\mathbf{E}^{(1)}$: 0.2912216, $\mathbf{E}^{(2)}$: 0.4146101, $\mathbf{E}^{(3)}$: 0.228054, $\mathbf{E}^{(4)}$: 0.0661141, $\mathbf{E}^{(5)}$: 0.0
-\end{itemize}
+The splits were calculated from NDCG @50 and can be seen in \autoref{tab:aggressive-balanced-layer-effect}.
+\begin{table}[]
+    \centering
+    \begin{tabular}{|l|r|r|r|r|r|r|}
+        \hline
+                          & $\mathbf{E}^{(0)}$ & $\mathbf{E}^{(1)}$ & $\mathbf{E}^{(2)}$ & $\mathbf{E}^{(3)}$ & $\mathbf{E}^{(4)}$ & $\mathbf{E}^{(5)}$ \\ \hline
+        Amazon-Cell-Sport & 0.0                & 0.0                & 0.1658853          & 0.2110679          & 0.291968           & 0.331078           \\ \hline
+        Yelp2020          & 0.0                & 0.2912216          & 0.4146101          & 0.228054           & 0.0661141          & 0.0                \\ \hline
+        Amazon-Book       & 0.051091           & 0.43049            & 0.38988            & 0.12852            &                    &                    \\ \hline
+    \end{tabular}
+    \caption{Layer effects for the different datasets based on ALC.}
+    \label{tab:aggressive-balanced-layer-effect}
+\end{table}
 The results can be seen in \autoref{tab:aggressive-layer-combination}.
 For Amazon-Cell-Sport it performed 8.37 \% better in NDCG and 8.54 \% better in recall than 5 convolution average.
-This is a better performance increase than BLC.
+This is a larger performance increase than BLC.
 For Yelp2020 there is a small increase in performance with 0.57 \% in NDCG and 0.17 \% in Recall.
-Here the BLC method made a better improvement.
-For Amazon-Book the decrease in performance for NDCG is smaller than for BLC, and increase in recall by -1.57 and 2.65 \% respectively.
-
+Here the BLC method had a larger improvement.
+For Amazon-Book the decrease in performance for NDCG is smaller than for BLC by -1.57 \% and has an increase in recall by  2.65 \%.
 \begin{table*}[h!]
     \centering
     \begin{tabular}{|l|r|r|r||l|r|r||l|l|l|}
