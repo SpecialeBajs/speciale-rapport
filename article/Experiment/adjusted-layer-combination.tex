@@ -2,7 +2,8 @@
 % Skal omskrives. Er skrevet til forkert data.
 One suggestion made by LightGCN was to personalize the layer combination, so that sparse users could benefit more from higher-order neighbors \cite{lightgcn}.
 The results seen in \autoref{subsec:degree-experiment} indicate that there are is no direct correlation between the degree of a node and the nodes performance.
-In this experiment we used the results from \autoref{subsec:degree-experiment} and calculated the splits with \autoref{fredsplit} only on the overall performance in each layer, and not depending on the node degree.
+In this experiment we used the results from \autoref{subsec:degree-experiment} to calculate the layer effects by using the algorithms described in \autoref{fredsplit}.
+All of the nodes will have the same calculated layer effects because we used the overall performance of the nodes to calculate them and not the individual performance of each node degree range.
 
 \subsubsection{Degree depending layer combination}
 The results from this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
