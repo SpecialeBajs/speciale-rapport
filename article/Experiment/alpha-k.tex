@@ -1,4 +1,5 @@
 \subsection{Changing $\alpha_k$}
+In this section we will discuss the results from the experiments made with the methods that where described in \autoref{sec:method:alpha-k-effect}.
 
 \subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
 % Overvej om denne sektion bør flyttes til appendix med en reference til den.
@@ -28,8 +29,6 @@ These results indicates that $\alpha_k$ is an important part of the layer combin
 \end{figure}
 
 \subsubsection{Utilizing only one layer}
-We showed previously that removing $\alpha_k$ was harmful for the performance. 
-Therefore we want to investigate what influence the different layers have on the performance.
 In this section we experiment with removing the layer combination, and only utilizing a specific convolution layers.
 $\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
 These are compared to LightGCN where weighted sum is utilized with a different number of layers.
@@ -65,3 +64,5 @@ For Amazon-Book weighted sum with 3 convolutions performs best and this could be
 One of the advantages of weighted sum is that it stabilizes the results.
 This might have a positive effect in some cases compared to our method where we only use the embedding from one of the layers.
 Already from this we can conclude that recommendation on a dataset, where items or users generally have few connections it is worth considering to use $e^{(4)}$ or $e^{(5)}$ instead of weighted sum.
+
+\subsubsection{Removing 0th layer}
