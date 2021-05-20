@@ -1,1 +1,40 @@
 \subsection{GCF ablation study}
+This subsection focus' on answering the following research question: 
+\begin{itemize}
+    \item \textbf{How do different aggregation functions effect the performance in GCF and LightGCN?}
+\end{itemize}
+Meng Liu et. al does not present an ablation study for BiTGCF and GCF, which LightGCN showed is important with their regards to NGCF \cite{lightgcn,BiTGCF}.
+The GCF aggregation functions is changed by either changing the layer combination to weighted summation, removing inner product, self connections or only utilizing the inner product.
+Examples of the changed methods can be seen in the following equations.
+\textit{GCF-minus-sc} can be seen on \autoref{eq:GCF-minus-sc} where the self-connection has been removed.
+On \autoref{eq:GCF-only-IP} only the inner product of the neighbor has been contained, and is called \textit{GCF-only-IP}.
+\autoref{eq:GCF-minus-IP} have removed the inner product and is called \textit{GCF-minus-IP}.
+There are also examples where GCF utilizes summation as layer combination as used in LightGCN which can be seen on \autoref{eq:lightgcn-sum}.
+The methods that use weighted summation all start with \textit{GCF-sum}.
+When LightGCN is tested with concatenation as layer combination it is called \textit{LightGCN-concat}.
+\begin{equation}
+    \mathbf{e}_{u}^{(k+1)} = \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}\left( \mathbf{e}_i^{(k)} + \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)} \right)
+    \label{eq:GCF-minus-sc}
+\end{equation}
+\begin{equation}
+    \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)}
+    \label{eq:GCF-only-IP}
+\end{equation}
+\begin{equation}
+    \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)}
+    \label{eq:GCF-minus-IP}
+\end{equation}
+To reduce redundancy not all methods can be found in equations, but the method names and descriptions of the models are as follows:
+\begin{itemize}
+    \item \textbf{GCF}: The original GCF method as described in \autoref{subsubsec:GCF-embed-propagation}.
+    \item \textbf{GCF-minus-sc}: GCF without self connections.
+    \item \textbf{GCF-only-IP}:  GCF where $e_i^{(k)}$ has been removed in \autoref{eq:GCF-embedding}, so that GCF's graph convolutions only considers the inner product of users and items.
+    \item \textbf{GCF-only-IP-minus-sc}: Implemented as GCF-only-ip but without self connections.
+    \item \textbf{GCF-minus-IP}: GCF where inner product has been removed.
+    \item \textbf{LightGCN-concat}: LightGCN with concatenation as layer combination.
+    \item \textbf{LightGCN}: Original LightGCN as described in \autoref{subsubsec:LightGCN-embed-propagation}.
+    \item \textbf{LightGCN-plus-sc}: LightGCN, but with self connections.
+    \item \textbf{GCF-sum-only-IP}: Implemented as GCF-only-IP except that the layer combination method used is weighted summation.
+    \item \textbf{GCF-sum}: GCF where the layer combination has been changed to weighted summation instead of concatenation.
+    \item \textbf{GCF-sum-minus-sc}: Implemented as GCF-sum but without self connections.
+\end{itemize}
