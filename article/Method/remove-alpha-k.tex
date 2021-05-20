@@ -1,0 +1,16 @@
+\subsection{Alpha k effect on LightGCN}
+
+\subsubsection{Removing $\alpha_k$}
+Before trying to optimize $\alpha_k$ we wanted to investigate what impact it had.
+The simplest experiment is to change the value of $\alpha_k$ to 1 which essentially removes it.
+If this results in small changes in performance, it could indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
+\begin{equation}
+    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
+    \label{eq:lightgcn-sum}
+\end{equation}
+This method is called LightGCN-Ak1 which stands for LightGCN $\alpha_k = 1$.
+This will result in the embeddings scaling more than they otherwise would have with $\alpha_k$ as normalization.
+
+\subsubsection{Utilizing only one layer}
+
+\subsubsection{Removing 0th layer}
