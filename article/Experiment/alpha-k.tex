@@ -66,3 +66,21 @@ This might have a positive effect in some cases compared to our method where we 
 Already from this we can conclude that recommendation on a dataset, where items or users generally have few connections it is worth considering to use $e^{(4)}$ or $e^{(5)}$ instead of weighted sum.
 
 \subsubsection{Removing 0th layer}
+The final method that we described in \autoref{sec:method:alpha-k-effect} was removing the 0th layer embedding before combining the embeddings from the different layers.
+In this subsection we show results from the experiments done with this method.
+
+\begin{table*}[h!]
+    \centering
+    \begin{tabular}{|l|l|l||l|l||l|l|}
+        \hline
+                            & \multicolumn{2}{c||}{Recall@50}           & \multicolumn{2}{c||}{NDCG@50}             \\ \hline
+        Method              & 5 con average     & $E^{(0)}$ removed     & 5 con average       & $E^{(0)}$ removed   \\ \hline
+        Amazon-Cell-Sport   & 0.06451           & \textbf{0.06726}      & 0.03285             & \textbf{0.03460}             \\ \hline
+        Yelp2020            & \textbf{0.2177}   & 0.21289               & \textbf{0.1089}     & 0.10641            \\ \hline
+        Amazon-Book         & \textbf{0.08129}  & 0.07715               & \textbf{0.04668}    & 0.04470            \\ \hline
+    \end{tabular}
+    \label{tab:removing-0th-layer-embedding-experiment}
+    \caption{Results from experiment where we remove 0th layer embedding}
+\end{table*}
+
+While Amazon-Cell-Sport has an improved performance when the 0th embedding is removed, the other datasets see a substantial decrease in performance.
