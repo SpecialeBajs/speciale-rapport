@@ -2,15 +2,15 @@
 
 Recommendation systems aim to alleviate the problem of information overload when browsing the web.
 They are widely used for eg. in online shopping where the number of items available can be overwhelming.
-By looking at the data of the current user the recommendation system can give a certain number of items that it thinks the user would like, thereby greatly reducing the unnecessary information shown.
+By looking at the data of the current user the recommendation system can predict a certain number of items that it thinks the user would like, thereby greatly reducing the unnecessary information shown.
 There are different ways to achieve this where one of the most common ways is using collaborative filtering (CF).
 \\
 CF is based on the concept that users that act similarly will most likely have the same preferences, meaning users who have bought the same things and liked the same things will in the future most likely have an interest in the same products.
-This is most often done by learning latent features of items and users to represent them, this is also called embedding.
-One of the earlier models for CF is Matrix Factorization (MF) where the users and items are embedded as vectors and the dot-product of the vectors is then used to make predictions of what items users would like \cite{Matrix-factorization-techniques}.
+This is most often done by learning latent features of items and users to represent them, this is also called embeddings.
+One of the earlier models for CF is Matrix Factorization (MF) where the users and items are embedded as vectors and the dot-product of the vectors is then used to make predictions of which items users would like \cite{Matrix-factorization-techniques}.
 \\
-More recent CF models utilize graph convolutional networks (GCN's) to better capture the collaborative signal.
-Models like Neural Graph Collaborative Filtering (NGCF) integrate the bipartite graph structure, that is the user-item-interactions, into the embedding process to capture the collaborative signal\cite{NGCF_2019}.
+More recent CF models utilize graph convolutional networks (GCN's) to better capture the collaborative signals.
+Models like Neural Graph Collaborative Filtering (NGCF) integrate the bipartite graph structure, that is the user-item-interactions, into the embedding process to capture the collaborative signals\cite{NGCF_2019}.
 A later model called LightGCN simplifies NGCF, removing feature transformation and the activation function.
 Doing this achieved state-of-the-art performance, as they showed that feature transformation and activation functions were not beneficial for recommendation \cite{lightgcn}.
 \\
@@ -32,4 +32,3 @@ These investigations can be summed up into the following research questions.
     \item How does ALC and BLC perform compared to other state of the art methods?
     \item Is it beneficial to change layer combination based on the degree of the nodes?
 \end{itemize}
-
