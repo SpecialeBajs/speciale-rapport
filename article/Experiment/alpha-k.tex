@@ -63,7 +63,7 @@ This dataset varies more in terms of the number of interactions that the users h
 For Amazon-Book weighted sum with 3 convolutions performs best and this could be because there is a large variation of how many interactions the users have.
 One of the advantages of weighted sum is that it stabilizes the results.
 This might have a positive effect in some cases compared to our method where we only use the embedding from one of the layers.
-Already from this we can conclude that recommendation on a dataset, where items or users generally have few connections it is worth considering to use $e^{(4)}$ or $e^{(5)}$ instead of weighted sum.
+From this we can conclude that for datasets, where items or users generally have few connections it is worth considering only using $e^{(4)}$ or $e^{(5)}$ instead of using weighted sum.
 
 \subsubsection{Removing 0th layer}
 The final method that we described in \autoref{sec:method:alpha-k-effect} was removing the 0th layer embedding before combining the embeddings from the different layers.
