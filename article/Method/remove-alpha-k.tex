@@ -1,10 +1,10 @@
 \subsection{Alpha k's effect on LightGCN}\label{sec:method:alpha-k-effect}
-Before trying to optimize $\alpha_k$ we wanted to investigate what impact $\alpha_k$ had on the performance it had.
+Before trying to optimize $\alpha_k$ we wanted to investigate what impact $\alpha_k$ had on the performance.
 We experimented with three different methods to see how simple changes to how layer combination is performed could effect LightGCN's performance.
 
 \subsubsection{Removing $\alpha_k$}
 The first method what we tried was simply just removing $\alpha_k$.
-If this did not have substantial effect on the performance of LightGCn, it could indicate that it would not worthwhile trying to optimize the layer combination method.
+If this did not have substantial effect on the performance of LightGCN, it could indicate that it would not be worthwhile trying to optimize the layer combination method.
 The way we accomplished this was by changing $\alpha_k$ to 1, which essentially removes it.
 \begin{equation}
     \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
