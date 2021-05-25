@@ -1,14 +1,15 @@
 \subsection{GCF ablation study}
 This subsection focus' on answering the following research question: 
 \begin{itemize}
-    \item \textbf{How do different aggregation functions effect the performance in GCF and LightGCN?}
+    \item \textbf{RQ2:} How do different aggregation functions effect the performance in GCF and LightGCN?
 \end{itemize}
-Meng Liu et. al does not present an ablation study for BiTGCF and GCF, which LightGCN showed is important with their regards to NGCF \cite{lightgcn,BiTGCF}.
-The GCF aggregation functions is changed by either changing the layer combination to weighted summation, removing inner product, self connections or only utilizing the inner product.
+Meng Liu et. al does not present an ablation study for BiTGCF and GCF, which LightGCN showed is important when studying the different components in NGCF \cite{lightgcn,BiTGCF}.
+GCF outperformed LightGCN on all datasets used in BiTGCF \cite{BiTGCF}, and we would like find out what part of GCF causes the increase in performance.
+The GCF aggregation function is changed by either changing the layer combination to weighted summation, removing the inner product, removing self connections or only utilizing the inner product.
 Examples of the changed methods can be seen in the following equations.
 \textit{GCF-minus-sc} can be seen on \autoref{eq:GCF-minus-sc} where the self-connection has been removed.
-On \autoref{eq:GCF-only-IP} only the inner product of the neighbor has been contained, and is called \textit{GCF-only-IP}.
-\autoref{eq:GCF-minus-IP} have removed the inner product and is called \textit{GCF-minus-IP}.
+On \autoref{eq:GCF-only-IP} only the inner product of the neighbor has been preserved, and is called \textit{GCF-only-IP}.
+In \autoref{eq:GCF-minus-IP} the inner product has been removed and is called \textit{GCF-minus-IP}.
 There are also examples where GCF utilizes summation as layer combination as used in LightGCN which can be seen on \autoref{eq:lightgcn-sum}.
 The methods that use weighted summation all start with \textit{GCF-sum}.
 When LightGCN is tested with concatenation as layer combination it is called \textit{LightGCN-concat}.
@@ -24,7 +25,7 @@ When LightGCN is tested with concatenation as layer combination it is called \te
     \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)}
     \label{eq:GCF-minus-IP}
 \end{equation}
-To reduce redundancy not all methods can be found in equations, but the method names and descriptions of the models are as follows:
+We did not include equations for all of the methods to reduce redundancy, but the method names and descriptions are as follows:
 \begin{itemize}
     \item \textbf{GCF}: The original GCF method as described in \autoref{subsubsec:GCF-embed-propagation}.
     \item \textbf{GCF-minus-sc}: GCF without self connections.

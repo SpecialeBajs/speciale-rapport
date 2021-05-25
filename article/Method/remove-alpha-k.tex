@@ -1,11 +1,16 @@
-\subsection{Alpha k's effect on LightGCN}\label{sec:method:alpha-k-effect}
+\subsection{The effect of $\alpha_k$ in LightGCN}\label{sec:method:alpha-k-effect}
 Before trying to optimize $\alpha_k$ we wanted to investigate what impact $\alpha_k$ had on the performance.
-We experimented with three different methods to see how simple changes to how layer combination is performed could effect LightGCN's performance.
+This sections serves to answer the following research question:
+\begin{itemize}
+	\item \textbf{RQ1}: How does changing $\alpha_k$ affect the performance in LightGCN?
+\end{itemize}
+We experimented with three different methods to see how changes to how layer combination is performed could effect LightGCN's performance.
+This includes removing $\alpha_k$, only using 1 layer and removing the 0th layer embedding.
 
 \subsubsection{Removing $\alpha_k$}
-The first method what we tried was simply just removing $\alpha_k$.
-If this did not have substantial effect on the performance of LightGCN, it could indicate that it would not be worthwhile trying to optimize the layer combination method.
-The way we accomplished this was by changing $\alpha_k$ to 1, which essentially removes it.
+The first method that we tried was removing $\alpha_k$.
+If this did not have any substantial effect on the performance of LightGCN, it could indicate that it would not be worthwhile trying to optimize the layer combination method.
+This was done by changing $\alpha_k$ to 1, which equates to summation of the different layer embeddings.
 \begin{equation}
     \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
     \label{eq:removing-alpha-k-lightgcn-sum}
@@ -23,7 +28,7 @@ This can be seen in \autoref{eq:only-utilizing-one-layer} where k is the layer t
 
 \subsubsection{Removing 0th layer}
 The third method that we tried was removing 0th layer.
-In this method we used the normal layer combination method that LightGCN used, but we did not include the 0th embedding in the final embedding as seen in \autoref{eq:removing-0th-layer}.
+In this method we used the normal layer combination method used in LightGCN, but we did not include the 0th layer embedding in the final embedding as seen in \autoref{eq:removing-0th-layer}.
 \begin{equation}
 	\mathbf{e}_u = \sum_{k=1}^{K} \alpha_k \mathbf{e}_u^{(k)},
 	\label{eq:removing-0th-layer}
