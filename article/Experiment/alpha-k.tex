@@ -1,16 +1,8 @@
 \subsection{Changing $\alpha_k$}
+In this section we will discuss the results from the experiments made with the methods that where described in \autoref{sec:method:alpha-k-effect}.
 
 \subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
 % Overvej om denne sektion bør flyttes til appendix med en reference til den.
-Before trying to optimize $\alpha_k$ we wanted to investigate what impact it had.
-The simplest experiment is to change the value of $\alpha_k$ to 1 which essentially removes it.
-If this results in small changes in performance, it could indicate that it would not be worthwhile to pursue the opportunity to optimize $\alpha_k$.
-\begin{equation}
-    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
-    \label{eq:lightgcn-sum}
-\end{equation}
-This method is called LightGCN-Ak1 which stands for LightGCN $\alpha_k = 1$.
-This will result in the embeddings scaling more than they otherwise would have with $\alpha_k$ as normalization.
 As can be seen on \autoref{fig:ndcg-yelp2020-alpha-k} and \autoref{fig:recall-yelp2020-alpha-k} changing $\alpha_k$ decreases performance of LightGCN on the yelp2020 dataset.
 In the initial epochs, LightGCN-Ak1 performs better, but quickly starts to decline in performance.
 On \autoref{fig:ndcg-amazon-alpha-k} and \autoref{fig:recall-amazon-alpha-k} LightGCN and LightGCN-Ak1 was run on the amazon-book dataset, but can seen that LightGCN still outperforms LightGCN-Ak1.
@@ -37,8 +29,6 @@ These results indicates that $\alpha_k$ is an important part of the layer combin
 \end{figure}
 
 \subsubsection{Utilizing only one layer}
-We showed previously that removing $\alpha_k$ was harmful for the performance. 
-Therefore we want to investigate what influence the different layers have on the performance.
 In this section we experiment with removing the layer combination, and only utilizing a specific convolution layers.
 $\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
 These are compared to LightGCN where weighted sum is utilized with a different number of layers.
@@ -73,4 +63,24 @@ This dataset varies more in terms of the number of interactions that the users h
 For Amazon-Book weighted sum with 3 convolutions performs best and this could be because there is a large variation of how many interactions the users have.
 One of the advantages of weighted sum is that it stabilizes the results.
 This might have a positive effect in some cases compared to our method where we only use the embedding from one of the layers.
-Already from this we can conclude that recommendation on a dataset, where items or users generally have few connections it is worth considering to use $e^{(4)}$ or $e^{(5)}$ instead of weighted sum.
+From this we can conclude that for datasets, where items or users generally have few connections it is worth considering only using $e^{(4)}$ or $e^{(5)}$ instead of using weighted sum.
+
+\subsubsection{Removing 0th layer}
+The final method that we described in \autoref{sec:method:alpha-k-effect} was removing the 0th layer embedding before combining the embeddings from the different layers.
+In this subsection we show results from the experiments done with this method.
+
+\begin{table*}[h!]
+    \centering
+    \begin{tabular}{|l|l|l||l|l||l|l|}
+        \hline
+                            & \multicolumn{2}{c||}{Recall@50}           & \multicolumn{2}{c||}{NDCG@50}             \\ \hline
+        Method              & 5 con average     & $E^{(0)}$ removed     & 5 con average       & $E^{(0)}$ removed   \\ \hline
+        Amazon-Cell-Sport   & 0.06451           & \textbf{0.06726}      & 0.03285             & \textbf{0.03460}             \\ \hline
+        Yelp2020            & \textbf{0.2177}   & 0.21289               & \textbf{0.1089}     & 0.10641            \\ \hline
+        Amazon-Book         & \textbf{0.08129}  & 0.07715               & \textbf{0.04668}    & 0.04470            \\ \hline
+    \end{tabular}
+    \label{tab:removing-0th-layer-embedding-experiment}
+    \caption{Results from experiment where we remove 0th layer embedding}
+\end{table*}
+
+While Amazon-Cell-Sport has an improved performance when the 0th embedding is removed, the other datasets see a substantial decrease in performance.
