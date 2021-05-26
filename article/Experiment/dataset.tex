@@ -8,8 +8,9 @@ A comparison of the datasets can be seen on \autoref{tab:dataset-comparison}.
 It is taken from the LightGCN paper and only contains ID's for users and items \cite{lightgcn}.
 LightGCN have used the 15-core setting for users and 5 core settings for items \textit{i.e.} removing users with less than 15 interactions and items with less than 5 interactions.
 \\
-\textbf{The \textit{Yelp2020} dataset} is also used by LightGCN.
+\textbf{The \textit{Yelp2020} dataset} is a dataset we used in our pre-specialization paper to mimic a dataset used in LightGCN that we could not get access to.
 This dataset uses 10-core settings for users and 5 core settings for items.
+It is a subset of the full yelp2020 dataset where all entries are restaurants with one category and price attribute.
 \\
 \textbf{\textit{Amazon-Cell-Sport}, \textit{Amazon-Cell-Electronic}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport}} are taken from BiTGCF \cite{BiTGCF}.
 These datasets contain two domains because BiTGCF builds an extension of LightGCN which utilizes a cross-domain transfer learning recommendation model \cite{BiTGCF}.
@@ -35,9 +36,9 @@ There is an exception for \textit{Amazon-Cell-Electronic} which uses 15 core set
 \end{table*}
 
 \subsubsection{Interactions in datasets}
-As we expect there is a relation between the number of connections for each node and the performance of a convolution layer, we analyzed the different datasets used for our test.
+As we expect there is a relation between the number of connections for each node and the performance of a convolution layer, we analyzed the different datasets used for our experiments.
 On \autoref{tab:dataset-item-and-user-splits} and \autoref{tab:node-degrees-cell-sport-electronic} the amount of users and items that have a certain amount of interactions can be seen.
-Users in \textit{Amazon-Book} have an average ndoe degree of 45.22 and items have an average node degree of 25.99 connections, which makes it the dataset with the highest average node degree compared to the other datasets.
+Users in \textit{Amazon-Book} have an average node degree of 45.22 and items have an average node degree of 25.99 connections, which makes it the dataset with the highest average node degree compared to the other datasets.
 For Yelp2020 the average node degree is 19.04 for users and 23.31 for items.
 The other four amazon datasets have in common that the average node degree for items is small.
 Users in \textit{Amazon-Cell-Sport} have an average node degree of 17.07 and items have an average node degree of 2.58.
