@@ -17,10 +17,11 @@ This was done by changing $\alpha_k$ to 1, which equates to summation of the dif
 \end{equation}
 This will make the embeddings scale when they are combined instead of normalizing them as they do in LightGCN.
 
-\subsubsection{Utilizing only one layer}
+\subsubsection{Utilizing only one layer}\label{subsubsec:only-1-layer}
 The second method that we tried was only utilizing one layer.
 This was done by performing the graph convolutions and then only using the embeddings from one of the layers instead of combining them.
 This can be seen in \autoref{eq:only-utilizing-one-layer} where k is the layer that we choose to utilize. 
+$\mathbf{e}^{(0)}$ will have zero convolutions, $\mathbf{e}^{(1)}$ will have one convolutions, $\mathbf{e}^{(2)}$ will have two convolutions and so on.
 \begin{equation}
 	\mathbf{e}_u = \mathbf{e}_u^{(k)}
 	\label{eq:only-utilizing-one-layer}
