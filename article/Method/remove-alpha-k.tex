@@ -1,0 +1,31 @@
+\subsection{Alpha k's effect on LightGCN}\label{sec:method:alpha-k-effect}
+Before trying to optimize $\alpha_k$ we wanted to investigate what impact $\alpha_k$ had on the performance.
+We experimented with three different methods to see how simple changes to how layer combination is performed could effect LightGCN's performance.
+
+\subsubsection{Removing $\alpha_k$}
+The first method what we tried was simply just removing $\alpha_k$.
+If this did not have substantial effect on the performance of LightGCN, it could indicate that it would not be worthwhile trying to optimize the layer combination method.
+The way we accomplished this was by changing $\alpha_k$ to 1, which essentially removes it.
+\begin{equation}
+    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
+    \label{eq:removing-alpha-k-lightgcn-sum}
+\end{equation}
+This will make the embeddings scale when they are combined instead of normalizing them as they do in LightGCN.
+
+\subsubsection{Utilizing only one layer}
+The second method that we tried was only utilizing one layer.
+This was done by performing the graph convolutions and then only using the embeddings from one of the layers instead of combining them.
+This can be seen in \autoref{eq:only-utilizing-one-layer} where k is the layer that we choose to utilize. 
+\begin{equation}
+	\mathbf{e}_u = \mathbf{e}_u^{(k)}
+	\label{eq:only-utilizing-one-layer}
+\end{equation}
+
+\subsubsection{Removing 0th layer}
+The third method that we tried was removing 0th layer.
+In this method we used the normal layer combination method that LightGCN used, but we did not include the 0th embedding in the final embedding as seen in \autoref{eq:removing-0th-layer}.
+\begin{equation}
+	\mathbf{e}_u = \sum_{k=1}^{K} \alpha_k \mathbf{e}_u^{(k)},
+	\label{eq:removing-0th-layer}
+\end{equation}
+where $K$ is the number of layers and $\alpha_k$ is set to $1/K$.
