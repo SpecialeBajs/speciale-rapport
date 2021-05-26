@@ -1,0 +1,33 @@
+\subsection{Individual layer performance} \label{subsec:individual-layer-combi}
+
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+        \hline
+        NDCG@50                 & $\mathbf{e}^{(0)}$ & $\mathbf{e}^{(1)}$  & $\mathbf{e}^{(2)}$  & $\mathbf{e}^{(3)}$ & $\mathbf{e}^{(4)}$  & $\mathbf{e}^{(5)}$ \\ \hline
+        Amazon-Book             & 0.03669            & \textbf{0.0458}     & \underline{0.04487} & 0.0372             & 0.03247             & 0.02923            \\ \hline
+        Yelp2020                & 0.08177            & \underline{0.1019}  & \textbf{0.1086}     & 0.09956            & 0.08863             & 0.0819             \\ \hline
+        Amazon-Cell-Sport       & 0.02169            & 0.02523             & 0.03419             & 0.03483            & \underline{0.0366}  & \textbf{0.03733}   \\ \hline
+        Amazon-Cloth-Sport      & 0.03092            & \underline{0.06054} & \textbf{0.06392}    & 0.05979            & 0.05928             & 0.05208            \\ \hline
+        Amazon-Cell-Electronic  & 0.03211            & 0.04403             & 0.05204             & \textbf{0.05422}   & \underline{0.05331} & 0.05158            \\ \hline
+        Amazon-Cloth-Electronic & 0.00659            & 0.01429             & 0.01688             & 0.01915            & \underline{0.02005} & \textbf{0.02074}   \\ \hline
+    \end{tabular}
+    \caption{NDCG@50 results for all datasets utilizing only 1 layer in LightGCN}
+    \label{tab:ndcg-individual}
+\end{table*}
+
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+        \hline
+        Recall@50               & $\mathbf{e}^{(0)}$ & $\mathbf{e}^{(1)}$ & $\mathbf{e}^{(2)}$  & $\mathbf{e}^{(3)}$  & $\mathbf{e}^{(4)}$  & $\mathbf{e}^{(5)}$  \\ \hline
+        Amazon-Book             & 0.06373            & \textbf{0.079}     & \underline{0.07755} & 0.06412             & 0.05607             & 0.05022             \\ \hline
+        Yelp2020                & 0.1674             & \underline{0.2039} & \textbf{0.217}      & 0.2001              & 0.01788             & 0.1643              \\ \hline
+        Amazon-Cell-Sport       & 0.04447            & 0.04859            & 0.06809             & 0.06972             & \textbf{0.7377}     & \underline{0.07318} \\ \hline
+        Amazon-Cloth-Sport      & 0.05190            & 0.09885            & \textbf{0.10541}    & \underline{0.10066} & 0.09930             & 0.09109             \\ \hline
+        Amazon-Cell-Electronic  & 0.04706            & 0.06518            & 0.07587             & \textbf{0.07909}    & \underline{0.07623} & 0.07584             \\ \hline
+        Amazon-Cloth-Electronic & 0.01324            & 0.02724            & 0.03223             & 0.03721             & \underline{0.03876} & \textbf{0.04061}    \\ \hline
+    \end{tabular}
+    \caption{Recall@50 results for all datasets utilizing only 1 layer in LightGCN}
+    \label{tab:recall-individual}
+\end{table*}

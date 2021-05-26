@@ -1,0 +1,35 @@
+\subsection{Performance Comparison with State-of-the-Arts}
+For all datasets 5 convolutions were used, except for Amazon-Book which used 3, as these generally performed better.
+
+
+\begin{table*}[] %Overvej om vi kun skal sammenligne med 5 convolutions? 
+    \centering  %Så performer vores bedre end amazon-book
+    \begin{tabular}{|l|r|r|r|r|r||r|r|l|}
+        \hline
+        NDCG@50                 & \multicolumn{1}{l|}{NGCF} & \multicolumn{1}{l|}{LightGCN} & \multicolumn{1}{l|}{GCN} & \multicolumn{1}{l|}{GC-MC} & \multicolumn{1}{l||}{GCF} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l|}{BLC} & $e^{(i)}$   \\ \hline
+        Yelp2020                &                           & 0.1089                        &                          &                            & 0.09092                   & 0.10953                  & 0.11015                  & 0.1086 (2)  \\ \hline
+        Amazon-Book             &                           & 0.04668                       &                          &                            & 0.04032                   & 0.04574                  & 0.04537                  & 0.0458 (1)  \\ \hline
+        Amazon-Cell-Sport       &                           & 0.033                         &                          &                            & 0.03398                   & 0.0356                   & 0.03516                  & 0.03733 (5) \\ \hline
+        Amazon-Cloth-Sport      & 0.05826                   & 0.06749                       & 0.00996                  & 0.01074                    & 0.07556                   &                          &                          & 0.06392 (2) \\ \hline
+        Amazon-Cell-Electronic  &                           & 0.05413                       &                          &                            &                           &                          &                          & 0.05422 (3) \\ \hline
+        Amazon-Cloth-Electronic & 0.00912                   &                               &                          & 0.00829                    & 0.01272                   &                          &                          & 0.02074 (5) \\ \hline
+    \end{tabular}
+    \caption{Performance comparison on NDCG@50 with different state of the art methods.}
+    \label{tab:baselines-ndcg}
+\end{table*}
+
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|r|r|r|r|r||r|r|l|}
+        \hline
+        Recall@50               & \multicolumn{1}{l|}{NGCF} & \multicolumn{1}{l|}{LightGCN} & \multicolumn{1}{l|}{GCN} & \multicolumn{1}{l|}{GC-MC} & \multicolumn{1}{l||}{GCF} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l|}{BLC} & $e^{(i)}$   \\ \hline
+        Yelp2020                &                           & 0.1089                        &                          &                            & 0.1869                    & 0.21809                  & 0.21917                  & 0.1086 (2)  \\ \hline
+        Amazon-Book             &                           & 0.08129                       &                          &                            & 0.07035                   & 0.07919                  & 0.08066                  & 0.079 (1)   \\ \hline
+        Amazon-Cell-Sport       &                           & 0.06451                       &                          &                            & 0.06536                   & 0.07002                  & 0.06928                  & 0.07377 (4) \\ \hline
+        Amazon-Cloth-Sport      & 0.08501                   & 0.10482                       & 0.02070                  & 0.02817                    & 0.10385                   &                          &                          & 0.10541 (2) \\ \hline
+        Amazon-Cell-Electronic  &                           & 0.07738                       &                          &                            &                           &                          &                          & 0.07909 (3) \\ \hline
+        Amazon-Cloth-Electronic & 0.01863                   &                               &                          & 0.01690                    & 0.02948                   &                          &                          & 0.04061 (5) \\ \hline
+    \end{tabular}
+    \caption{Performance comparison on NDCG@50 with different state of the art methods.}
+    \label{tab:recallbaselines}
+\end{table*}
