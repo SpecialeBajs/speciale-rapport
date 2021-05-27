@@ -1,36 +1,25 @@
 \subsection{Changing $\alpha_k$}
 In this section we will discuss the results from the experiments made with the methods that where described in \autoref{sec:method:alpha-k-effect}.
+\begin{itemize}
+    \item \textbf{RQ1}: How does changing $\alpha_k$ affect the performance in LightGCN?
+\end{itemize}
 
 \subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
-% Overvej om denne sektion bør flyttes til appendix med en reference til den.
-As can be seen on \autoref{fig:ndcg-yelp2020-alpha-k} and \autoref{fig:recall-yelp2020-alpha-k} changing $\alpha_k$ decreases performance of LightGCN on the yelp2020 dataset.
-In the initial epochs, LightGCN-Ak1 performs better, but quickly starts to decline in performance.
-On \autoref{fig:ndcg-amazon-alpha-k} and \autoref{fig:recall-amazon-alpha-k} LightGCN and LightGCN-Ak1 was run on the amazon-book dataset, but can seen that LightGCN still outperforms LightGCN-Ak1.
-These results indicates that $\alpha_k$ is an important part of the layer combination for weighted summation, and we will continue our experimentation on trying to optimize $\alpha_k$
+The results from running the experiment on the yelp2020 dataset can be seen on \autoref{fig:ndcg-yelp2020-alpha-k}.
+It shows that removing $\alpha_k$ was detrimental for the performance.
+In the initial epochs, LightGCN $\alpha_k = 1$ (LightGCN-Ak1) performs better, but it quickly starts to decline in performance.
+The results from amazon-book are similar and can be seen in \autoref{app:removing-alpha-k}
+These results indicates that $\alpha_k$ is an important part of the layer combination for weighted summation, and that summation is not beneficial for LightGCN.
 \begin{figure}
     \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-ndcg.png}
     \caption{NDCG@50 of LightGCN and LightGCN-Ak1 on yelp2020}
     \label{fig:ndcg-yelp2020-alpha-k}
 \end{figure}
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-recall.png}
-    \caption{Recall@50 of LightGCN and LightGCN-Ak1 on yelp2020}
-    \label{fig:recall-yelp2020-alpha-k}
-\end{figure}
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/alpha-k-results/amazon-ndcg.png}
-    \caption{NDCG@50 of LightGCN and LightGCN-Ak1 on amazon-book}
-    \label{fig:ndcg-amazon-alpha-k}
-\end{figure}
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/alpha-k-results/amazon-recall.png}
-    \caption{Recall@50 of LightGCN and LightGCN-Ak1 on amazon-book}
-    \label{fig:recall-amazon-alpha-k}
-\end{figure}
 
 \subsubsection{Utilizing only one layer}
-In this section we experiment with removing the layer combination, and only utilizing a specific convolution layers.
-$\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment respectively.
+In this section we experiment with removing the layer combination, and only utilizing the embedding from a specific convolution layer.
+This method is described in \autoref{subsubsec:only-1-layer}.
+$\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment.
 These are compared to LightGCN where weighted sum is utilized with a different number of layers.
 \begin{table*}[]
     \centering
@@ -54,10 +43,10 @@ These are compared to LightGCN where weighted sum is utilized with a different n
     \caption{Experiment on LightGCN where different layers are used as the final embedding compared with weighted sum.}
     \label{tab:only-use-one-layer-experiment}
 \end{table*}
-
 As can be seen on \autoref{tab:only-use-one-layer-experiment} the results vary a lot depending on the dataset.
 For Amazon-Cell-Sport only considering $e^{(4)}$ and $e^{(5)}$ gives the best results which perform around 13 \% better than weighted sum with 5 convolutions.
-This could be because Amazon-Cell-Sport consists of many nodes with few interactions, and therefore the later convolutions have the largest impact. 90 \% of all items within this dataset have 5 interactions, which is one of the reasons that the later convolutions perform so well.
+This could be because Amazon-Cell-Sport consists primarily of nodes with few interactions, and therefore the later convolutions have the largest impact. 
+90 \% of all items within this dataset have 5 interactions, which is one of the reasons that the later convolutions perform so well.
 For Yelp2020 the best results were weighted sum with 5 convolutions closely followed by $e^{(2)}$.
 This dataset varies more in terms of the number of interactions that the users have.
 For Amazon-Book weighted sum with 3 convolutions performs best and this could be because there is a large variation of how many interactions the users have.
@@ -68,7 +57,6 @@ From this we can conclude that for datasets, where items or users generally have
 \subsubsection{Removing 0th layer}
 The final method that we described in \autoref{sec:method:alpha-k-effect} was removing the 0th layer embedding before combining the embeddings from the different layers.
 In this subsection we show results from the experiments done with this method.
-
 \begin{table*}[h!]
     \centering
     \begin{tabular}{|l|l|l||l|l||l|l|}
@@ -82,5 +70,4 @@ In this subsection we show results from the experiments done with this method.
     \label{tab:removing-0th-layer-embedding-experiment}
     \caption{Results from experiment where we remove 0th layer embedding}
 \end{table*}
-
-While Amazon-Cell-Sport has an improved performance when the 0th embedding is removed, the other datasets see a substantial decrease in performance.
+While Amazon-Cell-Sport has an improved performance when the 0th embedding is removed, the other datasets see a decrease in performance.

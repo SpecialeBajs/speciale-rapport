@@ -1,6 +1,6 @@
 \subsection{Model training}
 LightGCN utilizes Bayesian Personalized Ranking (BPR) loss which is a pairwise loss that takes implicit feedback (e.g. clicks or purchased items) and ranks observed interactions in the prediction higher than the unobserved counterparts \cite{lightgcn,BPR}.
-BPR assumes that observed interactions are more reflective on a users preference than the unobserved counterparts, and hereby assign observed items a higher value.
+BPR assumes that observed interactions are more reflective on a users preference than the unobserved counterparts, and hereby assigns observed items a higher value.
 This loss is used to update the only learnable parameter, which is $\mathbf{E}^{(0)}$.
 \begin{equation}
     L_{BPR} = - \sum^M_{u=1} \sum_{i \in \mathcal{N}_u} \sum_{j \notin \mathcal{N}_u} \textnormal{ln } \sigma (\hat{y}_{ui} - \hat{y}_{uj}) + \lambda||\mathbf{E}^{(0)}||^2 
@@ -10,6 +10,6 @@ In \autoref{eq:bpr} $\lambda$ is $L_2$ regularization which is used to prevent o
 $\sigma$ is the sigmoid function.
 Adams optimizer is utilized and is used with mini-batches \cite{lightgcn,Adams-optimizer}.
 Adams optimizer uses momentum and adaptive learning rates in contrast to stochastic gradient descent \cite{Adams-optimizer}.
-Adams requires a batch of ramdomly sampled triples of users, observed item and unobserved item $(u, i, j)$ and utilizes the calculated loss from this to update $E^{(0)}$.
+Adams requires a batch of randomly sampled triples of users, observed item and unobserved item $(u, i, j)$ and utilizes the calculated loss from this to update $E^{(0)}$.
 These model parameters are updated by the gradient of the loss function \cite{NGCF_2019,Adams-optimizer}.
 $E^{(k)}$ is also updated, but is simply derived from $E^{(k-1)}$.
