@@ -9,11 +9,6 @@ The results seen in \autoref{subsec:degree-experiment} indicate that there are i
 In this experiment we used the results from \autoref{subsec:degree-experiment} to calculate the layer effects by using the algorithms described in \autoref{fredsplit}.
 All of the nodes will have the same calculated layer effects because we used the combined performance of the nodes to calculate them and not the individual performance of each node degree range.
 
-\subsubsection{Degree depending layer combination}
-% Skal omskrives når vi har indsat resultaterne i appendix
-The results from this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
-\todo{Results needs to be described when they are finished}
-
 \subsubsection{Balanced Layer Combination}
 The experiments conducted using BLC described in \autoref{fredsplit} are described in this section.
 It was calculated from the NDCG@50 results on each layer, seen on \autoref{tab:yelp2020-ndcg-evaluation}, \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}.
@@ -85,6 +80,12 @@ ALC performed better than BLC on Amazon-Book.
     \caption{NDCG@50 and Recall@50 results for aggressive layer combination, where it was not based on the node degree.}
     \label{tab:aggressive-layer-combination}
 \end{table*}
+
+\subsubsection{Degree depending layer combination}
+\todo{Beskriv videre når vi har resultaterne.}
+Another opportunity for layer combination is to use ALC or BLC based on the node degree.
+So instead of using the combined performance results from each layer, then use the results within a certain split.
+These splits can be seen in Appendix \autoref{app:adjusted-layer-combi}. 
 
 \subsection{Conclusion on adjusted layer combination}
 \todo{Describe why we have improvement in recall, but not in NDCG}

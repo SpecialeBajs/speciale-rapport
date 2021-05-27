@@ -3,33 +3,22 @@
 In this subsection we describe the methods to answer the following research questions:
 \begin{itemize}
     \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
-    \item \textbf{RQ4}: Is it beneficial to change layer combination based on the degree of the nodes?
 \end{itemize}  
-
-\subsubsection{Degree based layer combination}
 \todo{Omskriv denne til at passe med rød tråd og passe bedre med det vi har lavet}
 \todo{consider if RQ4 should be two different and more specific research questions}
-The initial idea of optimizing $\alpha_k$ was to change each layer's effect depending on how many connections each node had.
-An example can be seen \autoref{tab:alpha-example}.
-The numbers shown on the table are arbitrary and different variables need to be tested to see how well it performs.
-The intuition behind this is that the effect of each layer in the GCN being dependent on the number of connections that the node has would be beneficial.
-A node with only 1 connection will not benefit much from the first convolution but will be richer in information in the third convolution.
-For a node with 200 connections, the third convolution might actually be harmful, as the node gets impacted too much by too many nodes, where 1 convolution is enough to make it perform optimally.
 
-\begin{table}[]
-    \centering
-    \begin{tabular}{|l|l|}
-        \hline
-        Number of connections & Effect of each layer      \\ \hline
-        0 - 20                & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$\\ 15 \% effect of $e^{(1)}$\\ 25 \% effect of $e^{(2)}$\\ 50 \% effect of $e^{(3)}$\end{tabular} \\ \hline
-        21-50                 & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$\\ 10 \% effect of $e^{(1)}$\\ 60 \% effect of $e^{(2)}$\\ 20 \% effect of $e^{(3)}$\end{tabular} \\ \hline
-        50+                   & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$ \\ 50 \% effect of $e^{(1)}$\\ 20 \% effect of $e^{(2)}$ \\ 20 \% effect of $e^{(3)}$\end{tabular} \\ \hline
-    \end{tabular}
-    \caption{Example of the changed effect to $\alpha_k$. }
-    \label{tab:alpha-example}
-\end{table}
+\subsubsection{Layer effect based on performance} \label{fredsplit}
+When doing layer combination, instead of using the mean sum
+Instead of utilizing average as the weighted sum, two algorithms were developed to do weighted sum based on the performance of each layer.
+The algorithm looks at the performance of each individual layer and then based on how much worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
+Two algorithms have been created where one has a more aggressive approach, that can completely remove certain layers, and the other one has a more balanced approach, where each layer will be ensured influence.
 
-\paragraph{Layer effect based on performance} \label{fredsplit}
+\paragraph{Aggressive Layer Combination}
+
+
+\paragraph{Balanced Layer Combination}
+
+
 \todo{Omskriv således at det introducere ALC / BLC i hver sin og som fokuserer på forskellen mellem dem}
 %%% Måske sandt, men er ikke så god en intro når læseren ikke er kommet dertil.
 % Based on the results from the node degree experiments seen in \autoref{subsec:degree-experiment}, we decided to make an algorithm that calculated each layers' effect based on how they performed compared to each other.
@@ -118,3 +107,28 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
     \caption{Example of balanced splitting of layer effect based on performance}
     \label{fig:fredsplitBal}
 \end{figure}
+
+
+
+% \subsubsection{Degree based layer combination}
+
+% A possible solution for optimizing $\alpha_k$ could be to change each layer's effect depending on the degree of the node.
+% An example can of this can be seen \autoref{tab:alpha-example}.
+% The numbers shown on the tables are arbitrary and different variables need to be tested to see how well it performs.
+% The intuition behind this is that the effect of each layer in the GCN being dependent on the number of connections that the node has would be beneficial.
+% A node with only 1 connection will not benefit much from the first convolution but will be richer in information in the third convolution.
+% For a node with 200 connections, the third convolution might actually be harmful, as the node gets impacted too much by too many nodes, where 1 convolution is enough to make it perform optimally.
+
+% \begin{table}[]
+%     \centering
+%     \begin{tabular}{|l|l|}
+%         \hline
+%         Number of connections & Effect of each layer      \\ \hline
+%         0 - 20                & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$\\ 15 \% effect of $e^{(1)}$\\ 25 \% effect of $e^{(2)}$\\ 50 \% effect of $e^{(3)}$\end{tabular} \\ \hline
+%         21-50                 & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$\\ 10 \% effect of $e^{(1)}$\\ 60 \% effect of $e^{(2)}$\\ 20 \% effect of $e^{(3)}$\end{tabular} \\ \hline
+%         50+                   & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$ \\ 50 \% effect of $e^{(1)}$\\ 20 \% effect of $e^{(2)}$ \\ 20 \% effect of $e^{(3)}$\end{tabular} \\ \hline
+%     \end{tabular}
+%     \caption{Example of the changed effect to $\alpha_k$. }
+%     \label{tab:alpha-example}
+% \end{table}
+
