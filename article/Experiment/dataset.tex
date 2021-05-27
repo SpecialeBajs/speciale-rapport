@@ -1,53 +1,56 @@
 \subsection{Datasets}
-For our experiments, we have used 3 different datasets.
-These are \textit{yelp-2020}, \textit{amazon-book} and \textit{amazon-cell-sport}.
+For our experiments, we have used 6 different datasets.
+These are \textit{Yelp2020}, \textit{Amazon-Book}, \textit{Amazon-Cell-Sport}, \textit{Amazon-Cell-Electronic}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport}.
 The data split is 20\% testing and 80\% training where 10\% of the training data is used as validation data.
 A comparison of the datasets can be seen on \autoref{tab:dataset-comparison}.
 \\
-\textbf{The \textit{amazon-book} dataset} is the largest dataset we used.
+\textbf{\textit{Amazon-Book}} is the largest dataset we have used.
 It is taken from the LightGCN paper and only contains ID's for users and items \cite{lightgcn}.
-We have used the same settings as LightGCN with 15-core setting for users and 5 core settings for items \textit{i.e.} removing users with less than 15 interactions and items with less than 5 interactions.
+LightGCN have used the 15-core setting for users and 5 core settings for items \textit{i.e.} removing users with less than 15 interactions and items with less than 5 interactions.
 \\
-\textbf{The \textit{amazon-cell-sport} dataset} is taken from BiTGCF \cite{BiTGCF}.
-This dataset contains two domains \textit{cell} short for Cell Phones and \textit{sport} short for Sports and Outdoors.
-It contains two domains because BiTGCF builds an extension of LightGCN which utilizes a cross-domain transfer learning recommendation model \cite{BiTGCF}.
+\textbf{The \textit{Yelp2020} dataset} is a dataset we used in our pre-specialization paper to mimic a dataset used in LightGCN that we could not get access to.
+This dataset uses 10-core settings for users and 5 core settings for items.
+It is a subset of the full yelp2020 dataset where all entries are restaurants with one category and price attribute.
+\\
+\textbf{\textit{Amazon-Cell-Sport}, \textit{Amazon-Cell-Electronic}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport}} are taken from BiTGCF \cite{BiTGCF}.
+These datasets contain two domains because BiTGCF builds an extension of LightGCN which utilizes a cross-domain transfer learning recommendation model \cite{BiTGCF}.
 To build a cross-domain dataset first all the overlapping users were found.
 Then all the users with five or more interactions were retained.
 Items from each domain have both been split into training and testing before being merged.
-\\
-\textbf{The \textit{yelp-2020} dataset} was made as a compromise to test both LightGCN and Price-aware User Preference-modeling (PUP) \cite{PUP, lightgcn}.
-PUP needs both price and category in addition to user and item IDs so a dataset was needed which could be used to validate both methods.
-Both methods used a different version of Yelp's datasets which were incompatible so utilizing Yelp's newest dataset (at the time) was decided.
-Inspired by PUP the dataset only retains businesses belonging to the restaurant category where each restaurant have one or more sub-categories such as Mexican, Chinese, etc.
-To make the data simpler only one sub-category is retained for each item, this is what is considered its category in the rest of the text.
-In this dataset also we have also utilized the 10-core setting.
+\textit{Amazon-Cell-Sport}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport} use 5 core settings for users and 1 core settings for items.
+There is an exception for \textit{Amazon-Cell-Electronic} which uses 15 core settings for users.
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
         \hline
-                          & Users  & Items  & Items/users ratio & Interactions & Sparsity  \\ \hline
-        Amazon-cell       & 4,998  & 14,618 & 2.924             & 47,444       & 99.9351\% \\ \hline
-        Amazon-sport      & 4,998  & 22,101 & 4.421             & 55,556       & 99.9497\% \\ \hline
-        Amazon-cell-sport & 4,998  & 36,719 & 7.347             & 103,000      & 99.9438\% \\ \hline
-        Amazon-book       & 52,643 & 91,599 & 1.74              & 2,984,108    & 99.9381\% \\ \hline
-        Yelp2020          & 24,384 & 20,091 & 0.824             & 594,196      & 99.8787\% \\ \hline
+                                & Users  & Items   & Items/users ratio & Interactions & Sparsity  \\ \hline
+        Amazon-Book             & 52,643 & 91,599  & 1.74              & 2,984,108    & 99.9381\% \\ \hline
+        Yelp2020                & 24,384 & 20,091  & 0.824             & 594,196      & 99.8787\% \\ \hline
+        Amazon-Cell-Sport       & 4,998  & 36,719  & 7.347             & 103,000      & 99.9438\% \\ \hline
+        Amazon-Cell-Electronic  & 3,325  & 57,925  & 17.42             & 172,611      & 99.9103\% \\ \hline
+        Amazon-Cloth-Electronic & 15,761 & 105,174 & 6.673             & 363,474      & 99,9780\% \\ \hline
+        Amazon-Cloth-Sport      & 9,928  & 73,613  & 7.414             & 200,297      & 99,9726\% \\ \hline
     \end{tabular}
     \caption{Comparisons on the datasets}
     \label{tab:dataset-comparison}
 \end{table*}
 
 \subsubsection{Interactions in datasets}
-As we expect there is a relation between the number of connections for each node and the performance of a convolution layer, we analyzed the different datasets used for our test.
-On \autoref{tab:dataset-item-and-user-splits} the amount of users and items that have a certain amount of interactions can be seen.
-It can be easily seen, that the datasets in general are very different, where users in Amazon-book have 45 interactions in average and users in Amazon-Cell-Sport and Yelp2020 have around 17.07 and 19.04 interactions in average respectively.
-For Amazon-Cell-Sport the average of connections for items is at 2.58, where Yelp2020 and Amazon-Book have an average of 23.31 and 25.99 respectively.
-As with our hypothesis we expect that a Amazon-Book will perform better with a small number of convolutions, where Amazon-Cell-Sport will perform better with many convolutions.
+As we expect there is a relation between the number of connections for each node and the performance of a convolution layer, we analyzed the different datasets used for our experiments.
+On \autoref{tab:dataset-item-and-user-splits} and \autoref{tab:node-degrees-cell-sport-electronic} the amount of users and items that have a certain amount of interactions can be seen.
+Users in \textit{Amazon-Book} have an average node degree of 45.22 and items have an average node degree of 25.99 connections, which makes it the dataset with the highest average node degree compared to the other datasets.
+For Yelp2020 the average node degree is 19.04 for users and 23.31 for items.
+The other four amazon datasets have in common that the average node degree for items is small.
+Users in \textit{Amazon-Cell-Sport} have an average node degree of 17.07 and items have an average node degree of 2.58.
+\textit{Amazon-Cell-Electronic} has an average node degree of 42.22 for users and an average node degree 2.73 for items.
+\textit{Amazon-Cloth-Electronic} has an average node degree of 19.04 for users and an avevrage node degree of 3.12 for items.
+\textit{Amazon-Cloth-Sport} has an average node degree of 16.72 for users and an average node degree of 2.49 for items.
 
 \begin{table*}[]
     \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
         \hline
                 & \multicolumn{4}{c|}{Yelp2020} & \multicolumn{4}{c|}{Amazon-Cell-Sport} & \multicolumn{4}{c|}{Amazon-Book}                                                                                                                                                     \\ \hline
-        Range   & \multicolumn{2}{c|}{Users}    & \multicolumn{2}{c|}{Items}             & \multicolumn{2}{c|}{Users}       & \multicolumn{2}{c|}{Items} & \multicolumn{2}{c|}{Users} & \multicolumn{2}{c|}{Item}                                                               \\ \hline
+        Range   & \multicolumn{2}{c|}{Users}    & \multicolumn{2}{c|}{Items}             & \multicolumn{2}{c|}{Users}       & \multicolumn{2}{c|}{Items} & \multicolumn{2}{c|}{Users} & \multicolumn{2}{c|}{Items}                                                              \\ \hline
         1-5     & 0                             & 0 \%                                   & 5185                             & 26.02 \%                   & 0                          & 0 \%                       & 30152 & 91.31 \%     & 0     & 0 \%     & 4393  & 4.79  \% \\ \hline
         6-10    & 7298                          & 29.92 \%                               & 4652                             & 23.34 \%                   & 1190                       & 23.80 \%                   & 1677  & 5.07 \%      & 0     & 0 \%     & 20562 & 22.44 \% \\ \hline
         11-15   & 7175                          & 29.42 \%                               & 2505                             & 12.57 \%                   & 1890                       & 37.81 \%                   & 565   & 1.71 \%      & 0     & 0 \%     & 21561 & 23.53 \% \\ \hline
@@ -70,6 +73,38 @@ As with our hypothesis we expect that a Amazon-Book will perform better with a s
         300+    & 7                             & 0.028 \%                               & 61                               & 0.30 \%                    & 1                          & 0.02 \%                    & 0     & 0  \%        & 500   & 0.94 \%  & 271   & 0.29 \%  \\ \hline
         Avg con & \multicolumn{2}{l|}{19.04}    & \multicolumn{2}{l|}{23.31}             & \multicolumn{2}{l|}{17.07}       & \multicolumn{2}{l|}{2.58}  & \multicolumn{2}{l|}{45.22} & \multicolumn{2}{l|}{25.99}                                                              \\ \hline
     \end{tabular}
-    \caption{This table shows the number of nodes in a certain interaction range can be seen for each dataset and in different splits. The Avg connection shows how many connections each user or item have in average} % OMFORMULER denne lorte beskrivelse
+    \caption{Amount of nodes within a certain node degree for Amazon-Cell-Sport, Amazon-Book and Yelp2020. The Avg connection shows how many connections each user or item have on average}
     \label{tab:dataset-item-and-user-splits}
+\end{table*}
+
+\begin{table*}[]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline
+                & \multicolumn{4}{c|}{Amazon-Cell-Electronic} & \multicolumn{4}{c|}{Amazon-Cloth-Electronic} & \multicolumn{4}{c|}{Amazon-Cloth-Sport}                                                                                                                                        \\ \hline
+        Range   & \multicolumn{2}{c|}{Users}                  & \multicolumn{2}{c|}{Items}                   & \multicolumn{2}{c|}{Users}              & \multicolumn{2}{c|}{Items} & \multicolumn{2}{c|}{Users} & \multicolumn{2}{c|}{Items}                                                 \\ \hline
+        1-5     & \multicolumn{1}{r|}{0}                      & \multicolumn{1}{r|}{0.0}                     & \multicolumn{1}{r|}{46183}              & \multicolumn{1}{r|}{89.94} & \multicolumn{1}{r|}{0}     & \multicolumn{1}{r|}{0.0}   & 85169 & 88.81 & 0    & 0.0    & 61217 & 91.85 \\ \hline
+        6-10    & \multicolumn{1}{r|}{0}                      & \multicolumn{1}{r|}{0.0}                     & \multicolumn{1}{r|}{3072}               & \multicolumn{1}{r|}{5.982} & \multicolumn{1}{r|}{3345}  & \multicolumn{1}{r|}{21.22} & 6505  & 6.783 & 2331 & 23.479 & 3603  & 5.406 \\ \hline
+        11-15   & \multicolumn{1}{r|}{0}                      & \multicolumn{1}{r|}{0.0}                     & \multicolumn{1}{r|}{990}                & \multicolumn{1}{r|}{1.928} & \multicolumn{1}{r|}{5625}  & \multicolumn{1}{r|}{35.68} & 1944  & 2.027 & 3675 & 37.016 & 979   & 1.468 \\ \hline
+        16-20   & 538                                         & 16.180                                       & 477                                     & 0.928                      & 2957                       & 18.76                      & 862   & 0.898 & 1853 & 18.664 & 364   & 0.546 \\ \hline
+        21-25   & 685                                         & 20.601                                       & 204                                     & 0.397                      & 1358                       & 8.616                      & 429   & 0.447 & 916  & 9.226  & 168   & 0.252 \\ \hline
+        26-30   & 477                                         & 14.345                                       & 128                                     & 0.249                      & 774                        & 4.910                      & 243   & 0.253 & 443  & 4.462  & 110   & 0.165 \\ \hline
+        31-35   & 334                                         & 10.045                                       & 63                                      & 0.122                      & 458                        & 2.905                      & 170   & 0.177 & 244  & 2.457  & 56    & 0.084 \\ \hline
+        36-40   & 250                                         & 7.518                                        & 61                                      & 0.118                      & 295                        & 1.871                      & 131   & 0.136 & 149  & 1.500  & 53    & 0.079 \\ \hline
+        41-45   & 177                                         & 5.323                                        & 42                                      & 0.081                      & 208                        & 1.319                      & 97    & 0.101 & 95   & 0.956  & 32    & 0.048 \\ \hline
+        46-50   & 146                                         & 4.390                                        & 29                                      & 0.056                      & 157                        & 0.996                      & 63    & 0.065 & 64   & 0.644  & 17    & 0.025 \\ \hline
+        51-60   & 194                                         & 5.834                                        & 40                                      & 0.077                      & 186                        & 1.180                      & 67    & 0.069 & 62   & 0.624  & 23    & 0.034 \\ \hline
+        61-70   & 144                                         & 4.330                                        & 16                                      & 0.031                      & 107                        & 0.678                      & 51    & 0.053 & 37   & 0.372  & 6     & 0.009 \\ \hline
+        71-80   & 98                                          & 2.947                                        & 12                                      & 0.023                      & 83                         & 0.526                      & 41    & 0.042 & 16   & 0.161  & 4     & 0.006 \\ \hline
+        81-90   & 60                                          & 1.804                                        & 13                                      & 0.025                      & 48                         & 0.304                      & 29    & 0.030 & 17   & 0.171  & 5     & 0.007 \\ \hline
+        91-100  & 44                                          & 1.323                                        & 7                                       & 0.013                      & 37                         & 0.234                      & 15    & 0.015 & 11   & 0.110  & 2     & 0.003 \\ \hline
+        101-150 & 100                                         & 3.007                                        & 8                                       & 0.015                      & 68                         & 0.431                      & 45    & 0.046 & 10   & 0.100  & 5     & 0.007 \\ \hline
+        151-200 & 41                                          & 1.233                                        & 2                                       & 0.003                      & 37                         & 0.234                      & 14    & 0.014 & 4    & 0.040  & 0     & 0.0   \\ \hline
+        201-250 & 16                                          & 0.481                                        & 0                                       & 0.0                        & 12                         & 0.076                      & 11    & 0.011 & 0    & 0.0    & 0     & 0.0   \\ \hline
+        251-300 & 10                                          & 0.300                                        & 0                                       & 0.0                        & 2                          & 0.012                      & 2     & 0.002 & 1    & 0.0100 & 0     & 0.0   \\ \hline
+        300+    & 11                                          & 0.330                                        & 1                                       & 0.0019                     & 4                          & 0.025                      & 7     & 0.007 & 0    & 0.0    & 0     & 0.0   \\ \hline
+        Avg con & \multicolumn{2}{l|}{42.22}                  & \multicolumn{2}{l|}{2.73}                    & \multicolumn{2}{l|}{19.04}              & \multicolumn{2}{l|}{3.12}  & \multicolumn{2}{l|}{16.72} & \multicolumn{2}{l|}{2.49}                                                  \\ \hline
+    \end{tabular}
+    \caption{Amount of nodes within a certain node degree for Amazon-Cell-Electronic, Amazon-Cloth-Electronic and Amazon-Cloth-Sport. The Avg connection shows how many connections each user or item have in average}
+    \label{tab:node-degrees-cell-sport-electronic}
 \end{table*}

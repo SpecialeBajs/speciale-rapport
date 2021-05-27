@@ -1,44 +1,13 @@
-\subsection{Ablation study for GCF}\label{subsec:gcf-ablation-study}
-Meng Liu et. al does not present an ablation study for BiTGCF and GCF, which LightGCN showed is important with their regards to NGCF \cite{lightgcn,BiTGCF}.
-In this section we conduct an ablation study on GCF to get an understanding on the effect of the different parts of the embedding propagation and layer combination.
-The results can also be seen on \autoref{tab:ablation-results}, where the bold results are the best performing and underlined are the second best results.
-Examples of the changed methods can be seen in the following equations.
-\textit{GCF-minus-sc} can be seen on \autoref{eq:GCF-minus-sc} where the self-connection has been removed.
-On \autoref{eq:GCF-only-IP} only the inner product of the neighbor has been contained, and is called \textit{GCF-only-IP}.
-\autoref{eq:GCF-minus-IP} have removed the inner product and is called \textit{GCF-minus-IP}.
-There are also examples where GCF utilizes summation as layer combination as used in LightGCN which can be seen on \autoref{eq:lightgcn-sum}.
-The methods that use weighted summation all start with \textit{GCF-sum}.
-When LightGCN is tested with concatenation as layer combination it is called \textit{LightGCN-concat}.
-\begin{equation}
-    \mathbf{e}_{u}^{(k+1)} = \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}}\left( \mathbf{e}_i^{(k)} + \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)} \right)
-    \label{eq:GCF-minus-sc}
-\end{equation}
-\begin{equation}
-    \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)} \odot \mathbf{e}_u^{(k)}
-    \label{eq:GCF-only-IP}
-\end{equation}
-\begin{equation}
-    \mathbf{e}_{u}^{(k+1)} = \mathbf{e}_{u}^{(k)} + \sum^{}_{i \in \mathcal{N}_u}  \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)}
-    \label{eq:GCF-minus-IP}
-\end{equation}
-\autoref{fig:GCF-NDCG-ablation-study} contains the results of the GCF ablation study for the Yelp2020 dataset, \autoref{fig:GCF-NDCG-ablation-study-amazon-cell-sport} for the Amazon-Cell-Sport dataset and \autoref{fig:GCF-NDCG-ablation-study-amazon-book} for the Amazon-Book results.
-In Appendix \ref{app:recall-results-gcf-ablation} the figures of the results can be found in more detail, where the summation methods and concatenation methods are in separate figures.
-All the used methods for the GCF ablation study are described in the following itemize.
-The x-axis describes the every time the epochs increases by 20, and the y-axis is how well it performs regarding to NDCG or Recall.
-The methods are as described here:\\
+\subsection{GCF ablation study}\label{subsec:gcf-ablation-study}
+In this section we answer the following research question:
 \begin{itemize}
-    \item \textbf{GCF}: The original GCF method as described in \autoref{subsubsec:GCF-embed-propagation}.
-    \item \textbf{GCF-minus-sc}: GCF without self connections.
-    \item \textbf{GCF-only-IP}:  GCF where $e_i^{(k)}$ has been removed in \autoref{eq:GCF-embedding}, so that GCF's graph convolutions only considers the inner product of users and items.
-    \item \textbf{GCF-only-IP-minus-sc}: Implemented as GCF-only-ip but without self connections.
-    \item \textbf{GCF-minus-IP}: GCF where inner product has been removed.
-    \item \textbf{LightGCN-concat}: LightGCN with concatenation as layer combination.
-    \item \textbf{LightGCN}: Original LightGCN as described in \autoref{subsubsec:LightGCN-embed-propagation}.
-    \item \textbf{LightGCN-plus-sc}: LightGCN, but with self connections.
-    \item \textbf{GCF-sum-only-IP}: Implemented as GCF-only-IP except that the layer combination method used is weighted summation.
-    \item \textbf{GCF-sum}: GCF where the layer combination has been changed to weighted summation instead of concatenation.
-    \item \textbf{GCF-sum-minus-sc}: Implemented as GCF-sum but without self connections.
+    \item \textbf{How do different aggregation functions affect the performance in GCF and LightGCN?}
 \end{itemize}
+The results can be seen on \autoref{tab:ablation-results}, where the bold results are the best performing and underlined are the second best results.
+Graphs of how the performance of the methods change over epochs can be seen in \autoref{fig:GCF-NDCG-ablation-study}, \autoref{fig:GCF-NDCG-ablation-study-amazon-cell-sport} and {fig:GCF-NDCG-ablation-study-amazon-book}.
+These are for the datasets yelp2020, amazon-book and amazon-cell-sport respectively.
+More comprehensive figures can be seen in \ref{app:recall-results-gcf-ablation}, where the summation methods and concatenation methods are in separate figures.
+A description of the methods used in the GCF ablation study can be found in \autoref{subsec:method-gcf-ablation-study}.
 \begin{table*}[]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
@@ -64,10 +33,10 @@ The methods are as described here:\\
 \subsubsection{Concatenation and weighted summation}
 Looking at Yelp2020 and Amazon-Book on \autoref{tab:ablation-results} the methods that utilize concatenation as their layer combination method generally perform worse than the methods that utilize summation.
 On \autoref{fig:GCF-NDCG-ablation-study} most concatenation methods learn faster than the summation methods, but the concatenation methods are also prone to early stopping because they start to decline in performance.
-This is also the case for \autoref{fig:GCF-NDCG-ablation-study-amazon-book}, but here some concatenation methods are not prone to early stopping.
+This is also the case for \autoref{fig:GCF-NDCG-ablation-study-amazon-book}, although some concatenation methods are not prone to early stopping.
 On \autoref{fig:GCF-NDCG-ablation-study-amazon-cell-sport} the methods perform differently compared to the Yelp2020 dataset.
 The summation methods train for a lower number of epochs compared to the Yelp2020 dataset.
-This could be because amazon cell sport is a smaller dataset than Yelp2020.
+This could be because amazon-cell-sport is a smaller dataset than Yelp2020.
 Generally it can be seen that GCF and GCF-minus-sc perform better than the other methods in \autoref{fig:GCF-NDCG-ablation-study-amazon-cell-sport}.
 LightGCN performs better than the GCF methods that utilize weighted summation as their layer combination method.
 However with Amazon-Cell-Sport the results vary less between the methods, although \textit{gcf-sum-only-ip} is clearly performing worse than the other methods.
@@ -88,21 +57,24 @@ However with Amazon-Cell-Sport the results vary less between the methods, althou
 \end{figure}
 
 \subsubsection{Inner product}
-Inner product makes methods using weighted summation perform worse most of the time.
+Methods which use weighted summation perform worse over time when utilizing inner product.
 The only exception is Recall@50 on Amazon-Cell-Sport for \textit{GCF-sum} which performs better than LightGCN.
 This could also simply be because the inner product in general is beneficial for datasets where users or items have few connections.
 For \textit{GCF} and \textit{GCF-minus-ip} it makes a small difference to add inner product in Yelp2020 and Amazon-Book, however for Amazon-Cell-Sport the method using inner product performs 3.8 \% better for Recall@50 and 6 \% better for NDCG@50.
-These result can indicate that utilizing inner product is favorable when using smaller datasets.
+These result can indicate that utilizing inner product is favorable for datasets with few connections.
 
 \subsubsection{Self connections}
 When comparing the counter parting methods on \autoref{tab:ablation-results} that either utilize or do not utilize self connections there is often a minimal difference on the results.
-For LightGCN, GCF and GCF sum, the counterparting methods with or without self connections makes a small difference.
+For LightGCN, GCF and GCF sum, using self connections makes a small difference.
 For \textit{LightGCN} and \textit{LightGCN-plus-sc} it varies which one performs best, but \textit{GCF-minus-sc} outperforms \textit{GCF} by a small amount most of the time.
+This is probably dependent on how many connections there are in the dataset.
+It seems datasets with few connections declines in performance by adding self connections, and datasets with many connections benefit from adding self connections.
+This would probably be because when the node has few connections, the self connection will have a large influence on the embedding.
 Interestingly \textit{gcf-only-ip-minus-sc} performs significantly better than \textit{gcf-only-ip} on Yelp2020 and Amazon-Cell-Sport, which can indicate that self connections are harmful for performance, if you only use inner product in the convolutions.
-However on Amazon-Book it makes a small difference.
+However on Amazon-Book it does not make a large difference.
 
 \subsubsection{Conclusion}
-The best performing methods is either GCF or LightGCN with or without self connections.
+The best performing methods are either GCF or LightGCN with or without self connections.
 GCF is the best performing on Amazon-Cell-Sport, which is the smallest datasets, that also includes a lot of items with very few interactions.
-We assume that a combination of inner product and concatenation is beneficial for learning on small datasets.
-But on the larger datasets, LightGCN and LightGCN-plus-sc is the best performing methods.
+We assume that a combination of inner product and concatenation is beneficial for learning on small datasets or datasets with few interactions between users and items.
+But on the larger datasets, LightGCN and LightGCN-plus-sc are the best performing methods.

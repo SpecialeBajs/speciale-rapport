@@ -1,12 +1,14 @@
 \subsection{Optimizing layer combination}
-% BLC / ALC (Uddyb meget)
-% Definer matematikken
-% Algorithm 
-% Example of algorithm.
-% Model training
 
-\subsubsection{Optimizing $\alpha_k$}
-% Definer matematikken
+In this subsection we describe the methods to answer the following research questions:
+\begin{itemize}
+    \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
+    \item \textbf{RQ4}: Is it beneficial to change layer combination based on the degree of the nodes?
+\end{itemize}  
+
+\subsubsection{Degree based layer combination}
+\todo{Omskriv denne til at passe med rød tråd og passe bedre med det vi har lavet}
+\todo{consider if RQ4 should be two different and more specific research questions}
 The initial idea of optimizing $\alpha_k$ was to change each layer's effect depending on how many connections each node had.
 An example can be seen \autoref{tab:alpha-example}.
 The numbers shown on the table are arbitrary and different variables need to be tested to see how well it performs.
@@ -28,13 +30,14 @@ For a node with 200 connections, the third convolution might actually be harmful
 \end{table}
 
 \paragraph{Layer effect based on performance} \label{fredsplit}
+\todo{Omskriv således at det introducere ALC / BLC i hver sin og som fokuserer på forskellen mellem dem}
 %%% Måske sandt, men er ikke så god en intro når læseren ikke er kommet dertil.
 % Based on the results from the node degree experiments seen in \autoref{subsec:degree-experiment}, we decided to make an algorithm that calculated each layers' effect based on how they performed compared to each other.
 % It could clearly be seen that some layers performed substantially better than others and therefore the worst layers might have a negative effect on the final embedding.
 Instead of utilizing average as the weighted sum, two algorithms were developed to do weighted sum based on the performance of each layer.
 The algorithm looks at the performance of each individual layer and then based on how much worse they perform compared to the best layer they will get a penalty in their effect and the other layers will get an increase.
 Two algorithms have been created where one has a more aggressive approach, that can completely remove certain layers, and the other one has a more balanced approach, where each layer will be ensured influence.
-An advantage to the aggresive algorithm is that it is able to completely remove certain layers that has performed poorly, but there seems to be a beneficial factor to aggregating different layers, which in some cases will be eliminated with this algorithm.
+An advantage to the aggressive algorithm is that it is able to completely remove certain layers that has performed poorly, but there seems to be a beneficial factor to aggregating different layers, which in some cases will be eliminated with this algorithm.
 For the balanced algorithm, it ensures that all layers will have influence, but in some cases an layer might perform so bad, that it is harmful to add it.
 An example of the aggressive algorithm can be seen on \autoref{fig:fredsplitAgg} and an example of the balanced algorithm can be seen on \autoref{fig:fredsplitBal}.
 Given four layers on \autoref{fig:fredsplitAgg} each layer will have 25\% effect on the final embedding initially.
