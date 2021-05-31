@@ -1,35 +1,43 @@
 \subsection{Performance Comparison with State-of-the-Arts}
-For all datasets 5 convolutions were used, except for Amazon-Book which used 3, as these generally performed better.
-
-
-\begin{table*}[] %Overvej om vi kun skal sammenligne med 5 convolutions? 
-    \centering  %Så performer vores bedre end amazon-book
+\autoref{tab:baselines-ndcg} and \autoref{tab:baselines-recall} shows the results of our experiments with NDCG@50 and Recall@50 respectively.
+We perform comparisons to LightGCN, NGCF, GC-MC and GCN.
+For all methods 5 convolutions were used. For Amazon-Book 3 convolutions performed better, but as ALC and BLC were calculated using 5 convolutions we compare it to 5 convolutions.
+ALC and BLC possibly also perform better on Amazon-Book with fewer convolutions.
+The primary observations from the experiment are:
+\begin{itemize}
+    \item ALC, BLC and $\mathbf{e}^{(i)}$ generally perform better than all other methods, except on the datasets Amazon-Cell-Electronic and Amazon-Cloth-Sport. Amazon-Cell-Electronic diverges from the other datasets, as it has a item/user ratio of 17.42, however Amazon-Cloth-Sport is similar to Amazon-Cell-Sport, except that it has twice as many users and items.
+    \item ALC and $\mathbf{e}^{(i)}$ often perform better than BLC in NDCG@50, but BLC often performs better than ALC in Recall@50. For NDCG@50 $\mathbf{e}^{(i)}$ seems to either be best performing or close to performing best in most of the cases, except for on Amazon-Cloth-Sport.
+    \item LightGCN outperforms all other baseline methods, except for GCF in Amazon-Cell-Sport. We seem to be unable to reconstruct that GCF outperforms LightGCN consistently as seen in the paper about BiTGCF \cite{BiTGCF}. This could be because Meng Liu et al. uses cross entropy for all compared methods, and we have used BPR. Another reason could be because they utilize the evaluation protocol of "Leave-one-out" and LightGCN uses "All-Ranking" protocol \cite{BiTGCF,lightgcn}. GCF consistently outperforms NGCF and NGCF outperforms GCN and GC-MC most of the times. Between GCN and GC-MC it differs on the best performing depending on the dataset.
+    \item We have not found any layer combination method that consistently can perform better than any other method. There is still work to be done to find a layer combination method that can combine the layers best suited for the datasets.
+\end{itemize}
+\begin{table*}[h!]
+    \centering
     \begin{tabular}{|l|r|r|r|r|r||r|r|l|}
         \hline
-        NDCG@50                 & \multicolumn{1}{l|}{NGCF} & \multicolumn{1}{l|}{LightGCN} & \multicolumn{1}{l|}{GCN} & \multicolumn{1}{l|}{GC-MC} & \multicolumn{1}{l||}{GCF} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l|}{BLC} & $\mathbf{e}^{(i)}$   \\ \hline
-        Yelp2020                & 0.08502                   & 0.1089                        & 0.07594                  & 0.07947                    & 0.09092                   & \underline{0.10953}      & \textbf{0.11015}         & 0.1086 (2)  \\ \hline
-        Amazon-Book             & 0.03811                   & \textbf{0.04668}              & 0.03268                  & 0.03364                    & 0.04032                   & 0.04574                  & 0.04537                  & \underline{0.0458} (1)  \\ \hline
-        Amazon-Cell-Sport       & 0.02476                   & 0.033                         & 0.02087                  & 0.01709                    & 0.03398                   & \underline{0.0356}       & 0.03516                  & \textbf{0.03733} (5) \\ \hline
-        Amazon-Cloth-Sport      & 0.05826                   & \underline{0.06749}           & 0.00996                  & 0.01074                    & \textbf{0.07556}          & 0.05945                  & 0.06356                  & 0.06392 (2) \\ \hline
+        NDCG@50                 & \multicolumn{1}{l|}{NGCF} & \multicolumn{1}{l|}{LightGCN} & \multicolumn{1}{l|}{GCN} & \multicolumn{1}{l|}{GC-MC} & \multicolumn{1}{l||}{GCF} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l|}{BLC} & $\mathbf{e}^{(i)}$      \\ \hline
+        Yelp2020                & 0.08502                   & 0.1089                        & 0.07594                  & 0.07947                    & 0.09092                   & \underline{0.10953}      & \textbf{0.11015}         & 0.1086 (2)              \\ \hline
+        Amazon-Book             & 0.03811                   & 0.04515                       & 0.03268                  & 0.03364                    & 0.04032                   & \underline{0.04574}      & 0.04537                  & \textbf{0.0458} (1)     \\ \hline
+        Amazon-Cell-Sport       & 0.02476                   & 0.033                         & 0.02087                  & 0.01709                    & 0.03398                   & \underline{0.0356}       & 0.03516                  & \textbf{0.03733} (5)    \\ \hline
+        Amazon-Cloth-Sport      & 0.05826                   & \underline{0.06749}           & 0.00996                  & 0.01074                    & \textbf{0.07556}          & 0.05945                  & 0.06356                  & 0.06392 (2)             \\ \hline
         Amazon-Cell-Electronic  & 0.03399                   & 0.05413                       & 0.02589                  & 0.0180                     & \textbf{0.05424}          & 0.05094                  & 0.05399                  & \underline{0.05422} (3) \\ \hline
-        Amazon-Cloth-Electronic & 0.00912                   & 0.01710                       & 0.01384                  & 0.00829                    & 0.01272                   & \underline{0.01941}      & 0.01792                  & \textbf{0.02074} (5) \\ \hline
+        Amazon-Cloth-Electronic & 0.00912                   & 0.01710                       & 0.01384                  & 0.00829                    & 0.01272                   & \underline{0.01941}      & 0.01792                  & \textbf{0.02074} (5)    \\ \hline
     \end{tabular}
     \caption{Performance comparison on NDCG@50 with different state of the art methods.}
     \label{tab:baselines-ndcg}
 \end{table*}
 
-\begin{table*}[]
+\begin{table*}[h!]
     \centering
     \begin{tabular}{|l|r|r|r|r|r||r|r|l|}
         \hline
-        Recall@50               & \multicolumn{1}{l|}{NGCF} & \multicolumn{1}{l|}{LightGCN} & \multicolumn{1}{l|}{GCN} & \multicolumn{1}{l|}{GC-MC} & \multicolumn{1}{l||}{GCF} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l|}{BLC} & $\mathbf{e}^{(i)}$   \\ \hline
-        Yelp2020                & 0.17535                   & 0.2177                        & 0.15317                  & 0.16341                    & 0.1869                    & \underline{0.21809}      & \textbf{0.21917}         & 0.217 (2)   \\ \hline
-        Amazon-Book             & 0.06714                   & \textbf{0.08129}              & 0.05578                  & 0.05826                    & 0.07035                   & 0.07919                  & \underline{0.08066}      & 0.079 (1)   \\ \hline
-        Amazon-Cell-Sport       & 0.05312                   & 0.06451                       & 0.04119                  & 0.03723                    & 0.06536                   & \underline{0.07002}      & 0.06928                  & \textbf{0.07377} (4) \\ \hline
+        Recall@50               & \multicolumn{1}{l|}{NGCF} & \multicolumn{1}{l|}{LightGCN} & \multicolumn{1}{l|}{GCN} & \multicolumn{1}{l|}{GC-MC} & \multicolumn{1}{l||}{GCF} & \multicolumn{1}{l|}{ALC} & \multicolumn{1}{l|}{BLC} & $\mathbf{e}^{(i)}$      \\ \hline
+        Yelp2020                & 0.17535                   & 0.2177                        & 0.15317                  & 0.16341                    & 0.1869                    & \underline{0.21809}      & \textbf{0.21917}         & 0.217 (2)               \\ \hline
+        Amazon-Book             & 0.06714                   & 0.07861                       & 0.05578                  & 0.05826                    & 0.07035                   & \underline{0.07919}      & \textbf{0.08066}         & 0.079 (1)               \\ \hline
+        Amazon-Cell-Sport       & 0.05312                   & 0.06451                       & 0.04119                  & 0.03723                    & 0.06536                   & \underline{0.07002}      & 0.06928                  & \textbf{0.07377} (4)    \\ \hline
         Amazon-Cloth-Sport      & 0.08501                   & 0.10482                       & 0.02070                  & 0.02817                    & 0.10385                   & 0.10240                  & \textbf{0.10567}         & \underline{0.10541} (2) \\ \hline
-        Amazon-Cell-Electronic  & 0.05248                   & 0.07738                       & 0.03668                  & 0.02633                    & 0.07165                   & 0.07355                  & \underline{0.07846}      & \textbf{0.07909} (3) \\ \hline
-        Amazon-Cloth-Electronic & 0.01863                   & 0.03225                       & 0.02575                  & 0.01690                    & 0.02948                   & \underline{0.03760}      & 0.03506                  & \textbf{0.04061} (5) \\ \hline
+        Amazon-Cell-Electronic  & 0.05248                   & 0.07738                       & 0.03668                  & 0.02633                    & 0.07165                   & 0.07355                  & \underline{0.07846}      & \textbf{0.07909} (3)    \\ \hline
+        Amazon-Cloth-Electronic & 0.01863                   & 0.03225                       & 0.02575                  & 0.01690                    & 0.02948                   & \underline{0.03760}      & 0.03506                  & \textbf{0.04061} (5)    \\ \hline
     \end{tabular}
     \caption{Performance comparison on Recall@50 with different state of the art methods.}
-    \label{tab:recallbaselines}
+    \label{tab:baselines-recall}
 \end{table*}
