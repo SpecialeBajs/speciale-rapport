@@ -23,9 +23,9 @@ The layers are then sorted with the worst performing layer first.
 For each layer the amount of percent it has performed worse is subtracted from its effect and shared among the remaining layers to increase their effect.
 After this the layer is popped from the list and can not regain any effect.
 This can leave multiple layers with having zero effect on the final embedding.
-
-This might not be optimal as even layers who might not perform well on their own can still provide some kind of collaborative signal.\todo{tjek lige at Collab signal er det korrekte at bruge her}
-This is seen on experiments where the zero'th embedding was removed and yielded worse result even though its individual result was poor.
+\\
+This might not be optimal as even layers who might not perform well on their own can still provide some kind of collaborative signal.
+This is seen on experiments where the 0th embedding was removed and yielded worse result even though its individual result was poor.
 Therefore a more balanced algorithm was thought to be better.
 
 \begin{algorithm}
@@ -49,40 +49,11 @@ Therefore a more balanced algorithm was thought to be better.
     \label{alg:aggresive-layereffect}
 \end{algorithm}
 
-
 \paragraph{Balanced Layer Combination}
 The pseudo code for the balanced layer combination (BLC) algorithm can be seen on \autoref{alg:bal-layereffect}.
 The BLC algorithm works much the same as ALC but instead of popping a given layer of the list when its effect has been reduced it is instead kept.
 This means than when reducing other layers effect some of there effect will be given to the already reduced layer.
 This insures no layer will ever reach zero effect as can happen in ALC.
-
-
-
-Two algorithms have been created where one has a more aggressive approach, that can completely remove certain layers, and the other one has a more balanced approach, where each layer will be ensured influence.
-An advantage to the aggressive algorithm is that it is able to completely remove certain layers that has performed poorly, but there seems to be a beneficial factor to aggregating different layers, which in some cases will be eliminated with this algorithm.
-For the balanced algorithm, it ensures that all layers will have influence, but in some cases an layer might perform so bad, that it is harmful to add it.
-An example of the aggressive algorithm can be seen on \autoref{fig:fredsplitAgg} and an example of the balanced algorithm can be seen on \autoref{fig:fredsplitBal}.
-Given four layers on \autoref{fig:fredsplitAgg} each layer will have 25\% effect on the final embedding initially.
-The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
-Meanwhile, the 15 is split evenly among the 3 other layers who now have an effect of 30\%.
-The same process is then repeated but the worst performing layer from the previous iteration is excluded.
-This continues until all layers have gotten an effect penalty except the best performing layer.
-This can result in one or more layers having 0 \% effect in the end.
-In the balanced version the worst-performing layer is not excluded from the previous iteration.
-\\
-On  the pseudocode for the aggressive algorithm can be seen.
-The algorithm is given a list of how much worse each layer performed in percentages compared to the best performing layer in the same list.
-Initially each layers' \textit{effect} is set to be the same.
-After this the list \textit{L} is iterated over and the last element gets popped.
-Since L is ordered the last element is the worst performing one.
-Based on the initial effect and the performance of the layer its effect is lowered while the other layers effect is increased.
-On  the pseudocode for the balanced method can be seen.
-Examples of how the aggressive and balanced algorithms work can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}
-In both examples we have 4 layers from 0 to 3 and each layer has an initial effect of 25\%.
-Their performance is color coded to make it easier to follow which values are used to calculate the new effect.
-The yellow squares mark which layer is getting a lower effect in the current iteration and green marks the specific layer's final effect.
-Comparing these two algorithms it can be seen that there is a larger diversion in the aggressive algorithm than in the balanced algorithm.
-
 
 \begin{algorithm}
     \caption{Algorithm for the balanced layer combination based on performance}
@@ -107,6 +78,11 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
     \label{alg:bal-layereffect}
 \end{algorithm}
 
+Examples of how the aggressive and balanced algorithms work can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}
+In both examples we have 4 layers from 0 to 3 and each layer has an initial effect of 25\%.
+Their performance is color coded to make it easier to follow which values are used to calculate the new effect.
+The yellow squares mark which layer is getting a lower effect in the current iteration and green marks the specific layer's final effect.
+Comparing these two algorithms it can be seen that there is a larger diversion in the aggressive algorithm than in the balanced algorithm.
 
 \begin{figure}
     \includegraphics[width=0.5\textwidth]{figures/fredsplit/aggresiveAlgo.png}
@@ -121,6 +97,33 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
     \caption{Example of balanced splitting of layer effect based on performance}
     \label{fig:fredsplitBal}
 \end{figure}
+
+
+
+% Two algorithms have been created where one has a more aggressive approach, that can completely remove certain layers, and the other one has a more balanced approach, where each layer will be ensured influence.
+% An advantage to the aggressive algorithm is that it is able to completely remove certain layers that has performed poorly, but there seems to be a beneficial factor to aggregating different layers, which in some cases will be eliminated with this algorithm.
+% For the balanced algorithm, it ensures that all layers will have influence, but in some cases an layer might perform so bad, that it is harmful to add it.
+% An example of the aggressive algorithm can be seen on \autoref{fig:fredsplitAgg} and an example of the balanced algorithm can be seen on \autoref{fig:fredsplitBal}.
+% Given four layers on \autoref{fig:fredsplitAgg} each layer will have 25\% effect on the final embedding initially.
+% The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
+% Meanwhile, the 15 is split evenly among the 3 other layers who now have an effect of 30\%.
+% The same process is then repeated but the worst performing layer from the previous iteration is excluded.
+% This continues until all layers have gotten an effect penalty except the best performing layer.
+% This can result in one or more layers having 0 \% effect in the end.
+% In the balanced version the worst-performing layer is not excluded from the previous iteration.
+% \\
+% On  the pseudocode for the aggressive algorithm can be seen.
+% The algorithm is given a list of how much worse each layer performed in percentages compared to the best performing layer in the same list.
+% Initially each layers' \textit{effect} is set to be the same.
+% After this the list \textit{L} is iterated over and the last element gets popped.
+% Since L is ordered the last element is the worst performing one.
+% Based on the initial effect and the performance of the layer its effect is lowered while the other layers effect is increased.
+% On  the pseudocode for the balanced method can be seen.
+
+
+
+
+
 
 
 
