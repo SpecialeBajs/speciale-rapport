@@ -1,25 +1,14 @@
-\subsection{Changing $\alpha_k$}\label{subsec:changing-alpha-k}
+\subsection{Changing $\alpha_k$}
 In this section we will discuss the results from the experiments made with the methods that where described in \autoref{sec:method:alpha-k-effect}.
 \begin{itemize}
     \item \textbf{RQ1}: How does changing $\alpha_k$ affect the performance in LightGCN?
 \end{itemize}
 
-\subsubsection{Removing $\alpha_k$}\label{subsubsec:remove-alpha-k}
-The results from running the experiment on the yelp2020 dataset can be seen on \autoref{fig:ndcg-yelp2020-alpha-k}.
-It shows that removing $\alpha_k$ was detrimental for the performance.
-In the initial epochs, LightGCN $\alpha_k = 1$ (LightGCN-Ak1) performs better, but it quickly starts to decline in performance.
-The results from amazon-book are similar and can be seen in \autoref{app:removing-alpha-k}
-These results indicates that $\alpha_k$ is an important part of the layer combination for weighted summation, and that summation is not beneficial for LightGCN.
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-ndcg.png}
-    \caption{NDCG@50 of LightGCN and LightGCN-Ak1 on yelp2020}
-    \label{fig:ndcg-yelp2020-alpha-k}
-\end{figure}
-
 \subsubsection{Utilizing only one layer}
 In this section we experiment with removing the layer combination, and only utilizing the embedding from a specific convolution layer.
 This method is described in \autoref{subsubsec:only-1-layer}.
 $\mathbf{e}^{(0)}$, $\mathbf{e}^{(1)}$, $\mathbf{e}^{(2)}$, $\mathbf{e}^{(3)}$, $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ are used as the final embeddings in each experiment.
+These results are used to calculate ALC and BLC.
 These are compared to LightGCN where weighted sum is utilized with a different number of layers.
 \begin{table*}[]
     \centering
