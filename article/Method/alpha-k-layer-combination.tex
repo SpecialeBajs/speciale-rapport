@@ -1,11 +1,9 @@
-\subsection{Optimizing layer combination}
+\subsection{Optimizing layer combination}\label{fredsplit}
 
 In this subsection we describe the methods to answer the following research questions:
 \begin{itemize}
     \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
 \end{itemize}  
-\todo{Omskriv denne til at passe med rød tråd og passe bedre med det vi har lavet}
-\todo{consider if RQ4 should be two different and more specific research questions}
 
 When doing layer combination, LightGCN uses the weighted summation where each layer has the same effect on the final embedding.
 The hypothesis is that some layers are more important than others therefore giving each layer the same effect can decrease the performance of the model.
@@ -98,52 +96,3 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
 \end{figure}
 
 
-
-% Two algorithms have been created where one has a more aggressive approach, that can completely remove certain layers, and the other one has a more balanced approach, where each layer will be ensured influence.
-% An advantage to the aggressive algorithm is that it is able to completely remove certain layers that has performed poorly, but there seems to be a beneficial factor to aggregating different layers, which in some cases will be eliminated with this algorithm.
-% For the balanced algorithm, it ensures that all layers will have influence, but in some cases an layer might perform so bad, that it is harmful to add it.
-% An example of the aggressive algorithm can be seen on \autoref{fig:fredsplitAgg} and an example of the balanced algorithm can be seen on \autoref{fig:fredsplitBal}.
-% Given four layers on \autoref{fig:fredsplitAgg} each layer will have 25\% effect on the final embedding initially.
-% The worst layer performs 15\% worse than the best layer, we therefore remove 15 from 25 to get its final effect of 10.
-% Meanwhile, the 15 is split evenly among the 3 other layers who now have an effect of 30\%.
-% The same process is then repeated but the worst performing layer from the previous iteration is excluded.
-% This continues until all layers have gotten an effect penalty except the best performing layer.
-% This can result in one or more layers having 0 \% effect in the end.
-% In the balanced version the worst-performing layer is not excluded from the previous iteration.
-% \\
-% On  the pseudocode for the aggressive algorithm can be seen.
-% The algorithm is given a list of how much worse each layer performed in percentages compared to the best performing layer in the same list.
-% Initially each layers' \textit{effect} is set to be the same.
-% After this the list \textit{L} is iterated over and the last element gets popped.
-% Since L is ordered the last element is the worst performing one.
-% Based on the initial effect and the performance of the layer its effect is lowered while the other layers effect is increased.
-% On  the pseudocode for the balanced method can be seen.
-
-
-
-
-
-
-
-
-% \subsubsection{Degree based layer combination}
-
-% A possible solution for optimizing $\alpha_k$ could be to change each layer's effect depending on the degree of the node.
-% An example can of this can be seen \autoref{tab:alpha-example}.
-% The numbers shown on the tables are arbitrary and different variables need to be tested to see how well it performs.
-% The intuition behind this is that the effect of each layer in the GCN being dependent on the number of connections that the node has would be beneficial.
-% A node with only 1 connection will not benefit much from the first convolution but will be richer in information in the third convolution.
-% For a node with 200 connections, the third convolution might actually be harmful, as the node gets impacted too much by too many nodes, where 1 convolution is enough to make it perform optimally.
-
-% \begin{table}[]
-%     \centering
-%     \begin{tabular}{|l|l|}
-%         \hline
-%         Number of connections & Effect of each layer      \\ \hline
-%         0 - 20                & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$\\ 15 \% effect of $e^{(1)}$\\ 25 \% effect of $e^{(2)}$\\ 50 \% effect of $e^{(3)}$\end{tabular} \\ \hline
-%         21-50                 & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$\\ 10 \% effect of $e^{(1)}$\\ 60 \% effect of $e^{(2)}$\\ 20 \% effect of $e^{(3)}$\end{tabular} \\ \hline
-%         50+                   & \begin{tabular}[c]{@{}l@{}}10 \% effect of $e^{(0)}$ \\ 50 \% effect of $e^{(1)}$\\ 20 \% effect of $e^{(2)}$ \\ 20 \% effect of $e^{(3)}$\end{tabular} \\ \hline
-%     \end{tabular}
-%     \caption{Example of the changed effect to $\alpha_k$. }
-%     \label{tab:alpha-example}
-% \end{table}
