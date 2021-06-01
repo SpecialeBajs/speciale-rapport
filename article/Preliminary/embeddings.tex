@@ -70,6 +70,7 @@ The final embedding is calculated by concatenating each embedding layer as seen 
 The embedding propagation for LightGCN is defined as \cite{lightgcn},
 \begin{equation}
     \mathbf{e}_{u}^{(k+1)} = \sum^{}_{i \in \mathcal{N}_u} \frac{1}{\sqrt{|\mathcal{N}_u||\mathcal{N}_i|}} \mathbf{e}_i^{(k)}
+    \label{eq:lightgcn-propagation}
 \end{equation}
 As can be seen, LightGCN simplified NGCF by removing the activation function, learnable weight matrices, the self loop and the inner product between the user and item embeddings.
 Additionally LightGCN changes the layer combination from concatenation to weighted summation as shown here:
