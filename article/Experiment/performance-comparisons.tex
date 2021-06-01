@@ -1,13 +1,14 @@
 \subsection{Performance Comparison with State-of-the-Arts}
 \autoref{tab:baselines-ndcg} and \autoref{tab:baselines-recall} shows the results of our experiments with NDCG@50 and Recall@50 respectively.
-We perform comparisons to LightGCN, NGCF, GC-MC and GCN.
-For all methods 5 convolutions were used. For Amazon-Book 3 convolutions performed better, but as ALC and BLC were calculated using 5 convolutions we compare it to 5 convolutions.
-ALC and BLC possibly also perform better on Amazon-Book with fewer convolutions.
-The primary observations from the experiment are:
+We compare our method to LightGCN, NGCF, GC-MC and GCN.
+All experiments were done with 5 convolutions. 
+Amazon-Book actually performed better with 3 convolutions, but because ALC and BLC were calculated using 5 convolutions we decided to compare it with amazon-book using 5 convolutions.
+ALC and BLC could possibly perform better on Amazon-Book with fewer convolutions.
+The primary observations from the experiments are:
 \begin{itemize}
-    \item ALC, BLC and $\mathbf{e}^{(i)}$ generally perform better than all other methods, except on the datasets Amazon-Cell-Electronic and Amazon-Cloth-Sport. Amazon-Cell-Electronic diverges from the other datasets, as it has a item/user ratio of 17.42, where the others have a item/user ration below 8. Amazon-Cloth-Sport is similar to Amazon-Cell-Sport in terms of item/user ration, however it has twice as many users and items.
+    \item ALC, BLC and $\mathbf{e}^{(i)}$ generally perform better than all other methods, except for on Amazon-Cell-Electronic and Amazon-Cloth-Sport. Amazon-Cell-Electronic differentiates from other datasets because it has an item/user ratio of 17.42, while other datasets have an item/user ratio below 8. Amazon-Cloth-Sport is similar to Amazon-Cell-Sport in terms of item/user ratio, however, it has twice as many users and items.
     \item ALC and $\mathbf{e}^{(i)}$ often perform better than BLC in NDCG@50, but BLC often performs better than ALC in Recall@50. For NDCG@50 $\mathbf{e}^{(i)}$ seems to either be best performing or close to performing best in most of the cases, except for on Amazon-Cloth-Sport.
-    \item LightGCN outperforms all other baseline methods, except for GCF in Amazon-Cell-Sport. We seem to be unable to reconstruct that GCF outperforms LightGCN consistently as seen in the paper about BiTGCF \cite{BiTGCF}. This could be because Meng Liu et al. uses cross entropy for all compared methods, and we have used BPR. Another reason could be because they utilize the evaluation protocol of "Leave-one-out" and LightGCN uses "All-Ranking" protocol \cite{BiTGCF,lightgcn}. GCF consistently outperforms NGCF and NGCF outperforms GCN and GC-MC most of the times. Between GCN and GC-MC it differs on the best performing depending on the dataset.
+    \item LightGCN outperforms all other baseline methods, except for GCF in Amazon-Cell-Sport. We seem to be unable to reconstruct that GCF outperforms LightGCN consistently as seen in their paper BiTGCF \cite{BiTGCF}. This could be because BiTGCF uses cross-entropy as their loss function for all methods while we use BPR. Another reason could be because they utilize the evaluation protocol of "Leave-one-out" and LightGCN uses "All-Ranking" protocol \cite{BiTGCF,lightgcn}. GCF consistently outperforms NGCF and NGCF outperforms GCN and GC-MC most of the time. Between GCN and GC-MC it differs on the best performing depending on the dataset.
     \item We have not found any layer combination method that consistently can perform better than any other method. There is still work to be done to find a layer combination method that can combine the layers best suited for the datasets.
 \end{itemize}
 \begin{table*}[h!]
