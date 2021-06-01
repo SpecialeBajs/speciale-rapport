@@ -13,7 +13,7 @@ To be able to test ALC and BLC on different node degree ranges, we first had to 
 The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{fig:ndcg-individual-evaluation-amazon-book}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{fig:yelp2020-ndcg-individual-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{fig:amazon-cell-sport-individual-evaluation-ndcg}.
 The results have been evaluated within a certain node degree, and "Combined" is where all nodes have been evaluated together to get the overall performance.
 The rightmost column is the result of the best performing original LightGCN method.
-All of the results for LightGCN with different layers with NDCG and Recall can be found in Appendix \ref{app:average-lightgcn-results}.
+All of the results for LightGCN with different layers can be found in Appendix \ref{app:average-lightgcn-results}.
 The tables and figures containing the results of the recall performance for the different degree ranges can be found in Appendix \ref{app:individual-recall-degree-experiment}.
 The experiments with the Amazon-Cell-Sport dataset can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}.
 These results showcase that for nodes with less than 46 connections $E^{(5)}$ is usually the best performing embedding and for nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
@@ -149,4 +149,3 @@ The conclusion on the results are that the individual degree of a node has a sma
 Another opportunity for layer combination is to use ALC or BLC based on the node degree.
 So instead of using the combined performance results from each layer, then use the results within a certain split.
 These splits can be seen in Appendix \autoref{app:adjusted-layer-combi}. 
-
