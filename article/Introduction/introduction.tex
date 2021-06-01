@@ -14,7 +14,7 @@ A later model called LightGCN simplifies NGCF, removing feature transformation a
 Doing this achieved state-of-the-art performance, as they showed that feature transformation and activation functions were not beneficial for recommendation \cite{lightgcn}.
 \\
 One of the major components of GCN's is the layer combination.
-GCN's start with a user-item graph and conducts convolutions on the graph to create additional layers. % Denne sætning var Dolog lidt utilfreds med tidligere.
+GCN's start with a user-item graph and performs convolutions on the graph to create additional embeddings for each layer. % Denne sætning var Dolog lidt utilfreds med tidligere.
 In the end, these layers are combined to create the final embedding, the most common ways to combine these layers is by using concatenation or the weighted summation.
 \\
 To our knowledge, there has not been done any work on optimizing this process.
