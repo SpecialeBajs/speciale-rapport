@@ -7,25 +7,24 @@ In this subsection we describe the methods to answer the following research ques
 \todo{Omskriv denne til at passe med rød tråd og passe bedre med det vi har lavet}
 \todo{consider if RQ4 should be two different and more specific research questions}
 
-\subsubsection{Layer effect based on performance} \label{fredsplit}
 When doing layer combination, LightGCN uses the weighted summation where each layer has the same effect on the final embedding.
-The hypothesis is that some layers are more important than others therefore giving each layer the same effect can decrease performance of the model.
+The hypothesis is that some layers are more important than others therefore giving each layer the same effect can decrease the performance of the model.
 Instead we have developed two algorithms which takes into account the performance of each layer to see if there is a substantial performance gain to be had when optimizing the layer combination.
-Given a dataset a GCN model will have a number of layers.
+Given a dataset, a GCN model will have a number of layers.
 The algorithms looks at the performance of each layer compared to the best performing layer.
 Based on how much worse the layer performs compared to the best layer its effect on the final embedding will be reduced and the other layers will be increased.
 
-\paragraph{Aggressive Layer Combination}
-The pseudo code for the aggressive layer combination (ALC) algorithm can be seen on \autoref{alg:aggresive-layereffect}.
+\subsubsection{Aggressive Layer Combination}
+The pseudo-code for the aggressive layer combination (ALC) algorithm can be seen on \autoref{alg:aggresive-layereffect}.
 Each layer starts out with the same effect.
-Given the NDCG score of each layer the algorithm looks at how many percent worse each layer performed compared to the best layer.
+Given the NDCG score of each layer, the algorithm looks at how many percent worse each layer performed compared to the best layer.
 The layers are then sorted with the worst performing layer first.
-For each layer the amount of percent it has performed worse is subtracted from its effect and shared among the remaining layers to increase their effect.
-After this the layer is popped from the list and can not regain any effect.
+For each layer, the amount of percent it has performed worse is subtracted from its effect and shared among the remaining layers to increase their effect.
+After this, the layer is popped from the list and can not regain any effect.
 This can leave multiple layers with having zero effect on the final embedding.
 \\
 This might not be optimal as even layers who might not perform well on their own can still provide some kind of collaborative signal.
-This is seen on experiments where the 0th embedding was removed and yielded worse result even though its individual result was poor.
+This is seen in experiments where the 0th embedding was removed and yielded a worse result even though its individual result was poor.
 Therefore a more balanced algorithm was thought to be better.
 
 \begin{algorithm}
@@ -49,10 +48,10 @@ Therefore a more balanced algorithm was thought to be better.
     \label{alg:aggresive-layereffect}
 \end{algorithm}
 
-\paragraph{Balanced Layer Combination}
-The pseudo code for the balanced layer combination (BLC) algorithm can be seen on \autoref{alg:bal-layereffect}.
-The BLC algorithm works much the same as ALC but instead of popping a given layer of the list when its effect has been reduced it is instead kept.
-This means than when reducing other layers effect some of there effect will be given to the already reduced layer.
+\subsubsection{Balanced Layer Combination}
+The pseudo-code for the balanced layer combination (BLC) algorithm can be seen on \autoref{alg:bal-layereffect}.
+The BLC algorithm works much the same as ALC but instead of popping a given layer of the list when its effect has been reduced, it is instead kept.
+This means that when reducing other layers effect some of their effects will be given to the already reduced layer.
 This insures no layer will ever reach zero effect as can happen in ALC.
 
 \begin{algorithm}
@@ -79,8 +78,8 @@ This insures no layer will ever reach zero effect as can happen in ALC.
 \end{algorithm}
 
 Examples of how the aggressive and balanced algorithms work can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}
-In both examples we have 4 layers from 0 to 3 and each layer has an initial effect of 25\%.
-Their performance is color coded to make it easier to follow which values are used to calculate the new effect.
+In both examples, we have 4 layers from 0 to 3 and each layer has an initial effect of 25\%.
+Their performance is color-coded to make it easier to follow which values are used to calculate the new effect.
 The yellow squares mark which layer is getting a lower effect in the current iteration and green marks the specific layer's final effect.
 Comparing these two algorithms it can be seen that there is a larger diversion in the aggressive algorithm than in the balanced algorithm.
 
@@ -148,4 +147,3 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
 %     \caption{Example of the changed effect to $\alpha_k$. }
 %     \label{tab:alpha-example}
 % \end{table}
-
