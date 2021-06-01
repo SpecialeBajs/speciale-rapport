@@ -18,13 +18,14 @@ Examples of this are NCF \cite{NCF} which replaces the inner product with a deep
 SVD++ \cite{SVD} combines the neighborhood and the latent factor approach while also taking implicit feedback into account when calculating the predictions.
 
 \subsection{Graph based recommenders}
-Another reasearch area that is relevant to our paper is Graph based recommenders.
+Another research area that is relevant to our paper is Graph based recommenders.
 \todo{will write about graph based recommenders}
-#Burde være muligt at finde alle de kilder man har lyst til i den her. 
-#se side 10: https://arxiv.org/pdf/2011.02260.pdf
+%Burde være muligt at finde alle de kilder man har lyst til i den her. 
+%se side 10: https://arxiv.org/pdf/2011.02260.pdf
 
 \subsection{Extensions to LightGCN}
 There have been multiple extensions to LightGCN and work created inspired by LightGCN \cite{LGC-ACF,IMP-GCN,SGNN,BiTGCF}.
+% SGNN and BiTGCF uses inspiration from lightgcn by removing the feature tranformation and nonlinear activation function.
 One of them is LightGCN based Aspect-level Collaborative Filtering (LGC-ACF), which utilizes LightGCN and adds side information \cite{LGC-ACF}.
 The input to this model is a user-item graph and a user-side information graph. 
 These two graphs independently use the propagation method from LightGCN  (as seen on \autoref{eq:lightgcn-propagation}).
