@@ -1,5 +1,6 @@
 \subsection{Changing $\alpha_k$}
-In this section we will discuss the results from the experiments made with the methods that where described in \autoref{sec:method:alpha-k-effect}.
+In this section we discuss the results from the experiments made with the methods that where described in \autoref{sec:method:alpha-k-effect}.
+We answer the following research question in this subsection:
 \begin{itemize}
     \item \textbf{RQ1}: How does changing $\alpha_k$ affect the performance in LightGCN?
 \end{itemize}
@@ -33,18 +34,18 @@ These are compared to LightGCN where weighted sum is utilized with a different n
     \label{tab:only-use-one-layer-experiment}
 \end{table*}
 As can be seen on \autoref{tab:only-use-one-layer-experiment} the results vary a lot depending on the dataset.
-For Amazon-Cell-Sport only considering $e^{(4)}$ and $e^{(5)}$ gives the best results which perform around 13 \% better than weighted sum with 5 convolutions.
+For Amazon-Cell-Sport only considering $\mathbf{e}^{(4)}$ and $\mathbf{e}^{(5)}$ gives the best results which perform around 13 \% better than weighted sum with 5 convolutions.
 This could be because Amazon-Cell-Sport consists primarily of nodes with few interactions, and therefore the later convolutions have the largest impact. 
 90 \% of all items within this dataset have 5 interactions, which is one of the reasons that the later convolutions perform so well.
-For Yelp2020 the best results were weighted sum with 5 convolutions closely followed by $e^{(2)}$.
+For Yelp2020 the best results were weighted sum with 5 convolutions closely followed by $\mathbf{e}^{(2)}$.
 This dataset varies more in terms of the number of interactions that the users have.
 For Amazon-Book weighted sum with 3 convolutions performs best and this could be because there is a large variation of how many interactions the users have.
 One of the advantages of weighted sum is that it stabilizes the results.
 This might have a positive effect in some cases compared to our method where we only use the embedding from one of the layers.
-From this we can conclude that for datasets, where items or users generally have few connections it is worth considering only using $e^{(4)}$ or $e^{(5)}$ instead of using weighted sum.
+From this we can conclude that for datasets, where items or users generally have few connections it is worth considering only using $\mathbf{e}^{(4)}$ or $\mathbf{e}^{(5)}$ instead of using weighted sum.
 
 \subsubsection{Removing 0th layer}
-The final method that we described in \autoref{sec:method:alpha-k-effect} was removing the 0th layer embedding before combining the embeddings from the different layers.
+The case that we described in \autoref{subsubsec:remove-0-layer} was removing the 0th layer embedding before combining the embeddings from the different layers.
 In this subsection we show results from the experiments done with this method.
 \begin{table*}[h!]
     \centering
