@@ -1,4 +1,4 @@
-\section{Related work}
+\section{Related work} 
 In this section, we will look at some related work that is relevant to our paper.
 We will start by looking at some work related to collaborative filtering and graph-based recommenders.
 Finally, we will look at some related work that also extended LightGCN or builds upon LightGCN in some capacity.
@@ -6,14 +6,14 @@ Finally, we will look at some related work that also extended LightGCN or builds
 \subsection{Collaborative filtering}
 Collaborative filtering(CF) is a widely used technique in modern recommender systems \cite{lightgcn}.
 There are two main disciplines of CF which are the latent factor approach and the neighborhood approach \cite{SVD}.
-Neighborhood approaches compute the realtionship between items or alternatively between users.
-This will essentially transform users into sets of items which can then be compared.
+Neighborhood approaches compute the relationship between items or alternatively between users.
+This will essentially transform users into sets of items that can then be compared.
 Latent factor methods represent users and items as parameterized vectors and learn these parameters by reconstructing historical user-item interaction data.
-One of the earliest examples of this is Matrix factorization(MF) which maps users and items in a joint latent factor space with the same dimensionality and then models the user-item interactions as innerproducts in that space \cite{Matrix-factorization-techniques}.
+One of the earliest examples of this is Matrix factorization(MF) which maps users and items in a joint latent factor space with the same dimensionality and then models the user-item interactions as inner products in that space \cite{Matrix-factorization-techniques}.
 These representations of users and items are also commonly called embeddings.
-MF then uses the dot product of these to predict an user-item interaction.
+MF then uses the dot product of these to predict a user-item interaction.
 These methods do not require any domain knowledge because they only represent the users and items by their ID without any additional information.
-Newer methods also use neural network to improve this model while still using the older format of embeddings. 
+Newer methods also use neural networks to improve this model while still using the older format of embeddings. 
 Examples of this are NCF \cite{NCF} which replaces the inner product with a deep neural network and LRML\cite{LRML} which uses neural networks to improve the learned embeddings.
 SVD++ \cite{SVD} combines the neighborhood and the latent factor approach while also taking implicit feedback into account when calculating the predictions.
 
@@ -33,3 +33,4 @@ This is also done with the item embedding \cite{LGC-ACF}.
 Interest-aware Message-Passing GCN (IMP-GCN) is an alternative extension to LightGCN \cite{IMP-GCN}. 
 It alleviates the problem of GCNs being over-smoothed by creating clusters within the graphs so that not all nodes will end up being connected.
 The result of this method is that it can utilize a higher number of convolutions with good performance compared to LightGCN \cite{IMP-GCN}. 
+Both of these methods could probably benefit from using a different layer combination method than just using means.
