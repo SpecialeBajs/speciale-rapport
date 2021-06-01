@@ -1,23 +1,29 @@
-\subsection{Changing $\alpha_k$}
+\section{Changing $\alpha_k$}
+This section contains the other results of removing $\alpha_k$ and removing the 0th embedding as described in \autoref{subsec:changing-alpha-k}.
 
 \subsubsection{Removing $\alpha_k$}\label{app:removing-alpha-k}
-\begin{figure}
+\autoref{fig:recall-yelp2020-alpha-k} shows the recall results for LightGCN and LightGCN-Ak1 on Yelp2020.
+\autoref{fig:ndcg-amazon-alpha-k} and \autoref{fig:recall-amazon-alpha-k} shows LightGCN and LightGCN-Ak1 on Amazon-Book.
+\begin{figure}[h!]
     \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-recall.png}
     \caption{Recall@50 of LightGCN and LightGCN-Ak1 on yelp2020}
     \label{fig:recall-yelp2020-alpha-k}
 \end{figure}
-\begin{figure}
+\begin{figure}[h!]
     \includegraphics[width=\linewidth]{figures/alpha-k-results/amazon-ndcg.png}
     \caption{NDCG@50 of LightGCN and LightGCN-Ak1 on amazon-book}
     \label{fig:ndcg-amazon-alpha-k}
 \end{figure}
-\begin{figure}
+\begin{figure}[h!]
     \includegraphics[width=\linewidth]{figures/alpha-k-results/amazon-recall.png}
     \caption{Recall@50 of LightGCN and LightGCN-Ak1 on amazon-book}
     \label{fig:recall-amazon-alpha-k}
 \end{figure}
 
 \subsubsection{Removing embedding 0}
+On \autoref{tab:ndcg-adjusted-layer-remove-0-embedding} and \autoref{tab:recall-adjusted-layer-remove-0-embedding} the impact of removing $E^{(0)}$ can be seen.
+This also includes the impact within the different node degrees, where it in Amazon-Cell-Sport generally increases performance, but for Yelp2020 and Amazon-Book makes performance decrease.
+
 \begin{table*}[h!]
     \centering
     \begin{tabular}{|l|l|l||l|l||l|l|}
@@ -79,4 +85,3 @@
     \caption{Embedding 0 removed and the best performing methods.}
     \label{tab:recall-adjusted-layer-remove-0-embedding}
 \end{table*}
-
