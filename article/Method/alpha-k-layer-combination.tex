@@ -5,10 +5,10 @@ In this subsection we describe the methods to answer the following research ques
     \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
 \end{itemize}  
 
-When doing layer combination, LightGCN uses the weighted summation where each layer has the same effect on the final embedding.
+LightGCN uses weighted summation as their aggregation function when combining the different layers, where each layer has the same weight.
 The hypothesis is that some layers are more important than others therefore giving each layer the same effect can decrease the performance of the model.
-Instead we have developed two algorithms which takes into account the performance of each layer to see if there is a substantial performance gain to be had when optimizing the layer combination.
-Given a dataset, a GCN model will have a number of layers.
+Instead, we have developed two algorithms that take into account the performance of each layer to see if there is a substantial performance gain to be had when optimizing the layer combination.
+Given a dataset, a GCN model will have a number of convolution layers.
 The algorithms looks at the performance of each layer compared to the best performing layer.
 Based on how much worse the layer performs compared to the best layer its effect on the final embedding will be reduced and the other layers will be increased.
 
@@ -94,5 +94,4 @@ Comparing these two algorithms it can be seen that there is a larger diversion i
     \caption{Example of balanced splitting of layer effect based on performance}
     \label{fig:fredsplitBal}
 \end{figure}
-
 
