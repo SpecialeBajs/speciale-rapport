@@ -1,1 +1,11 @@
 \section{Conclusion}
+In this work we changed the design of the layer combination for LightGCN and performed studies that showed the improvement of our method.
+We proposed ALC and BLC, which on some datasets showed large improvements and on other datasets showed small differences.
+ALC and BLC does layer combination based on how well each layer performed.
+We also showed that in some cases it is better just to use one single convolution layer as the final embedding.
+ALC and BLC was also used on node degrees, and this did not show improvements compared to ALC and BLC without considering the degree of nodes.
+This should be something to consider for others deciding to continue working on weighted summation layer combination.\\
+A GCF ablation study was also conducted to investigate which parts of the model increase performance.
+It was inconclusive which of the methods performed best, as it depended on the dataset.
+LightGCN with the ALC and BLC extension were however able to consistently outperform GCF.\\
+We believe that ALC and BLC can be used as inspiration for future research into optimizing layer combination, as it showcases that there is room for improvements on different datasets.
