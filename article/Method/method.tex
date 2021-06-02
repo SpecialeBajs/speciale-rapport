@@ -1,11 +1,8 @@
 \section{Method}
-Throughout this section we introduce the different methods that we developed as our contribution to LightGCN.
-The methods experiment with different changes to how layer combination is performed in LightGCN.
-This includes changing $\alpha_k$ to different variables, as well as conducting an GCF ablation study. 
-This ablation study introduces the different methods that were developed to understand the impact of the different parts of GCF.
-Two specific layer combinations methods are proposed to improve layer combination in LightGCN, and finally model training is described.
+Throughout this section we introduce ALC and BLC as our contribution to LightGCN.
+These methods experiment with different changes to how layer combination is performed in LightGCN.
+We also describe some edge cases when changing $\alpha_k$ such as removing the 0th embedding and only utilizing one layer.
 
-\input{article/Method/remove-alpha-k.tex}
-\input{article/Method/GCF-ablation-study.tex}
 \input{article/Method/alpha-k-layer-combination.tex}
+\input{article/Method/remove-alpha-k.tex}
 \input{article/Method/model-training.tex}

@@ -1,0 +1,8 @@
+Graph Convolutional Networks (GCN) is a State-of-the-Art method used for recommendation.
+Throughout this paper we suggest two new alternative extensions for LightGCN called Aggressive Layer Combination (ALC) and Balanced Layer Combination (BLC).
+These are used as alternative layer combination methods for graph convolutional networks instead of using LightGCNs version of weighted summation.
+This showed large improvements on datasets where items have few connections and users have a larger amount of connections.
+An ablation study for GCF is also conducted to understand why it outperformed LightGCN on their datasets.
+ALC and BLC both outperformed GCF.
+Additionally, we experimented with some edge cases, where only one embedding layer was used or where the 0th embedding is removed.
+Only utilizing one embedding layer also showed in many cases to outperform ALC, BLC, GCF and LightGCN.

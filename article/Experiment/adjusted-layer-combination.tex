@@ -1,18 +1,13 @@
-\subsection{Adjusted layer combination}\label{subsec:adjusted-layer-combination}
+\subsection{ALC and BLC}\label{subsec:adjusted-layer-combination}
+\todo{Should this be removed since we already have "Performance Comparison with State-of-the-Arts"}
 In the following subsection experiments are conducted to answer the following research question:
 \begin{itemize}
     \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
-    \item \textbf{RQ4}: Is it beneficial to change layer combination based on the degree of the nodes?
 \end{itemize}
-One suggestion made by LightGCN was to personalize the layer combination, so that sparse users could benefit more from higher-order neighbors \cite{lightgcn}.
+One suggestion made by LightGCN was to personalize the layer combination, so that users with few interactions could benefit more from higher-order neighbors \cite{lightgcn}.
 The results seen in \autoref{subsec:degree-experiment} indicate that there are is no direct correlation between the degree of a node and the nodes performance.
 In this experiment we used the results from \autoref{subsec:degree-experiment} to calculate the layer effects by using the algorithms described in \autoref{fredsplit}.
 All of the nodes will have the same calculated layer effects because we used the combined performance of the nodes to calculate them and not the individual performance of each node degree range.
-
-\subsubsection{Degree depending layer combination}
-% Skal omskrives når vi har indsat resultaterne i appendix
-The results from this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
-\todo{Results needs to be described when they are finished}
 
 \subsubsection{Balanced Layer Combination}
 The experiments conducted using BLC described in \autoref{fredsplit} are described in this section.
@@ -86,7 +81,8 @@ ALC performed better than BLC on Amazon-Book.
     \label{tab:aggressive-layer-combination}
 \end{table*}
 
-\subsection{Conclusion on adjusted layer combination}
+
+\subsubsection{Conclusion on adjusted layer combination}
 \todo{Describe why we have improvement in recall, but not in NDCG}
 The results from these experiments show that our method is not an extension that would be beneficial for all datasets.
 It does show a significant improvement, but this improvement is still smaller than the 13 \% improvement on Amazon-Cell-Sport by only taking $e^{(5)}$ into account.
