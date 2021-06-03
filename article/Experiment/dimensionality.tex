@@ -25,7 +25,7 @@ In both of these datasets nodes have above 19 connections on average and therefo
 For Amazon-Cell-Sport the recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book the performance decreases for higher node degrees.
 This could be because the nodes with many connections get too much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
 The best result for "Combined" in Amazon-Book is 3 convolution with average.
-$E^{(1)}$ and $E^{(2)}$ significantly outperform the other embedding layers.  
+$E^{(1)}$ and $E^{(2)}$ significantly outperform the other embedding layers.
 For Yelp2020 the 5 convolution average performs best, while the $E^{(1)}$, $E^{(2)}$ and $E^{(3)}$ embedding layer are the best individual performing layer.
 For Amazon-Cell-Sport $E^{(2)}$, $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ outperform the 5 convolution average.
 \\
@@ -59,7 +59,7 @@ The conclusion on the results are that the individual degree of a node has a sma
         201-250     & \textbf{0.1231}                & \underline{0.1217}             & 0.11866                        & 0.1009                         & 0.09105                        & 0.09490                         & \textbf{0.11999}           \\ \hline
         251-300     & 0.2238                         & 0.2224                         & 0.17787                        & 0.2538                         & 0.2806                         & \textbf{0.2917}                 & 0.21693                    \\ \hline
         301+        & 0.1752                         & 0.1989                         & \underline{0.21585}            & 0.2093                         & 0.1719                         & 0.1880                          & \textbf{0.23305}           \\ \hline
-        Combined   & 0.08177                        & 0.1019                         & \underline{0.1086}             & 0.09956                        & 0.08863                        & 0.0819                          & \textbf{0.1089}            \\ \hline
+        Combined    & 0.08177                        & 0.1019                         & \underline{0.1086}             & 0.09956                        & 0.08863                        & 0.0819                          & \textbf{0.1089}            \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Yelp2020 where only one convolution layer is used and compared with the best performing LightGCN convolution for Yelp2020.}
     \label{tab:yelp2020-ndcg-evaluation}
@@ -95,7 +95,7 @@ The conclusion on the results are that the individual degree of a node has a sma
         201-250     & 0.02613                        & 0.03228                        & \textbf{0.03312}               & 0.03096                        & 0.02925                        & 0.02914                        & \underline{0.03242}        \\ \hline
         251-300     & 0.03153                        & \textbf{0.03682}               & 0.03492                        & 0.03594                        & 0.03508                        & 0.03581                        & \underline{0.03617}        \\ \hline
         301+        & 0.03219                        & 0.03874                        & \textbf{0.04227}               & 0.04137                        & 0.04169                        & \underline{0.04207}            & 0.04130                    \\ \hline
-        Combined   & 0.03669                        & \underline{0.0458}             & 0.04487                        & 0.0372                         & 0.03247                        & 0.02923                        & \textbf{0.04668}           \\ \hline
+        Combined    & 0.03669                        & \underline{0.0458}             & 0.04487                        & 0.0372                         & 0.03247                        & 0.02923                        & \textbf{0.04668}           \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Book}
     \label{tab:amazon-book-NDCG-evaluation}
@@ -132,7 +132,7 @@ The conclusion on the results are that the individual degree of a node has a sma
         201-250     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
         251-300     & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                            & 0.0                             & 0.0                        \\ \hline
         300+        & 0.11521                        & 0.16210                        & 0.12260                        & \underline{0.1752}             & \textbf{0.1786}                & 0.1680                          & 0.16771                    \\ \hline
-        Combined   & 0.02169                        & 0.02523                        & 0.03419                        & 0.03483                        & \underline{0.0366}             & \textbf{0.03733}                & 0.03285                    \\ \hline
+        Combined    & 0.02169                        & 0.02523                        & 0.03419                        & 0.03483                        & \underline{0.0366}             & \textbf{0.03733}                & 0.03285                    \\ \hline
     \end{tabular}
     \caption{NDCG@50 for Amazon-Cell-Sport where only one convolution layer is used.}
     \label{tab:Amazon-Cell-Sport-ndcg-evaluation}
@@ -145,7 +145,12 @@ The conclusion on the results are that the individual degree of a node has a sma
 \end{figure}
 
 \subsubsection{Degree dependent ALC and BLC}
-\todo{Beskriv videre når vi har resultaterne.}
+\todo{Finish writing when Amazon-Book is done.}
 Another opportunity for layer combination is to use ALC or BLC based on the node degree.
 So instead of using the combined performance results from each layer, then use the results within a certain split.
-These splits can be seen in Appendix \autoref{app:adjusted-layer-combi}. 
+These splits can be seen in Appendix \autoref{app:adjusted-layer-combi}.
+As can be observed Yelp2020 and Amazon-Book decline in performance, and Amazon-Cell-Sport increases in performance.
+However compared to \autoref{tab:baselines-ndcg} it can be observed, that doing layer combination based on node degree does not increase performance compared to ALC and BLC without considering node degree.
+A reason for this could be that doing different layer combinations for different users and items will disturb the collaborative signal.
+For example user A with 5 interactions could be similar to user B with 20 interactions and hereby user B's interactions could be good candidates for recommendations.
+However, as two different layer combinations are used for user A and user B, the embeddings will change more than it otherwise would have.
