@@ -3,11 +3,12 @@ In this work, we changed the design of the layer combination method in LightGCN 
 We proposed two methods called ALC and BLC, which on some datasets showed large improvements and on other datasets showed small differences.
 ALC and BLC change the effect each layer has on the final embedding based on how well that layer performed.
 We also showed that in some cases it is better just to use the embedding from one of the convolution layers as the final embedding instead of combining the embeddings from all of the layers.
-ALC and BLC was also used on node degrees, and this did not show improvements compared to ALC and BLC without considering the degree of nodes.
+ALC and BLC was also used based on the degree of the nodes, so that users with a different amounts of interactions would have a different layer combination.
+This did not show improvements compared to ALC and BLC without considering the degree of nodes.
 This could be something to take into consideration if others decide to continue working on improving the layer combination method in LightGCN.\\
-A GCF ablation study was also conducted to investigate which parts of the model increase performance.
+A GCF ablation study was also conducted to investigate which aggregation function would perform best on different datasets.
 It was inconclusive which of the methods was the optimal one, as it was dependent on the dataset.
 LightGCN with either the ALC or BLC extension was however able to consistently outperform GCF.\\
 We believe that ALC and BLC can be used as inspiration for future research into optimizing layer combination, as it showcases that there is room for improvements on different datasets.
 The improvements are in some cases quite significant, which indicates that choosing which method to use for layer combination can have importance for the performance of the model.
-This does not necessarily only apply for LightGCN, but might also have importance for other methods. 
+This does not necessarily only apply for LightGCN, but might also have importance for other methods.
