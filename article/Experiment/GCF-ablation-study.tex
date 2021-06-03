@@ -72,7 +72,7 @@ More comprehensive figures can be seen in Appendix \ref{app:recall-results-gcf-a
 Looking at Yelp2020 and Amazon-Book on \autoref{tab:ablation-results} the methods that utilize concatenation as their layer combination method generally perform worse than the methods that utilize summation.
 For Yelp2020 the best performing concatenation method is \textit{GCF-minus-ip} with 0.09179 in NDCG and the best performing weighted summation is \textit{LightGCN} with 0.1064 in NDCG, which is an increase of 13.7 \%.
 In Amazon-Book the best performing weighted summation method is \textit{LightGCN-plus-sc} with NDCG of 0.04679 and best concatenation method is \textit{GCF-minus-sc} with 0.04108, which is an increase 12.2 \%.
-For Amazon cell sport concatenation performs better than weighted summation. 
+For Amazon cell sport concatenation performs better than weighted summation.
 \textit{GCF-minus-sc} is the best performing concatenation method with NDCG of 0.03472 and \textit{LightGCN} is the best weighted summation method of 0.033, which is an increase of 4.9 \%.
 For Yelp2020 as seen on \autoref{fig:GCF-NDCG-ablation-study} most concatenation methods learn faster than the summation methods, but the concatenation methods are also prone to early stopping because they start to decline in performance.
 This is also the case for Amazon-Book on \autoref{fig:GCF-NDCG-ablation-study-amazon-book}, although some concatenation methods are not prone to early stopping.
