@@ -6,14 +6,15 @@ To see the effectiveness of our methods we compare them to the following baselin
     \item \textbf{NGCF} \cite{NGCF_2019}: was created for collaborative filtering utilizing a Graph Convolutional Network. Further description can be seen in \autoref{subsubsec:brief-review}.
     \item \textbf{LightGCN} \cite{lightgcn}: was created from NGCF by removing weights, activation function and changing the layer combination to weighted summation. Further description can be seen in \autoref{subsubsec:brief-review}.
     \item \textbf{GCF} \cite{BiTGCF}: is a degenerate method of BiTGCF that does not utilize transfer learning. GCF showed to outperform LightGCN in their experiments.
-    \item \textbf{GCN} \cite{GCN}: was created with the purpose of semi-supervised node classification with Graph Convolutional Networks. 
+    \item \textbf{GCN} \cite{GCN}: was created with the purpose of semi-supervised node classification with Graph Convolutional Networks.
     \item \textbf{GC-MC} \cite{GC_MC}: is a graph-based auto-encoder framework for matrix completion that produces latent features for users and items with message passing.
 \end{itemize}
 
 \subsubsection{Parameter settings}
 BiTGCF and GCF utilized the binary cross entropy loss function as this works well for cross domains, but as we only investigate GCF, we decided to change this to BPR to be able to compare this with LightGCN and NGCF.
 For all experiments the embedding size is 64 and mini batch size is 2048 on Yelp2020 and Amazon-Cell-Sport.
-Because of the large size of Amazon-Book the mini batch size is set to 8192 to make .
+Because of the large size of Amazon-Book the mini batch size is set to 8192 to make it faster to process all of the data.
 LightGCN is optimized with Adam \cite{Adam} and the learning rate is set to 0.001 and dropout is deactivated.
 The embedding parameters are initialized with Xavier method \cite{Xavier,lightgcn}.
+The Xavier method initializes the embedding parameters randomly within a certain range to ensure that they are not saturated before the training even starts.
 Early stopping is used and the maximum number of epochs is set to 1000.
