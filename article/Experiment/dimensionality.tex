@@ -146,14 +146,38 @@ In the following section we use ALC and BLC to optimize the layer combination ba
 \end{figure}
 
 \subsubsection{Degree dependent ALC and BLC}
-\todo{Finish writing when Amazon-Book is done.}
 Another opportunity for layer combination is to use ALC or BLC based on the node degree.
 So instead of using the combined performance results from each layer, then use the results within a certain split.
-These splits can be seen in Appendix \autoref{app:adjusted-layer-combi} on \autoref{tab:ALC-degree-based-ndcg} and \autoref{tab:BLC-degree-based-ndcg}.
-As can be observed Yelp2020 declines 1 \% in performance from 0.2177 to 0.21553.
-Amazon-Book decline in performance, \todo{insert results here}
-Amazon-Cell-Sport increases 10\% in performance from 0.06451 to 0.07117.
-However compared to \autoref{tab:baselines-ndcg} it can be observed, that doing layer combination based on node degree does not increase performance compared to ALC and BLC without considering node degree.
+\begin{table*}[]
+    \begin{tabular}{|l|l|l|l||l|l|l||l|l|l|}
+    \hline
+              & \multicolumn{3}{l||}{Amazon-Cell-Sport}     & \multicolumn{3}{l||}{Yelp2020}             & \multicolumn{3}{l|}{Amazon-Book}           \\ \hline
+              & 5 con   & ALC              & BLC           & 5 con           & ALC     & BLC           & 5 con   & ALC              & BLC           \\ \hline
+    NDCG@50   & 0.03285 & \textbf{0.03515} & {\ul 0.03414} & \textbf{0.1089} & 0.10792 & {\ul 0.10843} & 0.04518 & \textbf{0.04688} & {\ul 0.04610} \\ \hline
+    Recall@50 & 0.06451 & \textbf{0.07117} & {\ul 0.06621} & \textbf{0.2177} & 0.21553 & {\ul 0.21725} & 0.07874 & \textbf{0.08120} & {\ul 0.07974} \\ \hline
+    \end{tabular}
+    \caption{ALC and BLC based on node degrees.}
+    \label{tab:node-degree-alc-blc}
+\end{table*}
+\autoref{tab:node-degree-alc-blc} shows the combined results from ALC and BLC based on node degrees.
+The results within the splits can be seen in Appendix \autoref{app:adjusted-layer-combi} on \autoref{tab:ALC-degree-based-ndcg} and \autoref{tab:BLC-degree-based-ndcg}.
+\paragraph{ALC}
+\autoref{tab:ALC-degree-based-ndcg} and \autoref{tab:ALC-degree-based-recall} shows the results for node degree dependent ALC for NDCG and Recall.
+As can be observed Yelp2020 decrease 1 \% in performance in NDCG from 0.1089 to 0.10792 and decreases 1 \% in recall from 0.2177 to 0.21553.
+Amazon-Book increases in performance with 3.62 \% in NDCG from 0.04518 to 0.04688 and 3.02 \% in recall 0.07874 to 0.08120.
+Amazon-Cell-Sport increases 6.5 \% in NDCG from 0.03285 to 0.03515 and 10 \% in recall from 0.06451 to 0.07117.
+\paragraph{BLC}
+\autoref{tab:BLC-degree-based-ndcg} and \autoref{tab:BLC-degree-based-recall} shows the results for node degree dependent BLC for NDCG and Recall.
+Yelp2020 also decreases in NDCG by 0.5 \% from 0.1089 to 0.10843 and decreases in recall by 0.2 \% from 0.2177 to 0.21725.
+Amazon-Book increases 2 \% in NDCG from 0.04518 to 0.04610 and increases recall by 1.25 \% from 0.07874 to 0.07974. 
+Amazon-Cell-Sport increases 3.7 \% from 0.03285 to 0.03414 in NDCG and increases 2.5 \% 0.06451 to 0.06621.
+\paragraph{Conclusion}
+Looking at the results LightGCN generally improves, except for Yelp2020 which has a small decrease in performance.
+ALC seems to show better improvements than BLC for Amazon-Book and Amazon-Cell-Sport, but Yelp2020 also decreases more in performance with ALC.
+Compared to the baseline experiment (\autoref{tab:baselines-ndcg}) it can be observed, that doing layer combination on Amazon-Cell-Sport and Yelp2020 without considering node degrees shows a larger increase in performance than utilizing node degrees.
 A reason for this could be that doing different layer combinations for different users and items will disturb the collaborative signal.
 For example user A with 5 interactions could be similar to user B with 20 interactions and hereby user B's interactions could be good candidates for recommendations.
 However, as two different layer combinations are used for user A and user B, the embeddings will change more than it otherwise would have.
+This does not seem to be the case for Amazon-Book, as this improves more than when doing layer combination not based on node degree.
+This could be because Amazon-Book is a substantial larger dataset. 
+It could be interesting to run this experiment on a dataset that is larger than Amazon-Book to see the effect of it.
