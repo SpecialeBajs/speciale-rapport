@@ -2,3 +2,23 @@
 This section contains the basic information needed to understand our contributions to LightGCN and knowledge about similar recommendation models.
 It explains how embedding propagation and layer combination is done in NGCF, LightGCN and GCF.
 \input{article/Preliminary/embeddings.tex}
+
+\subsection{Removing $\alpha_k$}
+The first method that we tried was removing $\alpha_k$.
+If this did not have any substantial effect on the performance of LightGCN, it could indicate that it would not be worthwhile trying to optimize the layer combination method.
+This was done by changing $\alpha_k$ to 1, which equates to summation of the different layer embeddings.
+\begin{equation}
+    \mathbf{e}_u = \sum_{k=0}^{K} \mathbf{e}_u^{(k)},
+    \label{eq:removing-alpha-k-lightgcn-sum}
+\end{equation}
+This will make the embeddings scale when they are combined instead of normalizing them as they do in LightGCN.
+The results from running the experiment on the yelp2020 dataset can be seen on \autoref{fig:ndcg-yelp2020-alpha-k}.
+It shows that removing $\alpha_k$ was detrimental for the performance.
+In the initial epochs, LightGCN $\alpha_k = 1$ (LightGCN-Ak1) performs better, but it quickly starts to decline in performance.
+The results from amazon-book are similar and can be seen in \autoref{app:removing-alpha-k}
+These results indicates that $\alpha_k$ is an important part of the layer combination for weighted summation, and that summation is not beneficial for LightGCN.
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/alpha-k-results/yelp2020-ndcg.png}
+    \caption{NDCG@50 of LightGCN and LightGCN-Ak1 on yelp2020}
+    \label{fig:ndcg-yelp2020-alpha-k}
+\end{figure}

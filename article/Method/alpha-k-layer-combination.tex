@@ -1,10 +1,8 @@
 \subsection{Optimizing layer combination}\label{fredsplit}
-
-In this subsection we describe the methods to answer the following research questions:
+In this subsection we describe the methods that are mentioned in the following research question:
 \begin{itemize}
     \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
 \end{itemize}  
-
 LightGCN uses weighted summation as their aggregation function when combining the different layers, where each layer has the same weight.
 The hypothesis is that some layers are more important than others therefore giving each layer the same effect can decrease the performance of the model.
 Instead, we have developed two algorithms that take into account the performance of each layer to see if there is a substantial performance gain to be had when optimizing the layer combination.
@@ -74,7 +72,6 @@ This insures no layer will ever reach zero effect as can happen in ALC.
     \Return{effect.orderBy(layerId)}
     \label{alg:bal-layereffect}
 \end{algorithm}
-
 Examples of how the aggressive and balanced algorithms work can be seen on \autoref{fig:fredsplitAgg} and \autoref{fig:fredsplitBal}
 In both examples, we have 4 layers from 0 to 3 and each layer has an initial effect of 25\%.
 Their performance is color-coded to make it easier to follow which values are used to calculate the new effect.
