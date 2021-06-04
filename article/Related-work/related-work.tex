@@ -19,8 +19,7 @@ SVD++ \cite{SVD} combines the neighborhood and the latent factor approach while 
 
 \subsection{Graph-based recommenders}
 Another research area that is relevant to our paper is Graph-based recommenders.
-In our paper, we use a simplified version of a graph convolutional network(GCN) called LightGCN \cite{lightgcn}.
-As mentioned earlier LightGCN simplified NGCF's implementation of a GCN \cite{lightgcn, NGCF}.
+In our paper, we use a simplified version of a Neural Graph Collaborative Filtering(NGCF) that is a method that uses GCN's for collaborative filtering \cite{lightgcn, NGCF}.
 Simplified Graph Convolutional Networks also tried simplifying GCN's by removing nonlinearities and collapsing weight matrices between consecutive layers, but this method is created for node classification \cite{lightgcn, SGCN}.
 Other methods like GCN, GC-MC and GraphSage also utilize graph convolutions to capture the collaborative signals in the user-item interaction graph \cite{GCN,GC-MC, GraphSage}.
 
