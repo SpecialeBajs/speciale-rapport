@@ -103,7 +103,7 @@ Methods that use weighted summation perform worse over time when utilizing inner
 The only exception is Recall@50 on Amazon-Cell-Sport for \textit{GCF-sum} which performs better than LightGCN.
 This could also simply be because the inner product in general is beneficial for datasets where users or items have few connections.
 For \textit{GCF} and \textit{GCF-minus-ip} it makes a small difference to add inner product in Yelp2020 and Amazon-Book, however for Amazon-Cell-Sport the method using inner product performs 6 \% better for NDCG@50 and 3.8 \% better for Recall@50.
-These result can indicate that utilizing inner product is favorable for datasets with few connections, but can be difficult to conclude when only using three datasets.
+These results indicate that utilizing inner product could be favorable for datasets with few connections, but this can't be concluded from this as only three datasets were used in this experiment.
 
 \subsubsection{Self connections}
 When comparing the counter parting methods on \autoref{tab:ablation-results} that either utilize or do not utilize self connections there is often a minimal difference on the results.
@@ -113,11 +113,11 @@ This is probably dependent on how many connections there are in the dataset.
 It seems datasets with few connections declines in performance by adding self connections, and datasets with many connections benefit from adding self connections.
 This would probably be because when the node has few connections, the self connection will have a large influence on the embedding.
 Interestingly \textit{gcf-only-ip-minus-sc} performs significantly better than \textit{gcf-only-ip} on Yelp2020 and Amazon-Cell-Sport, which can indicate that self connections are harmful for performance, if you only use inner product in the convolutions.
-However on Amazon-Book it does not make a large difference, which could be because users and items in this dataset has many interactions.
+However, on Amazon-Book it does not make a large difference, which could be because users and items in this dataset have a high number of average interactions.
 
 \subsubsection{Conclusion}
 The best performing methods is dependent on the dataset.
-\textit{GCF-minus-sc} is the best performing on Amazon-Cell-Sport, which is the smallest datasets, that also includes a lot of items with very few interactions.
-\textit{LightGCN} and \textit{LightGCN-plus-sc} is performs good in all three datasets, and is still the third best performing method in Amazon-Cell-Sport.
+\textit{GCF-minus-sc} is the best performing on Amazon-Cell-Sport, which is the smallest dataset and the average number of interactions for items is low.
+\textit{LightGCN} and \textit{LightGCN-plus-sc} performs well on all three datasets and is the third-best performing method on Amazon-Cell-Sport.
 We assume that a combination of inner product and concatenation is beneficial for learning on small datasets or datasets with few interactions between users and items.
-But on the larger datasets, \textit{LightGCN} and \textit{LightGCN-plus-sc} are better performing methods.
+But on the larger datasets, \textit{LightGCN} and \textit{LightGCN-plus-sc} are the best performing methods.
