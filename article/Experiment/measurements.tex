@@ -1,0 +1,23 @@
+\subsubsection{Evaluation Metrics}
+We follow the same evaluation metrics as in LightGCN and NGCF \cite{lightgcn,NGCF_2019}.
+Each item a user has interacted with in the test set we consider as a positive item, and those they have not interacted with as negative items.
+The evaluation metrics are NDCG@50 and Recall@50.
+It utilizes the all ranking protocol, where all negative items are candidates.
+For ALC and BLC methods are calculated with NDCG@50.
+NDCG is a measure for information retrieval where positions are taken into account \cite{Handbook}.
+It is calculated from DCG calculated as follows:
+\begin{equation}
+    NDCG = \frac{DCG}{DCG*},
+\end{equation}
+where DCG* is the ideal DCG.
+DCG is calculated as follows,
+\begin{equation}
+    DCG = \sum^n_{i=1} \frac{relevance_i}{log_2{(i+1)}}
+\end{equation}
+where $relevance_i$ is the predicted rating for item $i$, and $n$ is the total amount of items \cite{Handbook,Deep-Learning-on-Graphs-with-GCN}.
+Recall is calculated as follows \cite{Handbook}:
+\begin{equation}
+    Recall = \frac{tp}{tp + fn}
+\end{equation}
+These evaluation metrics has been chosen because NDCG is well suited to evaluate the priority of recommended items for methods.
+Recall is also chosen because it shows how many of the positive items are recommended out of all positive examples in the dataset.
