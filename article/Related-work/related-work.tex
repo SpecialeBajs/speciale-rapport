@@ -20,14 +20,14 @@ SVD++ \cite{SVD} combines the neighborhood and the latent factor approach while 
 \subsection{Graph-based recommenders}
 Another research area that is relevant to our paper is Graph-based recommenders.
 Some of the earlier Graph-Based Recommenders were PageRank, ItemRank and BiRank and ItemRank that utilizes random-walks for recommendation \cite{PageRank,BiRank,ItemRank}.
-ItemRank and BiRank uses label propagation where interacted items are labeled and recommended items are based on the similarity between targeted items and interacted items \cite{BiRank,ItemRank}.
-In our paper, we use a simplified version of a Neural Graph Collaborative Filtering(NGCF) that is called LightGCN.
+ItemRank and BiRank use label propagation where interacted items are labeled and recommended items are based on the similarity between targeted items and interacted items \cite{BiRank,ItemRank}.
+In our paper, we use a simplified version of Neural Graph Collaborative Filtering(NGCF) called LightGCN.
 NGCF uses GCN's for collaborative filtering \cite{lightgcn, NGCF}.
 Simplified Graph Convolutional Networks also tried simplifying GCN's by removing nonlinearities and collapsing weight matrices between consecutive layers, but this method is created for node classification \cite{lightgcn,SGCN}.
-Other methods like GCN, GC-MC and GraphSage also utilize graph convolutions to capture the collaborative signals in the user-item interaction graph \cite{GCN,GC_MC,GraphSage}.
+Other methods like GCN, GC-MC, and GraphSage also utilize graph convolutions to capture the collaborative signals in the user-item interaction graph \cite{GCN,GC_MC,GraphSage}.
 For GC-MC it only utilizes one convolutional layer and is focused towards recommendation\cite{GC_MC}, where GCN and GraphSage are used for node classification \cite{GCN,GraphSage}.
 Other methods like KGAT and CKAN specialize in using knowledge graphs for collaborative filtering \cite{KGAT,CKAN}.
-KGAT propagates embeddings from a node's neighbors while having a specialized attention mechanism that discriminates the importance of different types of neighbors \cite{KGAT}.
+KGAT propagates embeddings from a node's neighbours while having a specialized attention mechanism that discriminates the importance of different types of neighbors \cite{KGAT}.
 CKAN has two different propagation methods, one for collaboration propagation and one for knowledge graph propagation, and then uses a knowledge aware attentive network to differentiate the importance of the different types of relations \cite{CKAN}.
 
 
