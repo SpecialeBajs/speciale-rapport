@@ -1,34 +1,33 @@
 \section{Introduction}
-
 Recommendation systems aim to alleviate the problem of information overload when browsing the web.
-They are widely used for eg. in online shopping where the number of items available can be overwhelming.
+They are widely used for e.g. online shopping where the number of items available can be overwhelming.
 By looking at the data of the current user the recommendation system can predict a certain number of items that it thinks the user would like, thereby greatly reducing the unnecessary information shown.
-There are different ways to achieve this where one of the most common ways is using collaborative filtering (CF).
+There are different ways to achieve this where one of the most common ways is using collaborative filtering.
 \\
-CF is based on the concept that users that act similarly will most likely have the same preferences, meaning users who have bought the same things and liked the same things will in the future most likely have an interest in the same products.
-This is most often done by learning latent features of items and users to represent them, this is also called embeddings.
-One of the earlier models for CF is Matrix Factorization (MF) where the users and items are embedded as vectors and the dot-product of the vectors is then used to make predictions of which items users would like \cite{Matrix-factorization-techniques}.
+Collaborative filtering is based on the concept that users that act similarly will most likely have the same preferences, meaning users who have bought the same things and liked the same things will in the future most likely have an interest in the same products.
+Achieving collaborative filtering is done by learning latent features of items and users to represent them, this is also called embeddings.
+One of the earlier models for collaborative filtering is Matrix Factorization (MF) where the users and items are embedded as vectors and the dot-product of the vectors is then used to make predictions of which items users would like \cite{Matrix-factorization-techniques}.
 \\
-More recent CF models utilize graph convolutional networks (GCN's) to better capture the collaborative signals.
+More recent collaborative filtering models utilize graph convolutional networks (GCN's) to better capture the collaborative signals.
 Models like Neural Graph Collaborative Filtering (NGCF) integrate the bipartite graph structure, that is the user-item-interactions, into the embedding process to capture the collaborative signals\cite{NGCF_2019}.
 A later model called LightGCN simplifies NGCF, removing feature transformation and the activation function.
 Doing this achieved state-of-the-art performance, as they showed that feature transformation and activation functions were not beneficial for recommendation \cite{lightgcn}.
 \\
 One of the major components of GCN's is the layer combination.
-GCN's start with a simple embedding of just the adjacency matrix and afterward propagates through it to form new layers.
+GCN's start with a user-item graph and performs convolutions on the graph to create additional embeddings for each layer. % Denne sætning var Dolog lidt utilfreds med tidligere.
 In the end, these layers are combined to create the final embedding, the most common ways to combine these layers is by using concatenation or the weighted summation.
 \\
 To our knowledge, there has not been done any work on optimizing this process.
 In this paper we have looked into what effect changing the layer combination method has on the performance of the LightGCN model.
-We have come up with different methods called ALC and BLC which rank how much effect each layer should have in the final embedding to achieve better performance.
+We have come up with different methods called Aggressive Layer Combination (ALC) and Balanced Layer Combination (BLC) which rank how much effect each layer should have in the final embedding to achieve better performance.
 We have also seen that utilizing only one layer and disregarding the rest can also lead to performance increase.
 \\
 In this paper, we have also done an ablation study to better understand how GCF the non-transfer learning version BiTGCF can outperform LightGCN in their paper.
 \\
 These investigations can be summed up into the following research questions.
 \begin{itemize}
-    \item How do different aggregation functions effect the performance in GCF and LightGCN?
-    \item How does changing $\alpha_k$ effect the performance in LightGCN?
-    \item How does ALC and BLC perform compared to other state of the art methods?
-    \item Is it beneficial to change layer combination based on the degree of the nodes?
+    \item \textbf{RQ1}: How does changing $\alpha_k$ affect the performance in LightGCN?
+    \item \textbf{RQ2}: How do different aggregation functions effect the performance in GCF and LightGCN?
+    \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
+    \item \textbf{RQ4}: Is it beneficial to change layer combination based on the degree of the nodes?
 \end{itemize}

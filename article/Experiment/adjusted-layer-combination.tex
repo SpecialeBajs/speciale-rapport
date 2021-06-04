@@ -1,21 +1,16 @@
 \subsection{Adjusted layer combination}\label{subsec:adjusted-layer-combination}
 In the following subsection experiments are conducted to answer the following research question:
 \begin{itemize}
-    \item How does ALC and BLC perform compared to other state of the art methods?
-    \item Is it beneficial to change layer combination based on the degree of the nodes?
+    \item \textbf{RQ3}: How does adding ALC and BLC to LightGCN perform compared to other state of the art methods?
+    \item \textbf{RQ4}: Is it beneficial to change layer combination based on the degree of the nodes?
 \end{itemize}
 One suggestion made by LightGCN was to personalize the layer combination, so that sparse users could benefit more from higher-order neighbors \cite{lightgcn}.
 The results seen in \autoref{subsec:degree-experiment} indicate that there are is no direct correlation between the degree of a node and the nodes performance.
 In this experiment we used the results from \autoref{subsec:degree-experiment} to calculate the layer effects by using the algorithms described in \autoref{fredsplit}.
-All of the nodes will have the same calculated layer effects because we used the overall performance of the nodes to calculate them and not the individual performance of each node degree range.
-
-\subsubsection{Degree depending layer combination}
-% Skal omskrives når vi har indsat resultaterne i appendix
-The results from this experiment can be seen in Appendix \ref{app:adjusted-layer-combi}.
-Results needs to be described when they are finished.
+All of the nodes will have the same calculated layer effects because we used the combined performance of the nodes to calculate them and not the individual performance of each node degree range.
 
 \subsubsection{Balanced Layer Combination}
-The experiments conducted using the balanced method described in \autoref{fredsplit} are described in this section.
+The experiments conducted using BLC described in \autoref{fredsplit} are described in this section.
 It was calculated from the NDCG@50 results on each layer, seen on \autoref{tab:yelp2020-ndcg-evaluation}, \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}.
 The splits in the following itemize were calculated from this method.
 \begin{table*}[]
@@ -27,13 +22,12 @@ The splits in the following itemize were calculated from this method.
         Yelp2020          & 0.10576            & 0.23173            & 0.30576            & 0.20587            & 0.08510            & 0.06576            \\ \hline
         Amazon-Book       & 0.12045            & 0.38566            & 0.35858            & 0.13529            &                    &                    \\ \hline
     \end{tabular}
-    \caption{Layer effects for the different datasets for the balanced method..}
+    \caption{Layer effects for the different datasets for BLC.}
     \label{tab:layer-effect}
 \end{table*}
-
 The results from this experiment can be seen in \autoref{tab:balanced-layer-effect}.
 Generally it can be observed that the results vary depending on the dataset.
-For Amazon-Cell-Sport improves with 7.03 \% using this method.
+Amazon-Cell-Sport improves with 7.03 \% using this method.
 This is a substantial improvement compared to the results from Yelp2020 and Amazon-Book.
 However, for Amazon-Cell-Sport only utilizing $\mathbf{e^{(4)}}$ or $\mathbf{e^{(5)}}$ as seen on \autoref{tab:only-use-one-layer-experiment} is an better alternative.
 For Yelp2020 there is a small improvement of 1.15 \% in NDCG and 0.68 \% in Recall.
@@ -48,12 +42,12 @@ For Amazon-Book there is a decrease in performance by -2.36 \% in NDCG and an im
         NDCG@50   & 0.03285                                 & 0.03516                        & \textbf{\textcolor{OliveGreen}{7.03}} & 0.1089 & 0.11015                  & \textbf{\textcolor{OliveGreen}{1.15}} & 0.04647 & 0.04537 & \textbf{\textcolor{Maroon}{-2.36}}    \\ \hline
         Recall@50 & 0.06451                                 & 0.06928                        & \textbf{\textcolor{OliveGreen}{7.39}} & 0.2177 & 0.21917                  & \textbf{\textcolor{OliveGreen}{0.68}} & 0,08129 & 0,08066 & \textbf{\textcolor{OliveGreen}{0.78}} \\ \hline
     \end{tabular}
-    \caption{NDCG@50 and Recall@50 results for balanced layer combination, where it was not based on the node degree.}
+    \caption{NDCG@50 and Recall@50 results for BLC, where it was not based on the node degree.}
     \label{tab:balanced-layer-effect}
 \end{table*}
 
 \paragraph{Aggressive Layer Combination}
-The experiments conducted using the aggressive method described in \autoref{fredsplit} are described in this section
+The experiments conducted using ALC are described in this section.
 The splits were calculated from NDCG @50 and can be seen in \autoref{tab:aggressive-balanced-layer-effect}.
 \begin{table*}[]
     \centering
@@ -68,11 +62,12 @@ The splits were calculated from NDCG @50 and can be seen in \autoref{tab:aggress
     \label{tab:aggressive-balanced-layer-effect}
 \end{table*}
 The results can be seen in \autoref{tab:aggressive-layer-combination}.
-For Amazon-Cell-Sport it performed 8.37 \% better in NDCG and 8.54 \% better in recall than 5 convolution average.
+For Amazon-Cell-Sport it performed 8.37 \% better in NDCG and 8.54 \% better in recall compared to5 convolution average.
 This is a larger performance increase than BLC.
 For Yelp2020 there is a small increase in performance with 0.57 \% in NDCG and 0.17 \% in Recall.
 Here the BLC method had a larger improvement.
-For Amazon-Book the decrease in performance for NDCG is smaller than for BLC by -1.57 \% and has an increase in recall by  2.65 \%.
+For Amazon-Book the decrease in performance for NDCG is -1.57 \% and has an increase in recall by 2.65 \%.
+ALC performed better than BLC on Amazon-Book.
 \begin{table*}[h!]
     \centering
     \begin{tabular}{|l|r|r|r||l|r|r||l|l|l|}
@@ -86,6 +81,13 @@ For Amazon-Book the decrease in performance for NDCG is smaller than for BLC by 
     \label{tab:aggressive-layer-combination}
 \end{table*}
 
+\subsubsection{Degree depending layer combination}
+\todo{Beskriv videre når vi har resultaterne.}
+Another opportunity for layer combination is to use ALC or BLC based on the node degree.
+So instead of using the combined performance results from each layer, then use the results within a certain split.
+These splits can be seen in Appendix \autoref{app:adjusted-layer-combi}. 
+
 \subsection{Conclusion on adjusted layer combination}
+\todo{Describe why we have improvement in recall, but not in NDCG}
 The results from these experiments show that our method is not an extension that would be beneficial for all datasets.
 It does show a significant improvement, but this improvement is still smaller than the 13 \% improvement on Amazon-Cell-Sport by only taking $e^{(5)}$ into account.
