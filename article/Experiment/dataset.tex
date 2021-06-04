@@ -1,4 +1,4 @@
-\subsection{Datasets}
+\subsubsection{Datasets}
 For our experiments, we have used 6 different datasets.
 These are \textit{Yelp2020}, \textit{Amazon-Book}, \textit{Amazon-Cell-Sport}, \textit{Amazon-Cell-Electronic}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport}.
 The data split is 20\% testing and 80\% training where 10\% of the training data is used as validation data.
@@ -35,7 +35,7 @@ There is an exception for \textit{Amazon-Cell-Electronic} which uses 15 core set
     \label{tab:dataset-comparison}
 \end{table*}
 
-\subsubsection{Interactions in datasets}
+\paragraph{Interactions in the datasets}
 As we expect there is a relation between the number of connections for each node and the performance of a convolution layer, we analyzed the different datasets used for our experiments.
 On \autoref{tab:dataset-item-and-user-splits} and \autoref{tab:node-degrees-cell-sport-electronic} the amount of users and items that have a certain amount of interactions can be seen.
 Users in \textit{Amazon-Book} have an average node degree of 45.22 and items have an average node degree of 25.99 connections, which makes it the dataset with the highest average node degree compared to the other datasets.
