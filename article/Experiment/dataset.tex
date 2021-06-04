@@ -5,12 +5,16 @@ These are \textit{Yelp2020}, \textit{Amazon-Book}, \textit{Amazon-Cell-Sport}, \
 The data split is 20\% testing and 80\% training where 10\% of the training data is used as validation data.
 A comparison of the datasets can be seen on \autoref{tab:dataset-comparison}.
 \\
+Each dataset has some applied k-core settings to it.
+K-core means that all users and items with less than \textit{k} connections are removed.
+This is because users and items with too few connections wont have enough data to compare to other users and items and therefore making collaborative filtering ineffective.
+\\
 \textbf{\textit{Amazon-Book}} is the largest dataset we have used.
 It is taken from the LightGCN paper and only contains ID's for users and items \cite{lightgcn}.
-LightGCN have used the 15-core setting for users and 5 core settings for items \textit{i.e.} removing users with less than 15 interactions and items with less than 5 interactions.
+LightGCN have used the 15-core setting for users and 5-core settings for items \textit{i.e.} removing users with less than 15 interactions and items with less than 5 interactions.
 \\
 \textbf{The \textit{Yelp2020} dataset} is a dataset we used in our pre-specialization paper to mimic a dataset used in LightGCN that we could not get access to.
-This dataset uses 10-core settings for users and 5 core settings for items.
+This dataset uses 10-core settings for users and 5-core settings for items.
 It is a subset of the full yelp2020 dataset where all entries are restaurants with one category and price attribute.
 \\
 \textbf{\textit{Amazon-Cell-Sport}, \textit{Amazon-Cell-Electronic}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport}} are taken from BiTGCF \cite{BiTGCF}.
@@ -19,8 +23,8 @@ To build a cross-domain dataset first all the overlapping users were found.
 Then all the users with five or more interactions were retained.
 Items from each domain have both been split into training and testing before being merged.
 
-\textit{Amazon-Cell-Sport}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport} use 5 core settings for users and 1 core settings for items.
-There is an exception for \textit{Amazon-Cell-Electronic} which uses 15 core settings for users.
+\textit{Amazon-Cell-Sport}, \textit{Amazon-Cloth-Electronic} and \textit{Amazon-Cloth-Sport} use 5-core settings for users and 1-core settings for items.
+There is an exception for \textit{Amazon-Cell-Electronic} which uses 15-core settings for users.
 
 
 \paragraph{Interactions in the datasets}
