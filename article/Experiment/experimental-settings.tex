@@ -1,4 +1,27 @@
+\begin{table*}[h!]
+    \scriptsize
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+                                & Users  & Items   & Items/users ratio & Interactions & Sparsity  \\ \hline
+        Amazon-Book             & 52,643 & 91,599  & 1.74              & 2,984,108    & 99.9381\% \\ \hline
+        Yelp2020                & 24,384 & 20,091  & 0.824             & 594,196      & 99.8787\% \\ \hline
+        Amazon-Cell-Sport       & 4,998  & 36,719  & 7.347             & 103,000      & 99.9438\% \\ \hline
+        Amazon-Cell-Electronic  & 3,325  & 57,925  & 17.42             & 172,611      & 99.9103\% \\ \hline
+        Amazon-Cloth-Electronic & 15,761 & 105,174 & 6.673             & 363,474      & 99,9780\% \\ \hline
+        Amazon-Cloth-Sport      & 9,928  & 73,613  & 7.414             & 200,297      & 99,9726\% \\ \hline
+    \end{tabular}
+    \caption{Comparisons on the datasets}
+    \label{tab:dataset-comparison}
+\end{table*}
+
+
 \subsection{Experimental Settings}
+
+In this subsection is the datasets and the settings that has been used for the experiments outlined.
+
+\input{article/Experiment/dataset.tex}
+\input{article/Experiment/measurements.tex}
 
 \subsubsection{Baselines}
 To see the effectiveness of our methods we compare them to the following baselines:
@@ -6,14 +29,15 @@ To see the effectiveness of our methods we compare them to the following baselin
     \item \textbf{NGCF} \cite{NGCF_2019}: was created for collaborative filtering utilizing a Graph Convolutional Network. Further description can be seen in \autoref{subsubsec:brief-review}.
     \item \textbf{LightGCN} \cite{lightgcn}: was created from NGCF by removing weights, activation function and changing the layer combination to weighted summation. Further description can be seen in \autoref{subsubsec:brief-review}.
     \item \textbf{GCF} \cite{BiTGCF}: is a degenerate method of BiTGCF that does not utilize transfer learning. GCF showed to outperform LightGCN in their experiments.
-    \item \textbf{GCN} \cite{GCN}: was created with the purpose of semi-supervised node classification with Graph Convolutional Networks. 
+    \item \textbf{GCN} \cite{GCN}: was created with the purpose of semi-supervised node classification with Graph Convolutional Networks.
     \item \textbf{GC-MC} \cite{GC_MC}: is a graph-based auto-encoder framework for matrix completion that produces latent features for users and items with message passing.
 \end{itemize}
 
 \subsubsection{Parameter settings}
 BiTGCF and GCF utilized the binary cross entropy loss function as this works well for cross domains, but as we only investigate GCF, we decided to change this to BPR to be able to compare this with LightGCN and NGCF.
 For all experiments the embedding size is 64 and mini batch size is 2048 on Yelp2020 and Amazon-Cell-Sport.
-For Amazon-Book the mini batch size is set to 8192 for speed.
+Because of the large size of Amazon-Book the mini batch size is set to 8192 to make it faster to process all of the data.
 LightGCN is optimized with Adam \cite{Adam} and the learning rate is set to 0.001 and dropout is deactivated.
 The embedding parameters are initialized with Xavier method \cite{Xavier,lightgcn}.
+The Xavier method initializes the embedding parameters randomly within a certain range to ensure that they are not saturated before the training even starts.
 Early stopping is used and the maximum number of epochs is set to 1000.

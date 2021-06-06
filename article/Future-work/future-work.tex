@@ -1,1 +1,16 @@
 \section{Future work}
+We have several ideas for future work.
+The weights in the weighted layer summation could be calculated differently than how we currently do it with ALC and BLC.
+One possibility could be to use another metric than NDCG to calculate the weights.
+Different ways to distribute the weights between the layers could also be experimented with.
+Additionally, the distribution of these weights could be based on statistics of the dataset so that it was not necessary to run each layer individually before being able to calculate the weights.
+But this would require a more exhaustive analysis of tendencies and patterns in the different datasets which could then be linked to which layers perform best.
+Alternatively the layer combination can be based on recall or an alternative evaluation measurement instead of NDCG@50 as we have used.
+These weights could also be parameters that could be learned.
+We tried adding one weight matrix to LightGCN and experimented with different layer combination methods in Appendix \ref{app:lightgcn-1-weight} to see if we were able to learn the weights used in the layer combination, but this method did not show good results.
+
+
+% Gør så den selv kan lave effects baseret på datasæt / lære dem selv
+% Find en måde at kunne lære / optimere effect
+% Eksperiment with the number of connections a users indirectly has
+

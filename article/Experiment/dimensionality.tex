@@ -1,8 +1,6 @@
 \subsection{Degree dependent layer combination}\label{subsec:degree-experiment}
 In this experiment we investigated how the nodes within a certain range of node degree perform.
 The node degree is the number of connections the node has in the original interaction graph.
-Our initial hypothesis was that the fewer connections a node had, the more it would benefit from a higher number of convolutions.
-However the results obviously confirm that this is not the case.
 We answer the following research question in this section:
 \begin{itemize}
     \item \textbf{RQ4}: Is it beneficial to change layer combination based on the degree of the nodes?
@@ -10,29 +8,32 @@ We answer the following research question in this section:
 
 \subsubsection{Only utilizing one layer}
 To be able to test ALC and BLC on different node degree ranges, we first had to find out how the different node degree ranges performed when only using one layer.
-The NDCG results can be seen for Amazon-Cell-Sport on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{fig:ndcg-individual-evaluation-amazon-book}, Yelp2020 on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{fig:yelp2020-ndcg-individual-evaluation} and Amazon-Book on \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{fig:amazon-cell-sport-individual-evaluation-ndcg}.
-The results have been evaluated within a certain node degree, and "Combined" is where all nodes have been evaluated together to get the overall performance.
+The NDCG results can be seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{fig:yelp2020-ndcg-individual-evaluation}  for Yelp2020, on \autoref{tab:amazon-book-NDCG-evaluation} and \autoref{fig:ndcg-individual-evaluation-amazon-book} for Amazon-Book  and on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation} and \autoref{fig:amazon-cell-sport-individual-evaluation-ndcg}  for Amazon-Cell-Sport.
+The results have been evaluated within a certain node degree range.
+\textit{Combined} is the overall performance of all of the nodes evaluated together.
 The rightmost column is the result of the best performing original LightGCN method.
 All of the results for LightGCN with different layers can be found in Appendix \ref{app:average-lightgcn-results}.
 The tables and figures containing the results of the recall performance for the different degree ranges can be found in Appendix \ref{app:individual-recall-degree-experiment}.
 The experiments with the Amazon-Cell-Sport dataset can be seen on \autoref{tab:Amazon-Cell-Sport-ndcg-evaluation}.
-These results showcase that for nodes with less than 46 connections $E^{(5)}$ is usually the best performing embedding and for nodes with more than 46 connections $E^{(5)}$ performs worse than other embeddings with a lower number of convolutions.
-$E^{(5)}$ does however often perform second best for many node degree ranges.
+These results showcase that for nodes with less than 46 connections $E^{(5)}$ is usually the best performing embedding.
+For nodes with more than 46 connections a lower number of convolutions than $E^{(5)}$ performs better.
 It is also worth noting that $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ consistently outperform LightGCN with 5 convolutions.
 This could be because utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performance, because 91 \% of all items only have between 1-5 connections and therefore the embeddings need more convolution to capture the collaborative signals.
-Looking at the yelp2020 and amazon-book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results do not seem to be dependent on the degree of the nodes, as almost all node degree ranges either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
-In both of these datasets nodes have above 19 connections on average and therefore the amount of collaborative signals increase much faster for each node in the graph compared to amazon-cell-sport.
+Looking at the Yelp2020 and Amazon-Book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results do not seem to be dependent on the degree of the nodes, as almost all node degree ranges either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
+5 convolutions with weighted does however perform better than both of these embeddings with a small amount where $E^{(2)}$ has 0.1086 in NDCG and 5 convolutions has 0.1089 in NDCG.
+This indicates that combining different layers benefits the performance, as all other embedding layers perform worse than $E^{(2)}$.
+The nodes from both of these datasets have above 19 connections on average and therefore the number of collaborative signals increases much faster for each node in the graph compared to Amazon-Cell-Sport.
 For Amazon-Cell-Sport the recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book the performance decreases for higher node degrees.
 This could be because the nodes with many connections get too much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
-The best result for "Combined" in Amazon-Book is 3 convolution with average.
+The best result for \textit{Combined} on Amazon-Book is 3 convolutions with weighted summation.
 $E^{(1)}$ and $E^{(2)}$ significantly outperform the other embedding layers.
-For Yelp2020 the 5 convolution average performs best, while the $E^{(1)}$, $E^{(2)}$ and $E^{(3)}$ embedding layer are the best individual performing layer.
+For Yelp2020 the 5 convolutions weighted summation performs best, while $E^{(1)}$, $E^{(2)}$ and $E^{(3)}$ are the best individual performing layers.
 For Amazon-Cell-Sport $E^{(2)}$, $E^{(3)}$, $E^{(4)}$ and $E^{(5)}$ outperform the 5 convolution average.
 \\
-From these results we see an opportunity to change the layer combination in different ways to investigate if this will improve the results.
-The last method is to use \autoref{fredsplit} method to optimize the hyper parameters.
 As no direct link between the number of connections a user has and its performance was found, it could be interesting to look further into the number of implicit connections a user has once the convolutions have been performed.
-The conclusion on the results are that the individual degree of a node has a smaller effect on the final result than we initially expected.
+We expected to see a larger difference between the number of connections, and how well each layer would perform.
+But if we look at which embeddings performed best we see that nodes with over 100 connections often perform similarly to nodes with a lower number of connections.
+In the following section we use ALC and BLC to optimize the layer combination based on node degree to understand its effect.
 
 % Yelp2020 NDCG
 \begin{table*}[]
@@ -145,12 +146,38 @@ The conclusion on the results are that the individual degree of a node has a sma
 \end{figure}
 
 \subsubsection{Degree dependent ALC and BLC}
-\todo{Finish writing when Amazon-Book is done.}
 Another opportunity for layer combination is to use ALC or BLC based on the node degree.
 So instead of using the combined performance results from each layer, then use the results within a certain split.
-These splits can be seen in Appendix \autoref{app:adjusted-layer-combi}.
-As can be observed Yelp2020 and Amazon-Book decline in performance, and Amazon-Cell-Sport increases in performance.
-However compared to \autoref{tab:baselines-ndcg} it can be observed, that doing layer combination based on node degree does not increase performance compared to ALC and BLC without considering node degree.
+\begin{table*}[]
+    \begin{tabular}{|l|l|l|l||l|l|l||l|l|l|}
+    \hline
+              & \multicolumn{3}{l||}{Amazon-Cell-Sport}     & \multicolumn{3}{l||}{Yelp2020}             & \multicolumn{3}{l|}{Amazon-Book}           \\ \hline
+              & 5 con   & ALC              & BLC           & 5 con           & ALC     & BLC           & 5 con   & ALC              & BLC           \\ \hline
+    NDCG@50   & 0.03285 & \textbf{0.03515} & {\ul 0.03414} & \textbf{0.1089} & 0.10792 & {\ul 0.10843} & 0.04518 & \textbf{0.04688} & {\ul 0.04610} \\ \hline
+    Recall@50 & 0.06451 & \textbf{0.07117} & {\ul 0.06621} & \textbf{0.2177} & 0.21553 & {\ul 0.21725} & 0.07874 & \textbf{0.08120} & {\ul 0.07974} \\ \hline
+    \end{tabular}
+    \caption{ALC and BLC based on node degrees.}
+    \label{tab:node-degree-alc-blc}
+\end{table*}
+\autoref{tab:node-degree-alc-blc} shows the combined results from ALC and BLC based on node degrees.
+The results within the splits can be seen in Appendix \autoref{app:adjusted-layer-combi} on \autoref{tab:ALC-degree-based-ndcg} and \autoref{tab:BLC-degree-based-ndcg}.
+\paragraph{ALC}
+\autoref{tab:ALC-degree-based-ndcg} and \autoref{tab:ALC-degree-based-recall} show the results for node degree dependent ALC in NDCG and Recall respectively. 
+As can be observed Yelp2020 has a 1 \% decrease in NDCG from 0.1089 to 0.10792 and a 1 \% decreases in recall from 0.2177 to 0.21553.
+Amazon-Book has a 3.62 \% increase in NDCG from 0.04518 to 0.04688 and 3.02 \% in recall from 0.07874 to 0.08120.
+Amazon-Cell-Sport has a 6.5 \% increase in NDCG from 0.03285 to 0.03515 and 10 \% in recall from 0.06451 to 0.07117.
+\paragraph{BLC}
+\autoref{tab:BLC-degree-based-ndcg} and \autoref{tab:BLC-degree-based-recall} shows the results for node degree dependent BLC in NDCG and Recall respectively.
+Yelp2020 has a 0.5 \%  decrease in NDCG from 0.1089 to 0.10843 and a 0.2 \% decrease in recall from 0.2177 to 0.21725.
+Amazon-Book has a 2 \% increase in NDCG from 0.04518 to 0.04610 and a 1.25 \% increase in recall from 0.07874 to 0.07974. 
+Amazon-Cell-Sport has a 3.7 \% increase in NDCG from 0.03285 to 0.03414 and 2.5 \% in recall from 0.06451 to 0.06621.
+\paragraph{Conclusion}
+Looking at these results we see that ALC and BLC generally improve the performance of LightGCN, except for on Yelp2020 which has a small decrease in performance.
+ALC seems to show larger improvements than BLC for Amazon-Book and Amazon-Cell-Sport, but also has a larger decrease in performance for Yelp2020 compared to BLC.
+Compared to the baseline experiment (\autoref{tab:baselines-ndcg}) it can be observed, that doing layer combination on Amazon-Cell-Sport and Yelp2020 without considering node degrees shows a larger increase in performance than utilizing node degrees.
 A reason for this could be that doing different layer combinations for different users and items will disturb the collaborative signal.
 For example user A with 5 interactions could be similar to user B with 20 interactions and hereby user B's interactions could be good candidates for recommendations.
 However, as two different layer combinations are used for user A and user B, the embeddings will change more than it otherwise would have.
+This does not seem to be the case for Amazon-Book, as we see a large improvement when we take node degrees into account when we calculate the different layer effects using ALC or BLC.
+This could be because Amazon-Book is a substantial larger dataset. 
+It could be interesting to run this experiment on a dataset that is larger than Amazon-Book to see what effect this would have.
