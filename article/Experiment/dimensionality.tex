@@ -22,7 +22,7 @@ This could be because utilizing $E^{(0)}$ and $E^{(1)}$ is harmful for performan
 Looking at the Yelp2020 and Amazon-Book datasets seen on \autoref{tab:yelp2020-ndcg-evaluation} and \autoref{tab:amazon-book-NDCG-evaluation} the results do not seem to be dependent on the degree of the nodes, as almost all node degree ranges either perform best or second best in $E^{(1)}$ and $E^{(2)}$.
 5 convolutions with weighted does however perform better than both of these embeddings with a small amount where $E^{(2)}$ has 0.1086 in NDCG and 5 convolutions has 0.1089 in NDCG.
 This indicates that combining different layers benefits the performance, as all other embedding layers perform worse than $E^{(2)}$.
-The nodes from Both of these datasets have above 19 connections on average and therefore the number of collaborative signals increases much faster for each node in the graph compared to Amazon-Cell-Sport.
+The nodes from both of these datasets have above 19 connections on average and therefore the number of collaborative signals increases much faster for each node in the graph compared to Amazon-Cell-Sport.
 For Amazon-Cell-Sport the recall performance increases for the nodes with a higher degree, however for Yelp2020 and Amazon-Book the performance decreases for higher node degrees.
 This could be because the nodes with many connections get too much noise in Yelp2020 and Amazon-Book, but for Amazon-Cell-Sport there are many items with few connected users, and hereby it limits how much information users with many connections gain.
 The best result for \textit{Combined} on Amazon-Book is 3 convolutions with weighted summation.
